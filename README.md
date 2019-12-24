@@ -1,3 +1,8 @@
+# !!!Commit and Push 하기전 반드시 Pull부터 해주세요!!!
+1. MovieProject 우클릭 -> Team -> 위에있는 Pull 클릭
+2. Commit and push시 Message입력
+
+
 # 추가 해야 하는 사항
 1. 
 
