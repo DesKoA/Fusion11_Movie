@@ -7,12 +7,16 @@ package test;
 
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.*;
+import org.netbeans.lib.awtextra.*;
+import java.awt.*;
+import java.awt.event.*;
 
 /**
  *
  * @author alfo4-9
  */
-public class MovieReserveUITest extends javax.swing.JFrame {
+public class MovieReserveUITest extends JFrame {
 
 	/**
 	 * Creates new form MovieReservation
@@ -30,113 +34,111 @@ public class MovieReserveUITest extends javax.swing.JFrame {
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">
 	private void initComponents() {
 
-		Main = new javax.swing.JPanel();
-		selMovie = new javax.swing.JPanel();
-		labelMovie = new javax.swing.JLabel();
-		order = new javax.swing.JPanel();
-		ganadaB = new javax.swing.JToggleButton();
-		gradeB = new javax.swing.JToggleButton();
-		movieListSC = new javax.swing.JScrollPane();
-		movieList = new javax.swing.JList<>();
-		screenSel = new javax.swing.JPanel();
-		selScreen = new javax.swing.JLabel();
-		screenSel1 = new javax.swing.JPanel();
-		selScreen1 = new javax.swing.JLabel();
-		movieInfo = new javax.swing.JPanel();
-		resetRe = new javax.swing.JButton();
-		moviePoster = new javax.swing.JLabel();
-		movieName = new javax.swing.JLabel();
-		movieName1 = new javax.swing.JLabel();
-		movieName2 = new javax.swing.JLabel();
-		movieName3 = new javax.swing.JLabel();
-		movieName4 = new javax.swing.JLabel();
-		movieName5 = new javax.swing.JLabel();
-		jButton1 = new javax.swing.JButton();
-		movieName6 = new javax.swing.JLabel();
-		movieName7 = new javax.swing.JLabel();
-		selCal = new javax.swing.JPanel();
-		calSel = new javax.swing.JLabel();
-		jPanel1 = new javax.swing.JPanel();
-		selPeople = new javax.swing.JPanel();
-		peopleSel = new javax.swing.JLabel();
-		selP = new javax.swing.JPanel();
-		jLabel1 = new javax.swing.JLabel();
-		jToggleButton1 = new javax.swing.JToggleButton();
-		jLabel2 = new javax.swing.JLabel();
-		jToggleButton2 = new javax.swing.JToggleButton();
-		jLabel3 = new javax.swing.JLabel();
-		jLabel4 = new javax.swing.JLabel();
-		selMovie2 = new javax.swing.JPanel();
-		labelMovie2 = new javax.swing.JLabel();
+		Main = new JPanel();
+		selMovie = new JPanel();
+		labelMovie = new JLabel();
+		order = new JPanel();
+		ganadaB = new JToggleButton();
+		gradeB = new JToggleButton();
+		movieListSC = new JScrollPane();
+		movieList = new JList<>();
+		screenSel = new JPanel();
+		selScreen = new JLabel();
+		screenSel1 = new JPanel();
+		selScreen1 = new JLabel();
+		movieInfo = new JPanel();
+		resetRe = new JButton();
+		moviePoster = new JLabel();
+		movieName = new JLabel();
+		movieName1 = new JLabel();
+		movieName2 = new JLabel();
+		movieName3 = new JLabel();
+		movieName4 = new JLabel();
+		movieName5 = new JLabel();
+		jButton1 = new JButton();
+		movieName6 = new JLabel();
+		movieName7 = new JLabel();
+		selCal = new JPanel();
+		calSel = new JLabel();
+		jPanel1 = new JPanel();
+		selPeople = new JPanel();
+		peopleSel = new JLabel();
+		selP = new JPanel();
+		jLabel1 = new JLabel();
+		jToggleButton1 = new JToggleButton();
+		jLabel2 = new JLabel();
+		jToggleButton2 = new JToggleButton();
+		jLabel3 = new JLabel();
+		jLabel4 = new JLabel();
+		selMovie2 = new JPanel();
+		labelMovie2 = new JLabel();
 
-		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-		setBackground(new java.awt.Color(255, 255, 255));
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		setBackground(new Color(255, 255, 255));
 
-		Main.setBackground(new java.awt.Color(255, 255, 255));
-		Main.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+		Main.setBackground(new Color(255, 255, 255));
+		Main.setLayout(new AbsoluteLayout());
 
-		selMovie.setBackground(new java.awt.Color(218, 210, 180));
-		selMovie.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-		selMovie.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+		selMovie.setBackground(new Color(218, 210, 180));
+		selMovie.setBorder(BorderFactory.createEtchedBorder());
+		selMovie.setLayout(new AbsoluteLayout());
 
-		labelMovie.setFont(new java.awt.Font("나눔바른고딕", 0, 18)); // NOI18N
-		labelMovie.setForeground(new java.awt.Color(0, 0, 0));
+		labelMovie.setFont(new Font("나눔바른고딕", 0, 18)); // NOI18N
+		labelMovie.setForeground(new Color(0, 0, 0));
 		labelMovie.setText("영화 예매");
-		selMovie.add(labelMovie, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 3, 70, 30));
+		selMovie.add(labelMovie, new AbsoluteConstraints(10, 3, 70, 30));
 
-		Main.add(selMovie, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, 35));
+		Main.add(selMovie, new AbsoluteConstraints(0, 0, 270, 35));
 
-		order.setBackground(new java.awt.Color(204, 204, 204));
-		order.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+		order.setBackground(new Color(204, 204, 204));
+		order.setLayout(new AbsoluteLayout());
 
-		ganadaB.setBackground(new java.awt.Color(255, 255, 255));
-		ganadaB.setFont(new java.awt.Font("나눔바른고딕", 1, 13)); // NOI18N
-		ganadaB.setForeground(new java.awt.Color(0, 0, 0));
+		ganadaB.setBackground(new Color(255, 255, 255));
+		ganadaB.setFont(new Font("나눔바른고딕", 1, 13)); // NOI18N
+		ganadaB.setForeground(new Color(0, 0, 0));
 		ganadaB.setText("가나다순");
 		ganadaB.setAlignmentY(0.0F);
 		ganadaB.setBorder(null);
 		ganadaB.setOpaque(false);
-		ganadaB.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		ganadaB.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				ganadaBActionPerformed(evt);
 			}
 		});
-		order.add(ganadaB, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 2, 60, 30));
+		order.add(ganadaB, new AbsoluteConstraints(70, 2, 60, 30));
 
-		gradeB.setBackground(new java.awt.Color(255, 255, 255));
-		gradeB.setFont(new java.awt.Font("나눔바른고딕", 1, 13)); // NOI18N
-		gradeB.setForeground(new java.awt.Color(0, 0, 0));
+		gradeB.setBackground(new Color(255, 255, 255));
+		gradeB.setFont(new Font("나눔바른고딕", 1, 13)); // NOI18N
+		gradeB.setForeground(new Color(0, 0, 0));
 		gradeB.setText("평점순");
 		gradeB.setAlignmentY(0.0F);
 		gradeB.setBorder(null);
 		gradeB.setOpaque(false);
-		gradeB.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		gradeB.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				gradeBActionPerformed(evt);
 			}
 		});
-		order.add(gradeB, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 2, 60, 30));
+		order.add(gradeB, new AbsoluteConstraints(2, 2, 60, 30));
 
-		Main.add(order, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 34, 269, 35));
+		Main.add(order, new AbsoluteConstraints(0, 34, 269, 35));
 
-		movieListSC.setBackground(new java.awt.Color(255, 255, 255));
+		movieListSC.setBackground(new Color(255, 255, 255));
 		movieListSC.setAlignmentX(0.0F);
 		movieListSC.setAlignmentY(0.0F);
 
-		movieList.setBackground(new java.awt.Color(255, 255, 255));
-		movieList.setFont(new java.awt.Font("나눔스퀘어", 0, 15)); // NOI18N
-		movieList.setModel(new javax.swing.AbstractListModel<String>() {
-			String[] strings = { "백두산", "백두산 (ATMOS)", "시동", "신비아파트 극장판 하늘도깨비 대 요르..", "겨울왕국 2", "겨울왕국 2 (우리말녹음)",
-					"겨울왕국 2 (싱어롱)", "겨울왕국 2 (3D)", "캣츠", "캣츠 (ATMOS)", "포드 V 페라리", "포드 V 페라리 (ATMOS)", "쥬만지: 넥스트 레벨",
-					"나이브스 아웃", "프린스 코기 (우리말녹음)", "프린스 코기", "눈의 여왕4 (우리말녹음)", "눈의 여왕4", "미안해요，리키", "미안해요，리키 (필름소사이어티)",
-					"미안해요，리키 (필름소사이어티)", "카운트다운", "윤희에게", "윤희에게 (영어자막)", "감쪽같은 그녀", "라스트 크리스마스", "러브 액츄얼리",
-					"러브 액츄얼리 (디지털)", "러브 액츄얼리 (방구석 영화관)", "두 교황", "두 교황 (필름소사이어티)", "두 교황 (ATMOS)", "파비안느에 관한 진실",
-					"파비안느에 관한 진실 (필름소사이어티..", "파비안느에 관한 진실 (필름소사이어티..", "결혼 이야기", "아이리시맨", "아이리시맨 (ATMOS)",
-					"아이리시맨 (GV)", "프란치스코 교황 : 맨 오브 히스 워드", "프란치스코 교황 : 맨 오브 히스 워드 ..", "대통령의 7시간", "월성", "이태원",
-					"이태원 (영어자막)", "날씨의 아이", "아내를 죽였다", "벌새", "벌새 (영어자막)", "벌새 (2019 더숲 올해의 영화)", "82년생 김지영",
-					"82년생 김지영 (영어자막)", "블랙 스완", "블랙 스완 (필름소사이어티)", "극장판 타오르지마 버스터 - 블랙어썰..", "헤로니모", "메기", "디에고", "속물들",
-					"나를 찾아줘", "나를 찾아줘 (가치봄)", "2019 CINE ICON: 벌새", "고흐，영원의 문에서", "고흐，영원의 문에서 (필름소사이어티)", "영화로운 나날",
-					"영화로운 나날 (영어자막)" };
+		movieList.setBackground(new Color(255, 255, 255));
+		movieList.setFont(new Font("나눔스퀘어", 0, 15)); // NOI18N
+		movieList.setModel(new AbstractListModel<String>() {
+			String[] strings = { "백두산", "백두산 (ATMOS)", "시동", "신비아파트 극장판 하늘도깨비 대 요르..", "겨울왕국 2", "겨울왕국 2 (우리말녹음)", "겨울왕국 2 (싱어롱)",
+					"겨울왕국 2 (3D)", "캣츠", "캣츠 (ATMOS)", "포드 V 페라리", "포드 V 페라리 (ATMOS)", "쥬만지: 넥스트 레벨", "나이브스 아웃", "프린스 코기 (우리말녹음)", "프린스 코기",
+					"눈의 여왕4 (우리말녹음)", "눈의 여왕4", "미안해요，리키", "미안해요，리키 (필름소사이어티)", "미안해요，리키 (필름소사이어티)", "카운트다운", "윤희에게", "윤희에게 (영어자막)",
+					"감쪽같은 그녀", "라스트 크리스마스", "러브 액츄얼리", "러브 액츄얼리 (디지털)", "러브 액츄얼리 (방구석 영화관)", "두 교황", "두 교황 (필름소사이어티)", "두 교황 (ATMOS)",
+					"파비안느에 관한 진실", "파비안느에 관한 진실 (필름소사이어티..", "파비안느에 관한 진실 (필름소사이어티..", "결혼 이야기", "아이리시맨", "아이리시맨 (ATMOS)", "아이리시맨 (GV)",
+					"프란치스코 교황 : 맨 오브 히스 워드", "프란치스코 교황 : 맨 오브 히스 워드 ..", "대통령의 7시간", "월성", "이태원", "이태원 (영어자막)", "날씨의 아이", "아내를 죽였다", "벌새",
+					"벌새 (영어자막)", "벌새 (2019 더숲 올해의 영화)", "82년생 김지영", "82년생 김지영 (영어자막)", "블랙 스완", "블랙 스완 (필름소사이어티)", "극장판 타오르지마 버스터 - 블랙어썰..",
+					"헤로니모", "메기", "디에고", "속물들", "나를 찾아줘", "나를 찾아줘 (가치봄)", "2019 CINE ICON: 벌새", "고흐，영원의 문에서", "고흐，영원의 문에서 (필름소사이어티)",
+					"영화로운 나날", "영화로운 나날 (영어자막)" };
 
 			public int getSize() {
 				return strings.length;
@@ -146,186 +148,185 @@ public class MovieReserveUITest extends javax.swing.JFrame {
 				return strings[i];
 			}
 		});
-		movieList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+		movieList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		movieListSC.setViewportView(movieList);
 
-		Main.add(movieListSC, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 270, 540));
+		Main.add(movieListSC, new AbsoluteConstraints(0, 70, 270, 540));
 
-		screenSel.setBackground(new java.awt.Color(218, 210, 180));
-		screenSel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-		screenSel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+		screenSel.setBackground(new Color(218, 210, 180));
+		screenSel.setBorder(BorderFactory.createEtchedBorder());
+		screenSel.setLayout(new AbsoluteLayout());
 
-		selScreen.setFont(new java.awt.Font("나눔바른고딕", 0, 18)); // NOI18N
-		selScreen.setForeground(new java.awt.Color(0, 0, 0));
+		selScreen.setFont(new Font("나눔바른고딕", 0, 18)); // NOI18N
+		selScreen.setForeground(new Color(0, 0, 0));
 		selScreen.setText("상영관 및 시간 선택");
-		screenSel.add(selScreen, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 3, 160, 30));
+		screenSel.add(selScreen, new AbsoluteConstraints(10, 3, 160, 30));
 
-		screenSel1.setBackground(new java.awt.Color(218, 210, 180));
-		screenSel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-		screenSel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+		screenSel1.setBackground(new Color(218, 210, 180));
+		screenSel1.setBorder(BorderFactory.createEtchedBorder());
+		screenSel1.setLayout(new AbsoluteLayout());
 
-		selScreen1.setFont(new java.awt.Font("나눔바른고딕", 1, 18)); // NOI18N
-		selScreen1.setForeground(new java.awt.Color(0, 0, 0));
+		selScreen1.setFont(new Font("나눔바른고딕", 1, 18)); // NOI18N
+		selScreen1.setForeground(new Color(0, 0, 0));
 		selScreen1.setText("상영관 선택");
-		screenSel1.add(selScreen1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 3, 110, 30));
+		screenSel1.add(selScreen1, new AbsoluteConstraints(10, 3, 110, 30));
 
-		screenSel.add(screenSel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 0, 200, 35));
+		screenSel.add(screenSel1, new AbsoluteConstraints(270, 0, 200, 35));
 
-		Main.add(screenSel, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 0, 200, 35));
+		Main.add(screenSel, new AbsoluteConstraints(270, 0, 200, 35));
 
-		movieInfo.setBackground(new java.awt.Color(45, 45, 45));
-		movieInfo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+		movieInfo.setBackground(new Color(45, 45, 45));
+		movieInfo.setLayout(new AbsoluteLayout());
 
-		resetRe.setFont(new java.awt.Font("나눔스퀘어", 1, 15)); // NOI18N
+		resetRe.setFont(new Font("나눔스퀘어", 1, 15)); // NOI18N
 		resetRe.setText("예매 다시하기");
-		movieInfo.add(resetRe, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 130, 30));
+		movieInfo.add(resetRe, new AbsoluteConstraints(10, 10, 130, 30));
 
-		moviePoster.setIcon(new javax.swing.ImageIcon("C:\\fusion11\\JAVA_NETBEANS\\Test\\Image\\poster.png")); // NOI18N
+		moviePoster.setIcon(new ImageIcon("C:\\fusion11\\JAVA_NETBEANS\\Test\\Image\\poster.png")); // NOI18N
 		moviePoster.setOpaque(true);
-		movieInfo.add(moviePoster, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 200, 250));
+		movieInfo.add(moviePoster, new AbsoluteConstraints(40, 60, 200, 250));
 
-		movieName.setFont(new java.awt.Font("나눔스퀘어", 0, 18)); // NOI18N
-		movieName.setForeground(new java.awt.Color(255, 255, 255));
+		movieName.setFont(new Font("나눔스퀘어", 0, 18)); // NOI18N
+		movieName.setForeground(new Color(255, 255, 255));
 		movieName.setText("11000");
-		movieInfo.add(movieName, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, -1, -1));
+		movieInfo.add(movieName, new AbsoluteConstraints(90, 350, -1, -1));
 
-		movieName1.setFont(new java.awt.Font("나눔스퀘어", 0, 16)); // NOI18N
-		movieName1.setForeground(new java.awt.Color(255, 255, 255));
+		movieName1.setFont(new Font("나눔스퀘어", 0, 16)); // NOI18N
+		movieName1.setForeground(new Color(255, 255, 255));
 		movieName1.setText("겨울왕국2");
-		movieInfo.add(movieName1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, -1, -1));
+		movieInfo.add(movieName1, new AbsoluteConstraints(40, 320, -1, -1));
 
-		movieName2.setFont(new java.awt.Font("나눔스퀘어", 0, 18)); // NOI18N
-		movieName2.setForeground(new java.awt.Color(255, 255, 255));
+		movieName2.setFont(new Font("나눔스퀘어", 0, 18)); // NOI18N
+		movieName2.setForeground(new Color(255, 255, 255));
 		movieName2.setText("금액");
-		movieInfo.add(movieName2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 500, -1, -1));
+		movieInfo.add(movieName2, new AbsoluteConstraints(40, 500, -1, -1));
 
-		movieName3.setFont(new java.awt.Font("나눔스퀘어", 0, 18)); // NOI18N
-		movieName3.setForeground(new java.awt.Color(255, 0, 0));
+		movieName3.setFont(new Font("나눔스퀘어", 0, 18)); // NOI18N
+		movieName3.setForeground(new Color(255, 0, 0));
 		movieName3.setText("좋아요");
-		movieInfo.add(movieName3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, -1, -1));
+		movieInfo.add(movieName3, new AbsoluteConstraints(40, 350, -1, -1));
 
-		movieName4.setFont(new java.awt.Font("나눔스퀘어", 0, 18)); // NOI18N
-		movieName4.setForeground(new java.awt.Color(255, 255, 255));
+		movieName4.setFont(new Font("나눔스퀘어", 0, 18)); // NOI18N
+		movieName4.setForeground(new Color(255, 255, 255));
 		movieName4.setText("상영관");
-		movieInfo.add(movieName4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, -1, -1));
+		movieInfo.add(movieName4, new AbsoluteConstraints(40, 380, -1, -1));
 
-		movieName5.setFont(new java.awt.Font("나눔스퀘어", 0, 18)); // NOI18N
-		movieName5.setForeground(new java.awt.Color(255, 255, 255));
+		movieName5.setFont(new Font("나눔스퀘어", 0, 18)); // NOI18N
+		movieName5.setForeground(new Color(255, 255, 255));
 		movieName5.setText("날짜");
-		movieInfo.add(movieName5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 410, -1, -1));
+		movieInfo.add(movieName5, new AbsoluteConstraints(40, 410, -1, -1));
 
-		jButton1.setBackground(new java.awt.Color(255, 255, 255));
-		jButton1.setFont(new java.awt.Font("나눔스퀘어", 1, 24)); // NOI18N
+		jButton1.setBackground(new Color(255, 255, 255));
+		jButton1.setFont(new Font("나눔스퀘어", 1, 24)); // NOI18N
 		jButton1.setText("예매 하기");
 		jButton1.setOpaque(false);
-		movieInfo.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 540, 190, -1));
+		movieInfo.add(jButton1, new AbsoluteConstraints(50, 540, 190, -1));
 
-		movieName6.setFont(new java.awt.Font("나눔스퀘어", 0, 18)); // NOI18N
-		movieName6.setForeground(new java.awt.Color(255, 255, 255));
+		movieName6.setFont(new Font("나눔스퀘어", 0, 18)); // NOI18N
+		movieName6.setForeground(new Color(255, 255, 255));
 		movieName6.setText("좌석");
-		movieInfo.add(movieName6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 470, -1, -1));
+		movieInfo.add(movieName6, new AbsoluteConstraints(40, 470, -1, -1));
 
-		movieName7.setFont(new java.awt.Font("나눔스퀘어", 0, 18)); // NOI18N
-		movieName7.setForeground(new java.awt.Color(255, 255, 255));
+		movieName7.setFont(new Font("나눔스퀘어", 0, 18)); // NOI18N
+		movieName7.setForeground(new Color(255, 255, 255));
 		movieName7.setText("인원");
-		movieInfo.add(movieName7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 440, -1, -1));
+		movieInfo.add(movieName7, new AbsoluteConstraints(40, 440, -1, -1));
 
-		Main.add(movieInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 0, 280, 600));
+		Main.add(movieInfo, new AbsoluteConstraints(730, 0, 280, 600));
 
-		selCal.setBackground(new java.awt.Color(218, 210, 180));
-		selCal.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-		selCal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+		selCal.setBackground(new Color(218, 210, 180));
+		selCal.setBorder(BorderFactory.createEtchedBorder());
+		selCal.setLayout(new AbsoluteLayout());
 
-		calSel.setFont(new java.awt.Font("나눔바른고딕", 0, 18)); // NOI18N
-		calSel.setForeground(new java.awt.Color(0, 0, 0));
+		calSel.setFont(new Font("나눔바른고딕", 0, 18)); // NOI18N
+		calSel.setForeground(new Color(0, 0, 0));
 		calSel.setText("달력 선택");
-		selCal.add(calSel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 3, 70, 30));
+		selCal.add(calSel, new AbsoluteConstraints(10, 3, 70, 30));
 
-		Main.add(selCal, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 0, 260, 35));
+		Main.add(selCal, new AbsoluteConstraints(470, 0, 260, 35));
 
-		jPanel1.setBackground(new java.awt.Color(255, 255, 204));
-		jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-		Main.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 30, 260, 370));
+		jPanel1.setBackground(new Color(255, 255, 204));
+		jPanel1.setLayout(new AbsoluteLayout());
+		Main.add(jPanel1, new AbsoluteConstraints(470, 30, 260, 370));
 
-		selPeople.setBackground(new java.awt.Color(218, 210, 180));
-		selPeople.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-		selPeople.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+		selPeople.setBackground(new Color(218, 210, 180));
+		selPeople.setBorder(BorderFactory.createEtchedBorder());
+		selPeople.setLayout(new AbsoluteLayout());
 
-		peopleSel.setFont(new java.awt.Font("나눔바른고딕", 0, 18)); // NOI18N
-		peopleSel.setForeground(new java.awt.Color(0, 0, 0));
+		peopleSel.setFont(new Font("나눔바른고딕", 0, 18)); // NOI18N
+		peopleSel.setForeground(new Color(0, 0, 0));
 		peopleSel.setText("인원 선택");
-		selPeople.add(peopleSel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 3, 70, 30));
+		selPeople.add(peopleSel, new AbsoluteConstraints(10, 3, 70, 30));
 
-		Main.add(selPeople, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 400, 260, 35));
+		Main.add(selPeople, new AbsoluteConstraints(470, 400, 260, 35));
 
-		selP.setBackground(new java.awt.Color(255, 255, 204));
+		selP.setBackground(new Color(255, 255, 204));
 		selP.setAlignmentX(0.0F);
 		selP.setAlignmentY(0.0F);
-		selP.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+		selP.setLayout(new AbsoluteLayout());
 
-		jLabel1.setFont(new java.awt.Font("나눔바른고딕", 1, 18)); // NOI18N
-		jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+		jLabel1.setFont(new Font("나눔바른고딕", 1, 18)); // NOI18N
+		jLabel1.setForeground(new Color(0, 0, 0));
 		jLabel1.setText("학생");
-		selP.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 90, -1, -1));
+		selP.add(jLabel1, new AbsoluteConstraints(6, 90, -1, -1));
 
-		jToggleButton1.setBackground(new java.awt.Color(255, 255, 255));
-		jToggleButton1.setFont(new java.awt.Font("Dialog", 1, 9)); // NOI18N
+		jToggleButton1.setBackground(new Color(255, 255, 255));
+		jToggleButton1.setFont(new Font("Dialog", 1, 9)); // NOI18N
 		jToggleButton1.setText("0");
 		jToggleButton1.setOpaque(false);
-		selP.add(jToggleButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 37, 37));
+		selP.add(jToggleButton1, new AbsoluteConstraints(0, 110, 37, 37));
 
-		jLabel2.setFont(new java.awt.Font("나눔바른고딕", 1, 18)); // NOI18N
-		jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+		jLabel2.setFont(new Font("나눔바른고딕", 1, 18)); // NOI18N
+		jLabel2.setForeground(new Color(0, 0, 0));
 		jLabel2.setText("성인");
-		selP.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 20, -1, -1));
+		selP.add(jLabel2, new AbsoluteConstraints(6, 20, -1, -1));
 
-		jToggleButton2.setBackground(new java.awt.Color(255, 255, 255));
-		jToggleButton2.setFont(new java.awt.Font("Dialog", 1, 9)); // NOI18N
+		jToggleButton2.setBackground(new Color(255, 255, 255));
+		jToggleButton2.setFont(new Font("Dialog", 1, 9)); // NOI18N
 		jToggleButton2.setText("0");
 		jToggleButton2.setOpaque(false);
-		selP.add(jToggleButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 37, 37));
+		selP.add(jToggleButton2, new AbsoluteConstraints(0, 40, 37, 37));
 
-		jLabel3.setBackground(new java.awt.Color(0, 0, 0));
-		jLabel3.setFont(new java.awt.Font("나눔바른고딕", 1, 12)); // NOI18N
-		jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+		jLabel3.setBackground(new Color(0, 0, 0));
+		jLabel3.setFont(new Font("나눔바른고딕", 1, 12)); // NOI18N
+		jLabel3.setForeground(new Color(0, 0, 0));
 		jLabel3.setText("1매 / 8000원");
-		selP.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, -1, -1));
+		selP.add(jLabel3, new AbsoluteConstraints(180, 80, -1, -1));
 
-		jLabel4.setBackground(new java.awt.Color(0, 0, 0));
-		jLabel4.setFont(new java.awt.Font("나눔바른고딕", 1, 12)); // NOI18N
-		jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+		jLabel4.setBackground(new Color(0, 0, 0));
+		jLabel4.setFont(new Font("나눔바른고딕", 1, 12)); // NOI18N
+		jLabel4.setForeground(new Color(0, 0, 0));
 		jLabel4.setText("1매 / 10000원");
-		selP.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, -1, -1));
+		selP.add(jLabel4, new AbsoluteConstraints(180, 10, -1, -1));
 
-		Main.add(selP, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 430, 260, 170));
+		Main.add(selP, new AbsoluteConstraints(470, 430, 260, 170));
 
-		selMovie2.setBackground(new java.awt.Color(218, 210, 180));
-		selMovie2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-		selMovie2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+		selMovie2.setBackground(new Color(218, 210, 180));
+		selMovie2.setBorder(BorderFactory.createEtchedBorder());
+		selMovie2.setLayout(new AbsoluteLayout());
 
-		labelMovie2.setFont(new java.awt.Font("나눔바른고딕", 0, 18)); // NOI18N
-		labelMovie2.setForeground(new java.awt.Color(0, 0, 0));
+		labelMovie2.setFont(new Font("나눔바른고딕", 0, 18)); // NOI18N
+		labelMovie2.setForeground(new Color(0, 0, 0));
 		labelMovie2.setText("선택");
-		selMovie2.add(labelMovie2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 3, 70, 30));
+		selMovie2.add(labelMovie2, new AbsoluteConstraints(10, 3, 70, 30));
 
-		Main.add(selMovie2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 400, 200, 35));
+		Main.add(selMovie2, new AbsoluteConstraints(270, 400, 200, 35));
 
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+		GroupLayout layout = new GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
-		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(
-				Main, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-				javax.swing.GroupLayout.PREFERRED_SIZE));
-		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(Main,
-				javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+		layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(Main, GroupLayout.PREFERRED_SIZE,
+				GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE));
+		layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(Main, GroupLayout.DEFAULT_SIZE,
+				GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
 
 		pack();
 	}// </editor-fold>
 
-	private void ganadaBActionPerformed(java.awt.event.ActionEvent evt) {
+	private void ganadaBActionPerformed(ActionEvent evt) {
 		// TODO add your handling code here:
 	}
 
-	private void gradeBActionPerformed(java.awt.event.ActionEvent evt) {
+	private void gradeBActionPerformed(ActionEvent evt) {
 		// TODO add your handling code here:
 	}
 
@@ -344,36 +345,31 @@ public class MovieReserveUITest extends javax.swing.JFrame {
 		try {
 			System.setProperty("awt.useSystemAAFontSettings", "on");
 			System.setProperty("swing.aatext", "true");
-			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+			for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 				if ("Nimbus".equals(info.getName())) {
-					javax.swing.UIManager.setLookAndFeel(info.getClassName());
+					UIManager.setLookAndFeel(info.getClassName());
 					break;
 				}
 			}
 		} catch (ClassNotFoundException ex) {
-			java.util.logging.Logger.getLogger(MovieReserveUITest.class.getName()).log(java.util.logging.Level.SEVERE,
-					null, ex);
+			java.util.logging.Logger.getLogger(MovieReserveUITest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 		} catch (InstantiationException ex) {
-			java.util.logging.Logger.getLogger(MovieReserveUITest.class.getName()).log(java.util.logging.Level.SEVERE,
-					null, ex);
+			java.util.logging.Logger.getLogger(MovieReserveUITest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 		} catch (IllegalAccessException ex) {
-			java.util.logging.Logger.getLogger(MovieReserveUITest.class.getName()).log(java.util.logging.Level.SEVERE,
-					null, ex);
-		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-			java.util.logging.Logger.getLogger(MovieReserveUITest.class.getName()).log(java.util.logging.Level.SEVERE,
-					null, ex);
+			java.util.logging.Logger.getLogger(MovieReserveUITest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		} catch (UnsupportedLookAndFeelException ex) {
+			java.util.logging.Logger.getLogger(MovieReserveUITest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 		}
 
 		try {
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-				| UnsupportedLookAndFeelException e) {
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
 			e.printStackTrace();
 		}
 		// </editor-fold>
 
 		/* Create and display the form */
-		java.awt.EventQueue.invokeLater(new Runnable() {
+		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				new MovieReserveUITest().setVisible(true);
 			}
@@ -381,43 +377,43 @@ public class MovieReserveUITest extends javax.swing.JFrame {
 	}
 
 	// Variables declaration - do not modify
-	private javax.swing.JPanel Main;
-	private javax.swing.JLabel calSel;
-	private javax.swing.JToggleButton ganadaB;
-	private javax.swing.JToggleButton gradeB;
-	private javax.swing.JButton jButton1;
-	private javax.swing.JLabel jLabel1;
-	private javax.swing.JLabel jLabel2;
-	private javax.swing.JLabel jLabel3;
-	private javax.swing.JLabel jLabel4;
-	private javax.swing.JPanel jPanel1;
-	private javax.swing.JToggleButton jToggleButton1;
-	private javax.swing.JToggleButton jToggleButton2;
-	private javax.swing.JLabel labelMovie;
-	private javax.swing.JLabel labelMovie2;
-	private javax.swing.JPanel movieInfo;
-	private javax.swing.JList<String> movieList;
-	private javax.swing.JScrollPane movieListSC;
-	private javax.swing.JLabel movieName;
-	private javax.swing.JLabel movieName1;
-	private javax.swing.JLabel movieName2;
-	private javax.swing.JLabel movieName3;
-	private javax.swing.JLabel movieName4;
-	private javax.swing.JLabel movieName5;
-	private javax.swing.JLabel movieName6;
-	private javax.swing.JLabel movieName7;
-	private javax.swing.JLabel moviePoster;
-	private javax.swing.JPanel order;
-	private javax.swing.JLabel peopleSel;
-	private javax.swing.JButton resetRe;
-	private javax.swing.JPanel screenSel;
-	private javax.swing.JPanel screenSel1;
-	private javax.swing.JPanel selCal;
-	private javax.swing.JPanel selMovie;
-	private javax.swing.JPanel selMovie2;
-	private javax.swing.JPanel selP;
-	private javax.swing.JPanel selPeople;
-	private javax.swing.JLabel selScreen;
-	private javax.swing.JLabel selScreen1;
+	private JPanel Main;
+	private JLabel calSel;
+	private JToggleButton ganadaB;
+	private JToggleButton gradeB;
+	private JButton jButton1;
+	private JLabel jLabel1;
+	private JLabel jLabel2;
+	private JLabel jLabel3;
+	private JLabel jLabel4;
+	private JPanel jPanel1;
+	private JToggleButton jToggleButton1;
+	private JToggleButton jToggleButton2;
+	private JLabel labelMovie;
+	private JLabel labelMovie2;
+	private JPanel movieInfo;
+	private JList<String> movieList;
+	private JScrollPane movieListSC;
+	private JLabel movieName;
+	private JLabel movieName1;
+	private JLabel movieName2;
+	private JLabel movieName3;
+	private JLabel movieName4;
+	private JLabel movieName5;
+	private JLabel movieName6;
+	private JLabel movieName7;
+	private JLabel moviePoster;
+	private JPanel order;
+	private JLabel peopleSel;
+	private JButton resetRe;
+	private JPanel screenSel;
+	private JPanel screenSel1;
+	private JPanel selCal;
+	private JPanel selMovie;
+	private JPanel selMovie2;
+	private JPanel selP;
+	private JPanel selPeople;
+	private JLabel selScreen;
+	private JLabel selScreen1;
 	// End of variables declaration
 }
