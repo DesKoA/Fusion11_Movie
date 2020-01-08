@@ -1,11 +1,10 @@
 package data;
 
-import java.sql.Date;
+import java.util.Date;
 
 // 예약
 
 public class Reserve {
-
 	private int reserveNo; // 예약 번호(자동증가)
 	private String movieTitle; // 영화 제목(영화 테이블)
 	private String memberID; // 회원 아이디(회원 테이블)
