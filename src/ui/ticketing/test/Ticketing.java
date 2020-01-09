@@ -1,4 +1,4 @@
-package test;
+package ui.ticketing.test;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package test;
+package ui.ticketing.test;
 
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
