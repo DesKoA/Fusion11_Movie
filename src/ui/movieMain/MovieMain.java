@@ -77,7 +77,7 @@ public class MovieMain extends JFrame {
 				JLabel mov = movieLabelList.get(i);
 				if (movMenu == mov) {
 					Movie selMovie = MovieList.get(i);
-					Test t1 = new Test(selMovie);
+					MoviePosterInfo t1 = new MoviePosterInfo(selMovie);
 					t1.setVisible(true);
 					t1.setSize(810, 635);
 

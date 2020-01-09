@@ -49,8 +49,8 @@ import java.awt.Window.Type;
 import javax.swing.UIManager;
 import java.awt.Font;
 
-public class Test extends JDialog implements ActionListener {
-	Test dlg;
+public class MoviePosterInfo extends JDialog implements ActionListener {
+	MoviePosterInfo dlg;
 	ImageIcon imgIconList[], icon;
 	File folder;
 	private JPanel contentPane;
@@ -81,7 +81,7 @@ public class Test extends JDialog implements ActionListener {
 		cardMgr.show(movPoter, "mov"+sel);
 	}
 	
-	public Test(Movie mv) {
+	public MoviePosterInfo(Movie mv) {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(600, 150, 872, 746);
