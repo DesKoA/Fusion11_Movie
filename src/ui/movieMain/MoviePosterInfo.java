@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import data.Movie;
-
+import ui.ticketing.MovieTicketingTest;
 
 import java.awt.FlowLayout;
 import java.awt.Graphics;
@@ -103,7 +103,7 @@ public class MoviePosterInfo extends JDialog implements ActionListener {
 		JPanel panel_4 = new JPanel();
 		panel_4.setBackground(Color.DARK_GRAY);
 		panel_1.add(panel_4);
-
+		int num = 0;
 		JButton btnNewButton = new JButton("\uC608\uB9E4\uD558\uAE30");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -113,6 +113,10 @@ public class MoviePosterInfo extends JDialog implements ActionListener {
 				if (result == JOptionPane.OK_OPTION) {
 					// TODO 예매 페이지로 이동
 					JOptionPane.showMessageDialog(contentPane, "예매 페이지로 이동합니다");
+					if( num == 0) {
+						MovieTicketingTest Mt = new MovieTicketingTest();
+						Mt.setVisible(true);
+					}
 				} else if (result == JOptionPane.CANCEL_OPTION) {
 					JOptionPane.showMessageDialog(contentPane, "취소하였습니다");
 					//예매 페이지로 이동하겠습니다

@@ -80,7 +80,7 @@ public class MovieTicketingTest extends JFrame {
 	public static MovieTicketingTest mov;
 	
 	public void setFrame() {
-		setBounds(0, 0, 500, 400);
+		setBounds(500, 150, 500, 400);
 
 		setAlwaysOnTop(false);
 		desktop = new JDesktopPane(); // a specialized layered pane
@@ -140,7 +140,7 @@ public class MovieTicketingTest extends JFrame {
 		movieInfoTimeName.setText("-");
 		
 		try {
-			Image image = ImageIO.read(new File("C:\\fusion11\\JAVA_WS\\MovieProject\\files\\image\\no_poster.png"));
+			Image image = ImageIO.read(new File(".\\files\\image\\no_poster.png"));
 			Image changedImg = image.getScaledInstance(200, 250, Image.SCALE_SMOOTH);
 			Icon = new ImageIcon(changedImg);
 			movieInfoPoster.setIcon(Icon);
@@ -220,7 +220,7 @@ public class MovieTicketingTest extends JFrame {
 		student6 = new JToggleButton();
 		student7 = new JToggleButton();
 		
-		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setBackground(new Color(255, 255, 255));
 
 		Main.setBackground(new Color(255, 255, 255));
@@ -375,7 +375,7 @@ public class MovieTicketingTest extends JFrame {
 		movieInfo.add(resetRe, new AbsoluteConstraints(10, 10, 130, 30));
 		
 		try {
-			Image image = ImageIO.read(new File("C:\\fusion11\\JAVA_WS\\MovieProject\\files\\image\\no_poster.png"));
+			Image image = ImageIO.read(new File(".\\files\\image\\no_poster.png"));
 			Image changedImg = image.getScaledInstance(200, 250, Image.SCALE_SMOOTH);
 			Icon = new ImageIcon(changedImg);
 			movieInfoPoster.setIcon(Icon);
