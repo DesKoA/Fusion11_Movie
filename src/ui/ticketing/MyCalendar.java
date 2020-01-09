@@ -33,7 +33,7 @@ public class MyCalendar extends JInternalFrame { // CalendarDataManager¿« GUI + 
 	int calDayOfMon;
 	public static int targetDay;
 	final int calLastDateOfMonth[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-	public static MovieTicketingTest mov;
+	public static MovieTicketing mov;
 	int calLastDate;
 	Calendar today = Calendar.getInstance();
 	Calendar cal;

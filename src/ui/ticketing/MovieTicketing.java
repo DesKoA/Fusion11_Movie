@@ -23,6 +23,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
+import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
@@ -56,7 +57,7 @@ import java.util.LinkedHashMap;
  *
  * @author alfo4-9
  */
-public class MovieTicketingTest extends JFrame {
+public class MovieTicketing extends JFrame {
 	public int adPersons;
 	public int stPersons;
 	public String movTitle;
@@ -77,7 +78,7 @@ public class MovieTicketingTest extends JFrame {
 	
 	public LinkedHashMap<String, ArrayList<String>> timeList;
 	
-	public static MovieTicketingTest mov;
+	public static MovieTicketing mov;
 	
 	public void setFrame() {
 		setBounds(0, 0, 500, 400);
@@ -91,10 +92,10 @@ public class MovieTicketingTest extends JFrame {
 	protected void createFrame() {
 		setAlwaysOnTop(false);
 		// frame.setBounds(470, 30, 260, 370);
-		calFrame.setBounds(273, 35, 454, 304); // 364
+		calFrame.setBounds(269, 35, 460, 304); // 364
 		calFrame.setVisible(true);
 		BasicInternalFrameUI bi = (BasicInternalFrameUI) calFrame.getUI();
-		calFrame.setBorder(null);
+		calFrame.setBorder(new LineBorder(Color.BLACK, 1));
 		bi.setNorthPane(null);
 		desktop.add(calFrame);
 		try {
@@ -108,7 +109,7 @@ public class MovieTicketingTest extends JFrame {
 	 * Creates new form MovieReservation
 	 */
 	
-	public MovieTicketingTest() {
+	public MovieTicketing() {
 		MyCalendar.mov = this;
 		initComponents();
 	}
@@ -140,7 +141,7 @@ public class MovieTicketingTest extends JFrame {
 		movieInfoTimeName.setText("-");
 		
 		try {
-			Image image = ImageIO.read(new File("C:\\fusion11\\JAVA_WS\\MovieProject\\files\\image\\no_poster.png"));
+			Image image = ImageIO.read(new File(".\\files\\image\\no_poster.png"));
 			Image changedImg = image.getScaledInstance(200, 250, Image.SCALE_SMOOTH);
 			Icon = new ImageIcon(changedImg);
 			movieInfoPoster.setIcon(Icon);
@@ -190,17 +191,16 @@ public class MovieTicketingTest extends JFrame {
 		movieInfoTimeName = new JLabel();
 		movieInfoMoneyName = new JLabel();
 		timePanel = new JPanel();
-		// timeBtPanel = new JPanel();
 		movieInfoStar = new JLabel();
 		selCal = new JPanel();
 		calSel = new JLabel();
 		selPeople = new JPanel();
 		lblPeopleSel = new JLabel();
 		selPeoplePanel = new JPanel();
-		jLabel1 = new JLabel();
-		jLabel2 = new JLabel();
-		jLabel3 = new JLabel();
-		jLabel4 = new JLabel();
+		lbTxtStu = new JLabel();
+		lbTxtAd = new JLabel();
+		lbTxtStuMoney = new JLabel();
+		lbTxtAdMoney = new JLabel();
 		selMovieTime = new JPanel();
 		lblSelMovieTime = new JLabel();
 		adult0 = new JToggleButton();
@@ -277,13 +277,13 @@ public class MovieTicketingTest extends JFrame {
 		
 		order.add(gradeB, new AbsoluteConstraints(2, 2, 60, 30));
 
-		Main.add(order, new AbsoluteConstraints(0, 34, 269, 35));
+		Main.add(order, new AbsoluteConstraints(0, 34, 268, 35));
 
 		movieListSC.setBackground(new Color(255, 255, 255));
 		movieListSC.setAlignmentX(0.0F);
 		movieListSC.setAlignmentY(0.0F);
 
-		movieList.setBackground(new Color(255, 255, 255));
+		movieList.setBackground(Color.WHITE);
 		movieList.setFont(new Font("³ª´®¹Ù¸¥°íµñ", Font.PLAIN, 16)); // NOI18N
 		
 		movieList.setModel(new AbstractListModel<String>() {
@@ -359,8 +359,8 @@ public class MovieTicketingTest extends JFrame {
 		movieList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		
 		movieListSC.setViewportView(movieList);
-		
-		Main.add(movieListSC, new AbsoluteConstraints(0, 70, 270, 540));
+		movieListSC.setBorder(new LineBorder(Color.BLACK, 1));
+		Main.add(movieListSC, new AbsoluteConstraints(1, 70, 269, 540));
 
 		movieInfo.setBackground(new Color(45, 45, 45));
 		movieInfo.setLayout(new AbsoluteLayout());
@@ -375,7 +375,7 @@ public class MovieTicketingTest extends JFrame {
 		movieInfo.add(resetRe, new AbsoluteConstraints(10, 10, 130, 30));
 		
 		try {
-			Image image = ImageIO.read(new File("C:\\fusion11\\JAVA_WS\\MovieProject\\files\\image\\no_poster.png"));
+			Image image = ImageIO.read(new File(".\\files\\image\\no_poster.png"));
 			Image changedImg = image.getScaledInstance(200, 250, Image.SCALE_SMOOTH);
 			Icon = new ImageIcon(changedImg);
 			movieInfoPoster.setIcon(Icon);
@@ -383,7 +383,6 @@ public class MovieTicketingTest extends JFrame {
 			e1.printStackTrace();
 		}
 		
-		// moviePoster.setIcon(new ImageIcon("C:\\fusion11\\JAVA_NETBEANS\\Test\\Image\\poster.png"));
 		movieInfoPoster.setOpaque(true);
 		movieInfo.add(movieInfoPoster, new AbsoluteConstraints(40, 60, 200, 250));
 
@@ -437,7 +436,7 @@ public class MovieTicketingTest extends JFrame {
 				System.out.println(Icon2.toString());
 				System.out.println("===============¿¹¸Å=================");
 				
-				MovieTicketingSeatTest seatFrame = new MovieTicketingSeatTest(mov);
+				MovieTicketingSeat seatFrame = new MovieTicketingSeat(mov);
 				seatFrame.setVisible(true);
 			}
 		});
@@ -502,32 +501,32 @@ public class MovieTicketingTest extends JFrame {
 
 		Main.add(selPeople, new AbsoluteConstraints(470, 340, 260, 35));
 
-		selPeoplePanel.setBackground(new Color(255, 255, 204));
+		selPeoplePanel.setBackground(Color.WHITE);
 		selPeoplePanel.setAlignmentX(0.0F);
 		selPeoplePanel.setAlignmentY(0.0F);
 		selPeoplePanel.setLayout(new AbsoluteLayout());
 
-		jLabel1.setFont(new Font("³ª´®¹Ù¸¥°íµñ", 1, 18)); // NOI18N
-		jLabel1.setForeground(new Color(0, 0, 0));
-		jLabel1.setText("ÇÐ»ý");
-		selPeoplePanel.add(jLabel1, new AbsoluteConstraints(6, 125, -1, -1));
+		lbTxtStu.setFont(new Font("³ª´®¹Ù¸¥°íµñ", 1, 18)); // NOI18N
+		lbTxtStu.setForeground(new Color(0, 0, 0));
+		lbTxtStu.setText("ÇÐ»ý");
+		selPeoplePanel.add(lbTxtStu, new AbsoluteConstraints(6, 125, -1, -1));
 
-		jLabel2.setFont(new Font("³ª´®¹Ù¸¥°íµñ", 1, 18)); // NOI18N
-		jLabel2.setForeground(new Color(0, 0, 0));
-		jLabel2.setText("¼ºÀÎ");
-		selPeoplePanel.add(jLabel2, new AbsoluteConstraints(6, 35, -1, -1));
+		lbTxtAd.setFont(new Font("³ª´®¹Ù¸¥°íµñ", 1, 18)); // NOI18N
+		lbTxtAd.setForeground(new Color(0, 0, 0));
+		lbTxtAd.setText("¼ºÀÎ");
+		selPeoplePanel.add(lbTxtAd, new AbsoluteConstraints(6, 35, -1, -1));
 
-		jLabel3.setBackground(new Color(0, 0, 0));
-		jLabel3.setFont(new Font("³ª´®¹Ù¸¥°íµñ", 1, 14)); // NOI18N
-		jLabel3.setForeground(new Color(0, 0, 0));
-		jLabel3.setText("1¸Å / 8000¿ø");
-		selPeoplePanel.add(jLabel3, new AbsoluteConstraints(180, 125, -1, -1));
+		lbTxtStuMoney.setBackground(new Color(0, 0, 0));
+		lbTxtStuMoney.setFont(new Font("³ª´®¹Ù¸¥°íµñ", 1, 14)); // NOI18N
+		lbTxtStuMoney.setForeground(new Color(0, 0, 0));
+		lbTxtStuMoney.setText("1¸Å / 8000¿ø");
+		selPeoplePanel.add(lbTxtStuMoney, new AbsoluteConstraints(180, 125, -1, -1));
 
-		jLabel4.setBackground(new Color(0, 0, 0));
-		jLabel4.setFont(new Font("³ª´®¹Ù¸¥°íµñ", 1, 14)); // NOI18N
-		jLabel4.setForeground(new Color(0, 0, 0));
-		jLabel4.setText("1¸Å / 10000¿ø");
-		selPeoplePanel.add(jLabel4, new AbsoluteConstraints(173, 35, -1, -1));
+		lbTxtAdMoney.setBackground(new Color(0, 0, 0));
+		lbTxtAdMoney.setFont(new Font("³ª´®¹Ù¸¥°íµñ", 1, 14)); // NOI18N
+		lbTxtAdMoney.setForeground(new Color(0, 0, 0));
+		lbTxtAdMoney.setText("1¸Å / 10000¿ø");
+		selPeoplePanel.add(lbTxtAdMoney, new AbsoluteConstraints(173, 35, -1, -1));
 		
 		bAdults = new JToggleButton[] {adult0, adult1, adult2, adult3, adult4, adult5, adult6, adult7};
 		bgAdult = new ButtonGroup();
@@ -675,8 +674,8 @@ public class MovieTicketingTest extends JFrame {
 			bAdults[i].setEnabled(false);
 			bStudents[i].setEnabled(false);
 		}
-		
-		Main.add(selPeoplePanel, new AbsoluteConstraints(470, 374, 260, 235));
+		selPeoplePanel.setBorder(new LineBorder(Color.BLACK, 1));
+		Main.add(selPeoplePanel, new AbsoluteConstraints(469, 375, 260, 235));
 
 		selMovieTime.setBackground(new Color(218, 210, 180));
 		selMovieTime.setBorder(BorderFactory.createEtchedBorder());
@@ -704,7 +703,8 @@ public class MovieTicketingTest extends JFrame {
 		timePanel.setBackground(new Color(255, 255, 255));
         // timePanel.setAlignmentX(0.0F);
         // timePanel.setAlignmentY(0.0F);
-        Main.add(timePanel, new AbsoluteConstraints(270, 375, 200, 230));
+		timePanel.setBorder(new LineBorder(Color.BLACK, 1));
+        Main.add(timePanel, new AbsoluteConstraints(268, 375, 202, 235));
         timePanel.setLayout(new BorderLayout());
         
 		GroupLayout layout = new GroupLayout(getContentPane());
@@ -787,7 +787,7 @@ public class MovieTicketingTest extends JFrame {
 		/* Create and display the form */
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				new MovieTicketingTest().setVisible(true);
+				new MovieTicketing().setVisible(true);
 			}
 		});
 		OracleDBUtil.closeDB();
@@ -899,10 +899,10 @@ public class MovieTicketingTest extends JFrame {
 	private JToggleButton ganadaB;
 	private JToggleButton gradeB;
 	private JButton btnReserve;
-	private JLabel jLabel1;
-	private JLabel jLabel2;
-	private JLabel jLabel3;
-	private JLabel jLabel4;
+	private JLabel lbTxtStu;
+	private JLabel lbTxtAd;
+	private JLabel lbTxtStuMoney;
+	private JLabel lbTxtAdMoney;
 	private JLabel labelMovie;
 	private JLabel lblSelMovieTime;
 	private JPanel movieInfo;

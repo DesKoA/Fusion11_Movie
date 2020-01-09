@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ui.ticketing;
+package test;
 
+import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
-import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
@@ -15,13 +15,12 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
-import javax.swing.border.LineBorder;
-
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 import db.dao.MovieDBManager;
 import db.dao.TheatersDBManager;
+import db.util.OracleDBUtil;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -32,36 +31,51 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.border.LineBorder;
+import javax.swing.Icon;
 import java.awt.GridLayout;
-import javax.swing.SwingConstants;
 
 /**
  *
  * @author alfo4-9
  */
-public class MovieTicketingSeatTest extends JFrame {
+public class seatTest extends JFrame {
 	public int adPersons;
 	public int stPersons;
 	public String movTitle;
 	
+	public static OracleDBUtil db;
 	public MovieDBManager movieMgr;
 	public TheatersDBManager thMgr;
 	
 	public JDesktopPane desktop;
 	
 	public LinkedHashMap<String, ArrayList<String>> timeList;
-	JButton seatBtn[][] = new JButton[10][10];
-	public char ch;
-	public int seatNum;
 	
-	public MovieTicketingTest mov;
-
 	/**
 	 * Creates new form MovieReservation
 	 */
 	
-	public MovieTicketingSeatTest(MovieTicketingTest mov) {
-		this.mov = mov;
+	public static void main(String args[]) {
+		try {
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+			System.setProperty("awt.useSystemAAFontSettings", "on");
+			System.setProperty("swing.aatext", "true");
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+			e.printStackTrace();
+		}
+		// </editor-fold>
+
+		/* Create and display the form */
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				new seatTest().setVisible(true);
+			}
+		});
+		OracleDBUtil.closeDB();
+	}
+	
+	public seatTest() {
 		initComponents();
 	}
 	
@@ -77,8 +91,7 @@ public class MovieTicketingSeatTest extends JFrame {
 	 */
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">
 	public void initComponents() {
-		mov = MovieTicketingTest.mov;
-		Object[] obj = mov.getObjects();
+		OracleDBUtil.connectDB();
 		movieMgr = new MovieDBManager();
 		thMgr = new TheatersDBManager();
 		Main = new JPanel();
@@ -121,12 +134,10 @@ public class MovieTicketingSeatTest extends JFrame {
 		movieInfo.add(resetRe, new AbsoluteConstraints(10, 10, 130, 30));
 		
 		movieInfoPoster.setOpaque(true);
-		movieInfoPoster.setIcon((Icon)obj[0]);
 		movieInfo.add(movieInfoPoster, new AbsoluteConstraints(40, 60, 200, 250));
 		
 		movieInfoName.setFont(new Font("³ª´®½ºÄù¾î", 0, 20)); // NOI18N
 		movieInfoName.setForeground(new Color(255, 255, 255));
-		movieInfoName.setText((String)obj[1]);
 		movieInfo.add(movieInfoName, new AbsoluteConstraints(40, 320, -1, -1));
 
 		movieInfoMoney.setFont(new Font("³ª´®½ºÄù¾î", 0, 18)); // NOI18N
@@ -141,7 +152,6 @@ public class MovieTicketingSeatTest extends JFrame {
 		
 		movieInfoGrade.setFont(new Font("³ª´®½ºÄù¾î", 0, 18)); // NOI18N
 		movieInfoGrade.setForeground(new Color(255, 0, 0));
-		movieInfoGrade.setText((String)obj[2]);
 		movieInfo.add(movieInfoGrade, new AbsoluteConstraints(205, 350, -1, -1));
 		
 		movieInfoScreen.setFont(new Font("³ª´®½ºÄù¾î", 0, 18)); // NOI18N
@@ -178,27 +188,22 @@ public class MovieTicketingSeatTest extends JFrame {
 		
 		movieInfoScreenName.setFont(new Font("³ª´®½ºÄù¾î", 0, 18)); // NOI18N
 		movieInfoScreenName.setForeground(new Color(255, 255, 255));
-		movieInfoScreenName.setText((String)obj[4]);
 		movieInfo.add(movieInfoScreenName, new AbsoluteConstraints(80, 380, -1, -1));
 
 		movieInfoDayName.setFont(new Font("³ª´®½ºÄù¾î", 0, 18)); // NOI18N
 		movieInfoDayName.setForeground(new Color(255, 255, 255));
-		movieInfoDayName.setText((String)obj[5]);
 		movieInfo.add(movieInfoDayName, new AbsoluteConstraints(80, 410, -1, -1));
 
 		movieInfoPeopleName.setFont(new Font("³ª´®½ºÄù¾î", 0, 18)); // NOI18N
 		movieInfoPeopleName.setForeground(new Color(255, 255, 255));
-		movieInfoPeopleName.setText((String)obj[6]);
 		movieInfo.add(movieInfoPeopleName, new AbsoluteConstraints(80, 440, -1, -1));
 
 		movieInfoTimeName.setFont(new Font("³ª´®½ºÄù¾î", 0, 18)); // NOI18N
 		movieInfoTimeName.setForeground(new Color(255, 255, 255));
-		movieInfoTimeName.setText((String)obj[7]);
 		movieInfo.add(movieInfoTimeName, new AbsoluteConstraints(80, 470, -1, -1));
 		
 		movieInfoMoneyName.setFont(new Font("³ª´®½ºÄù¾î", 0, 18)); // NOI18N
 		movieInfoMoneyName.setForeground(new Color(255, 255, 255));
-		movieInfoMoneyName.setText((String)obj[8]);
 		movieInfo.add(movieInfoMoneyName, new AbsoluteConstraints(80, 500, 80, -1));
 
 		Main.add(movieInfo, new AbsoluteConstraints(730, 0, 280, 610));
@@ -206,48 +211,40 @@ public class MovieTicketingSeatTest extends JFrame {
         seatPanelLeft.setLayout(null);
         
         seatBtnPanel = new JPanel();
-        seatBtnPanel.setBounds(54, 134, 488, 435);
+        seatBtnPanel.setBounds(148, 91, 535, 475);
         seatPanelLeft.add(seatBtnPanel);
-        for (char c = 'A'; c <= 'J'; c++) {
-        	int i = c - 'A';
+        
+        ButtonGroup btnGr = new ButtonGroup();
+        for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
-				seatBtn[i][j] = new JButton(j + 1 + "");
-				seatBtn[i][j].setToolTipText(c + "" + (j + 1));
-				seatBtn[i][j].setVisible(true);
-				seatBtn[i][j].setPreferredSize(new Dimension(30, 30));
-				seatBtn[i][j].addActionListener(new ActionListener() {
+				JButton btn = new JButton("" + (j + 1));
+				btn.setFont(new Font("³ª´®¹Ù¸¥°íµñ", 1, 15));
+				btn.setVisible(true);
+				btn.setPreferredSize(new Dimension(30, 30));
+				btn.setContentAreaFilled(false);
+				btn.setFocusPainted(false);
+				btn.setOpaque(true);
+				btn.setForeground(Color.BLACK);
+				btn.setBackground(Color.LIGHT_GRAY);
+				btn.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						JButton btn = (JButton)(e.getSource());
-						System.out.println(btn.getToolTipText());
+						if (btn.getBackground() == Color.RED) {
+							btn.setBackground(Color.LIGHT_GRAY);
+							btn.setSelected(false);
+						} else {
+							btn.setBackground(Color.RED);
+						}
 					}
 				});
-				seatBtnPanel.add(seatBtn[i][j]);
+				btnGr.add(btn);
+				seatBtnPanel.add(btn);
 			}
-		} 
-        seatBtnPanel.setLayout(new GridLayout(10, 5, 5, 5));
-        
-        lblScreen = new JLabel("S c r e e n");
-        lblScreen.setFont(new Font("³ª´®¹Ù¸¥°íµñ", Font.PLAIN, 60));
-        lblScreen.setBorder(new LineBorder(Color.black, 2));
-        lblScreen.setHorizontalAlignment(SwingConstants.CENTER);
-        lblScreen.setBounds(54, 41, 488, 62);
-        seatPanelLeft.add(lblScreen);
-        
-        seatAZPanel = new JPanel();
-        seatAZPanel.setBounds(12, 134, 30, 435);
-        seatPanelLeft.add(seatAZPanel);
-        for (char c = 'A'; c <= 'J'; c++) {
-			JLabel lbl = new JLabel((String.valueOf(c)));
-			lbl.setFont(new Font("³ª´®¹Ù¸¥°íµñ", Font.PLAIN, 24));
-			lbl.setHorizontalAlignment(SwingConstants.RIGHT);
-			seatAZPanel.add(lbl);
 		}
-        seatAZPanel.setLayout(new GridLayout(10, 0, 0, 0));
+        seatBtnPanel.setLayout(new GridLayout(10, 5, 5, 5));
         
 		movieInfoStar.setBackground(new Color(255, 255, 255));
 		movieInfoStar.setAlignmentY(0.0F);
-		movieInfoStar.setIcon((Icon)obj[3]);
 		movieInfo.add(movieInfoStar, new AbsoluteConstraints(78, 347, 120, 25));
 		
         
@@ -287,6 +284,4 @@ public class MovieTicketingSeatTest extends JFrame {
 	private JLabel movieInfoGrade;
 	private JButton resetRe;
 	private JPanel seatBtnPanel;
-	private JLabel lblScreen;
-	private JPanel seatAZPanel;
 }
