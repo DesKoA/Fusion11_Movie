@@ -5,12 +5,16 @@ import java.awt.CardLayout;
 import java.awt.EventQueue;
 import java.awt.Graphics;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 
 import data.Movie;
+import data.MovieInfo;
+import db.dao.MovieDBManager;
 import db.util.OracleDBUtil;
 
 import java.awt.FlowLayout;
@@ -24,14 +28,18 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class MovieMain extends JFrame {
-
+	MovieDBManager mvDB;
 	private JPanel contentPane;
 	ImageIcon icon;
+	ImageIcon Icon;
 	JLabel lblMovie1;
 	JPanel pnMovieInfo;
 	JLabel lblMovieInfo;
@@ -42,23 +50,24 @@ public class MovieMain extends JFrame {
 	int index;
 	JButton btnWest;
 	JButton btnEast;
-
 	/**
 	 * Launch the application.
 	 */
+	static ArrayList<MovieInfo> mf;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					MovieMain frame = new MovieMain();
 					frame.setVisible(true);
-					OracleDBUtil.connectDB();
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 			
 		});
+		OracleDBUtil.closeDB();
 	}
 
 	/**
@@ -70,10 +79,12 @@ public class MovieMain extends JFrame {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			JLabel movMenu = (JLabel) e.getSource();
-			for (int i = 0; i < movieLabelList.size(); i++) {
+			for (int i = 0; i < mf.size(); i++) {
 				JLabel mov = movieLabelList.get(i);
+				//System.out.println("m"+mov);
 				if (movMenu == mov) {
-					Movie selMovie = MovieList.get(i);
+					MovieInfo selMovie = mf.get(i);
+					//System.out.println("s"+selMovie);
 					MoviePosterInfo t1 = new MoviePosterInfo(selMovie);
 					t1.setVisible(true);
 					t1.setSize(810, 635);
@@ -94,29 +105,39 @@ public class MovieMain extends JFrame {
 		}
 
 	}
-	public static ArrayList<Movie> MovieList = new ArrayList<>();
+
+	public static ArrayList<MovieInfo> MovieList = new ArrayList<MovieInfo>();
+	ArrayList<MovieInfo> titleList;
 	public static ArrayList<JLabel> movieLabelList;
 	//
-	ArrayList<Movie> postList = new ArrayList<>();
-	
-	
-	public void prepareDummyMovieList() {
+	ArrayList<MovieInfo> postList = new ArrayList<>();
 
-		final String[] movNames = { "겨울왕국2", "백두산", "쥬만지", "크롤",
-				"시동", "판도라", "패딩턴", "폐교","버닝", "사자", "알라딘", "해운대"};
+//	public void prepareDummyMovieList() {
+//
+//		final String[] movNames = { "겨울왕국 2", "백두산", "쥬만지", "크롤",
+//				"시동", "판도라", "패딩턴", "폐교","버닝", "사자", "알라딘", "해운대"};
+//
+//				for (int i = 0; i < movNames.length; i++) {
+//				MovieInfo movie = new Movie(i + 1, movNames[i], movNames[i] + ".jpg", movNames[i]);
+//				MovieList.add(movie);
+//			}
+//		//}
+//	}
 
-				for (int i = 0; i < movNames.length; i++) {
-				Movie movie = new Movie(i + 1, movNames[i], movNames[i] + ".jpg", movNames[i]);
-				MovieList.add(movie);
-			}
-		//}
-	}
+//	public void potoMovieList(MovieInfo list) {
+//		for (int i = 0; i < MovieList.size(); i++) {
+//			MovieInfo movie = new MovieInfo(i + 1, list.getMovieTitle() + ".jpg", list.getMoviePoster(), "", "", 0, 0,
+//					"", "", "", 0);
+//			MovieList.add(movie);
+//		}
+//	}
 
 	MovieMain movMain;
 
 	private ImageIcon[] imgIconList;
 
 	public MovieMain() {
+		OracleDBUtil.connectDB();
 		this.movMain = movMain;
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -138,7 +159,9 @@ public class MovieMain extends JFrame {
 		contentPane.add(pnBackground, BorderLayout.CENTER);
 		pnBackground.setLayout(new BorderLayout(0, 0));
 
-		prepareDummyMovieList();
+		// prepareDummyMovieList();
+		mvDB = new MovieDBManager();
+		titleList = mvDB.movieTitle_selectAll();
 		this.movieLabelList = new ArrayList<JLabel>();
 
 		JPanel pnNorth = new JPanel();
@@ -270,92 +293,185 @@ public class MovieMain extends JFrame {
 
 		//
 		PotoList1 = new JPanel();
-		PotoList1.setLayout(new GridLayout(0, 4, 0, 0));
 
 		PotoList2 = new JPanel();
-		PotoList2.setLayout(new GridLayout(0, 4, 0, 0));
+		
 		PotoList3 = new JPanel();
 
-		PotoList3.setLayout(new GridLayout(0, 4, 0, 0));
-
 		pnMovieInfo = new JPanel();
+		
 		//
-		pnMovieList.add(pnMovieInfo, BorderLayout.CENTER);
+		pnMovieList.add(pnMovieInfo);
 		cardMgr = new CardLayout(0, 0);
 
 		pnMovieInfo.setLayout(cardMgr);
 		pnMovieInfo.add("A", PotoList1);
-		pnMovieInfo.add("B", PotoList2);
-		pnMovieInfo.add("C", PotoList3);
+		PotoList1.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+		
+			//ImageIcon Oicon = new ImageIcon(mf.get(0));
+//			Image img = Oicon.getImage();
+//			Image cimg = img.getScaledInstance(186, 234, Image.SCALE_SMOOTH);
+//			ImageIcon icon = new ImageIcon(cimg);
+		//}
+		
+		JLabel lblNewLabel_3 = new JLabel();
+		PotoList1.add(lblNewLabel_3);
+		
+		JLabel label = new JLabel("");
+		PotoList1.add(label);
+		
+		JLabel label_1 = new JLabel("");
+		PotoList1.add(label_1);
+		
+		JLabel label_2 = new JLabel("");
+		PotoList1.add(label_2);
+
+		JLabel lblNewLabel_4 = new JLabel();
+		PotoList1.add(lblNewLabel_4);
+
+		JLabel lblNewLabel_5 = new JLabel();
+		PotoList1.add(lblNewLabel_5);
+		
+		JLabel lblNewLabel_6 = new JLabel();
+		PotoList1.add(lblNewLabel_6);
+		
 		//
-		String imagePaths[] = { "./image/poster1/", "./image/poster2/", "./image/poster3/" };
+		pnMovieInfo.add("B", PotoList2);
+		PotoList2.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+		
+		JLabel lblNewLabel_7 = new JLabel();
+		PotoList2.add(lblNewLabel_7);
+		
+		JLabel lblNewLabel_8 = new JLabel();
+		PotoList2.add(lblNewLabel_8);
+		
+		JLabel lblNewLabel_9 = new JLabel();
+		PotoList2.add(lblNewLabel_9);
+		
+		JLabel lblNewLabel_10 = new JLabel();
+		PotoList2.add(lblNewLabel_10);
+		//
+		pnMovieInfo.add("C", PotoList3);
+		PotoList3.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+		
+		JLabel lblNewLabel_11 = new JLabel();
+		PotoList3.add(lblNewLabel_11);
+		
+		JLabel lblNewLabel_12 = new JLabel();
+		PotoList3.add(lblNewLabel_12);
+		
+		JLabel lblNewLabel_13 = new JLabel();
+		PotoList3.add(lblNewLabel_13);
+		
+		JLabel lblNewLabel_14 = new JLabel();
+		PotoList3.add(lblNewLabel_14);
+		//
+		JLabel l[] = {lblNewLabel_3,lblNewLabel_4,lblNewLabel_5,lblNewLabel_6,lblNewLabel_7,
+				lblNewLabel_8,lblNewLabel_9,lblNewLabel_10,lblNewLabel_11,lblNewLabel_12,lblNewLabel_13,lblNewLabel_14};
 		JPanel potoPanels[] = { PotoList1, PotoList2, PotoList3 };
 		MovieSelectHandle movSelectHandle = new MovieSelectHandle();
 		int index1 = 4;
-		int index2 = 8;
-		int index3 = 12;
-		//
-		for (int i = 0; i < MovieList.size(); i++) {
-			Movie mov = MovieList.get(i);
-			//System.out.println("mov"+mov);
-			if (i < index1) {
+		mf = mvDB.movieTitle_selectAll();
+		for (int i = 0; i < mf.size(); i++) {
+			if (i < 4) {
 				//System.out.println("1번 카드"+i);
-				lblMovieInfo = new JLabel() {
-
-					ImageIcon icon = new ImageIcon(imagePaths[0] + mov.getImgPath());
-					Image img = icon.getImage();
-
-					public void paintComponent(Graphics g) {
-						g.drawImage(img, 0, 0, getWidth(), getHeight(), null);
-						setOpaque(false); // 그림을 표시하세 설정, 투명하게 조절
-						super.paintComponent(g);
+					String strURL = mf.get(i).getMoviePoster();
+					URL url;
+					try {
+						url = new URL(strURL);
+						Image image = ImageIO.read(url);
+						Image changedImg = image.getScaledInstance(186, 234, Image.SCALE_SMOOTH);
+						Icon = new ImageIcon(changedImg);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
 					}
-				};
-				lblMovieInfo.setToolTipText("영화 클릭시 예매 및 상세보기");
-				potoPanels[0].add(lblMovieInfo);
+					l[i] = new JLabel(Icon);
+					l[i].setToolTipText("영화 클릭시 예매 및 상세보기");
+					potoPanels[0].add(l[i]);
 				//
-				movieLabelList.add(lblMovieInfo);
+				movieLabelList.add(l[i]);
 				//
-				lblMovieInfo.addMouseListener(movSelectHandle);
-			} else if (i < index2) {
-				//System.out.println("2번 카드"+i);
-				lblMovieInfo = new JLabel() {
-
-					ImageIcon icon = new ImageIcon(imagePaths[1] + mov.getImgPath());
-					Image img = icon.getImage();
-
-					public void paintComponent(Graphics g) {
-						g.drawImage(img, 0, 0, getWidth(), getHeight(), null);
-						setOpaque(false); // 그림을 표시하세 설정, 투명하게 조절
-						super.paintComponent(g);
+				l[i].addMouseListener(movSelectHandle);
+				} else if (i < 8) {
+						//System.out.println("1번 카드"+i);
+							String strURL = mf.get(i).getMoviePoster();
+							URL url;
+							try {
+								url = new URL(strURL);
+								Image image = ImageIO.read(url);
+								Image changedImg = image.getScaledInstance(186, 234, Image.SCALE_SMOOTH);
+								Icon = new ImageIcon(changedImg);
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							l[i] = new JLabel(Icon);
+							l[i].setToolTipText("영화 클릭시 예매 및 상세보기");
+							potoPanels[1].add(l[i]);
+						//
+						movieLabelList.add(l[i]);
+						//
+						l[i].addMouseListener(movSelectHandle);
+				} else if (i < 12) {
+					String strURL = mf.get(i).getMoviePoster();
+					URL url;
+					try {
+						url = new URL(strURL);
+						Image image = ImageIO.read(url);
+						Image changedImg = image.getScaledInstance(186, 234, Image.SCALE_SMOOTH);
+						Icon = new ImageIcon(changedImg);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
 					}
-				};
-				lblMovieInfo.setToolTipText("영화 클릭시 예매 및 상세보기");
-				potoPanels[1].add(lblMovieInfo);
+					l[i] = new JLabel(Icon);
+					l[i].setToolTipText("영화 클릭시 예매 및 상세보기");
+					potoPanels[2].add(l[i]);
 				//
-				movieLabelList.add(lblMovieInfo);
+				movieLabelList.add(l[i]);
 				//
-				lblMovieInfo.addMouseListener(movSelectHandle);
-			} else if (i < index3) {
-				//System.out.println("3번 카드"+i);
-				lblMovieInfo = new JLabel() {
-
-					ImageIcon icon = new ImageIcon(imagePaths[2] + mov.getImgPath());
-					Image img = icon.getImage();
-
-					public void paintComponent(Graphics g) {
-						g.drawImage(img, 0, 0, getWidth(), getHeight(), null);
-						setOpaque(false); // 그림을 표시하세 설정, 투명하게 조절
-						super.paintComponent(g);
-					}
-				};
-				lblMovieInfo.setToolTipText("영화 클릭시 예매 및 상세보기");
-				potoPanels[2].add(lblMovieInfo);
-				//
-				movieLabelList.add(lblMovieInfo);
-				//
-				lblMovieInfo.addMouseListener(movSelectHandle);
+				l[i].addMouseListener(movSelectHandle);
+				}
 			}
-		}
+//			} else if (i < index2) {
+//				//System.out.println("2번 카드"+i);
+//				lblMovieInfo = new JLabel() {
+//
+//					//ImageIcon icon = new ImageIcon(imagePaths[1] + mov.getMoviePoster());
+//					Image img = icon.getImage();
+//
+//					public void paintComponent(Graphics g) {
+//						g.drawImage(img, 0, 0, getWidth(), getHeight(), null);
+//						setOpaque(false); // 그림을 표시하세 설정, 투명하게 조절
+//						super.paintComponent(g);
+//					}
+//				};
+//				lblMovieInfo.setToolTipText("영화 클릭시 예매 및 상세보기");
+//				//potoPanels[1].add(lblMovieInfo);
+//				//
+//				movieLabelList.add(lblMovieInfo);
+//				//
+//				lblMovieInfo.addMouseListener(movSelectHandle);
+//			} else if (i < index3) {
+//				//System.out.println("3번 카드"+i);
+//				lblMovieInfo = new JLabel() {
+//
+//					//ImageIcon icon = new ImageIcon(imagePaths[2] + mov.getMoviePoster());
+//					Image img = icon.getImage();
+//
+//					public void paintComponent(Graphics g) {
+//						g.drawImage(img, 0, 0, getWidth(), getHeight(), null);
+//						setOpaque(false); // 그림을 표시하세 설정, 투명하게 조절
+//						super.paintComponent(g);
+//					}
+//				};
+//				lblMovieInfo.setToolTipText("영화 클릭시 예매 및 상세보기");
+//				//potoPanels[2].add(lblMovieInfo);
+//				//
+//				movieLabelList.add(lblMovieInfo);
+//				//
+//				lblMovieInfo.addMouseListener(movSelectHandle);
+			
 	}
 }
