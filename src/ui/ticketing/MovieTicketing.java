@@ -893,6 +893,10 @@ public class MovieTicketing extends JFrame {
 		return objList;
 	}
 	
+	public void setJlistValue(String title) {
+		movieList.setSelectedValue(title, false);
+	}
+	
 	// Variables declaration - do not modify
 	private JPanel Main;
 	private JLabel calSel;
@@ -912,7 +916,7 @@ public class MovieTicketing extends JFrame {
 	public JLabel movieInfoTimeName;
 	public JLabel movieInfoPeopleName;
 	public JList<String> movieList;
-	private JScrollPane movieListSC;
+	public JScrollPane movieListSC;
 	public JLabel movieInfoGrade;
 	public JLabel movieInfoName;
 	public JLabel movieInfoMoney;

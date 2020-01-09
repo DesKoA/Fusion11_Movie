@@ -115,7 +115,9 @@ public class MoviePosterInfo extends JDialog implements ActionListener {
 					JOptionPane.showMessageDialog(contentPane, "예매 페이지로 이동합니다");
 					if( num == 0) {
 						MovieTicketing Mt = new MovieTicketing();
+						System.out.println(mv.getName());
 						Mt.setVisible(true);
+						Mt.setJlistValue(mv.getName());
 					}
 				} else if (result == JOptionPane.CANCEL_OPTION) {
 					JOptionPane.showMessageDialog(contentPane, "취소하였습니다");
