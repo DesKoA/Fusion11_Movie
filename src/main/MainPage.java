@@ -42,7 +42,7 @@ public class MainPage extends JFrame {
 	public MainPage() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1002, 537);
-		ImageIcon ic = new ImageIcon(	".\\imgs\\시작화면.png");
+		ImageIcon ic = new ImageIcon(".\\image\\시작화면.png");
 		contentPane = new JPanel() {
 		   public void paintComponent(Graphics g) { //투명도 조절크기 조절
 			    g.drawImage(ic.getImage(), 0, 0, null);
@@ -66,7 +66,7 @@ public class MainPage extends JFrame {
 		panel.add(formattedTextField_1);
 		
 		
-		ImageIcon icon = new ImageIcon(	".\\imgs\\밝은색64.png");
+		ImageIcon icon = new ImageIcon(	".\\image\\밝은색64.png");
 		JPanel moviepanel = new JPanel() {
 			   public void paintComponent(Graphics g) { //투명도 조절크기 조절
 				    g.drawImage(icon.getImage(), 0, 0, null);
@@ -84,21 +84,21 @@ public class MainPage extends JFrame {
 		panel_1.setLayout(null);
 		panel_1.setOpaque(false);
 		
-		JButton joinBtn = new JButton(new ImageIcon(".\\imgs\\빨강1.png"));
+		JButton joinBtn = new JButton(new ImageIcon(".\\image\\빨강1.png"));
 		joinBtn.setBorderPainted(false);//버튼 테두리 설정
 		joinBtn.setContentAreaFilled(false);//버튼 영역 배경 표시 설정
 		joinBtn.setFocusPainted(false);
 		joinBtn.setBounds(90, 36, 192, 175);
 		panel_1.add(joinBtn);
 		
-		JButton loginBtn = new JButton(new ImageIcon(".\\imgs\\초록.png"));
+		JButton loginBtn = new JButton(new ImageIcon(".\\image\\초록.png"));
 		loginBtn.setBorderPainted(false);//버튼 테두리 설정
 		loginBtn.setContentAreaFilled(false);//버튼 영역 배경 표시 설정
 		loginBtn.setFocusPainted(false);
 		loginBtn.setBounds(309, 36, 192, 175);
 		panel_1.add(loginBtn);
 		
-		JButton nojoinBtn = new JButton(new ImageIcon(".\\imgs\\파랑.png"));
+		JButton nojoinBtn = new JButton(new ImageIcon(".\\image\\파랑.png"));
 		nojoinBtn.setBorderPainted(false);//버튼 테두리 설정
 		nojoinBtn.setContentAreaFilled(false);//버튼 영역 배경 표시 설정
 		nojoinBtn.setFocusPainted(false);
