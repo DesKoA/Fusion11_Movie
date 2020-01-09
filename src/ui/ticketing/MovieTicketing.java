@@ -318,6 +318,7 @@ public class MovieTicketing extends JFrame {
 					movieInfoName.setText(selection);
 					if (selection != null) {
 						try {
+							calFrame.showCalAfterDB(movTitle);
 							MovieInfo movieInfo = movieMgr.movie_selectOneByTitle(selection);
 							String strURL = movieInfo.getMoviePoster();
 							URL url = new URL(strURL);
@@ -346,7 +347,6 @@ public class MovieTicketing extends JFrame {
 							Icon2 = new ImageIcon(changedImg2);
 							movieInfoStar.setIcon(Icon2);
 							// calFrame.setVisible(true);
-							calFrame.showCalAfterDB(movTitle);
 						} catch (IOException e1) {
 							e1.printStackTrace();
 						}
@@ -435,7 +435,6 @@ public class MovieTicketing extends JFrame {
 				System.out.println(Icon.toString());
 				System.out.println(Icon2.toString());
 				System.out.println("===============¿¹¸Å=================");
-				
 				MovieTicketingSeat seatFrame = new MovieTicketingSeat(mov);
 				seatFrame.setVisible(true);
 			}
