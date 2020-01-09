@@ -47,10 +47,12 @@ import java.awt.event.FocusEvent;
 import java.awt.geom.CubicCurve2D;
 import java.awt.Window.Type;
 import javax.swing.UIManager;
+import java.awt.Font;
 
 public class Test extends JDialog implements ActionListener {
 	Test dlg;
-	ImageIcon imgIconList[];
+	ImageIcon imgIconList[], icon;
+	File folder;
 	private JPanel contentPane;
 	private JPanel panel_27;
 	private JPanel panel_26;
@@ -60,9 +62,10 @@ public class Test extends JDialog implements ActionListener {
 	private JButton btnNewButton_7;
 	private JButton btnNewButton_8;
 	private JTextArea txtArea;
-	JButton btnNewButton_9;
-	File folder;
+	public CardLayout cardMgr;
+	
 	int i, l1;
+	
 	private final static String newline = "\n";
 
 	/**
@@ -78,11 +81,7 @@ public class Test extends JDialog implements ActionListener {
 		cardMgr.show(movPoter, "mov"+sel);
 	}
 	
-	ImageIcon icon;
-	public CardLayout cardMgr;
-//	MovieMain mm, boolean modal, String movie, int sel
 	public Test(Movie mv) {
-//	super(mm, modal)
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(600, 150, 872, 746);
@@ -203,19 +202,12 @@ public class Test extends JDialog implements ActionListener {
 		panel_10.setBackground(Color.DARK_GRAY);
 		panel_9.add(panel_10, BorderLayout.SOUTH);
 		// 포스터 화면
-		//String movPoster[] = { "겨울왕국2", "백두산", "쥬만지", "크롤" };
-			
-			//Movie mov = new Movie(id, name, imgPath, movieInfo);
-			//icon = new ImageIcon("./image/poster/"+mov.getImgPath());
 			String imagePaths[] = { "./image/poster1/", "./image/poster2/", "./image/poster3/" };
 			ArrayList<Movie> movlist = MovieMain.MovieList;
 			for (int i = 0; i < movlist.size(); i++) {
 				//System.out.println("test"+i);
 				Movie mov = movlist.get(i); 
 				if(mv.getId() == i+1)
-					//System.out.println("mv"+mv.getId());
-				//icon = new ImageIcon("./image/poster/"+movPoster[i]+".jpg");
-				//icon = new ImageIcon("./image/poster1/"+mov.getImgPath());
 				if(i < 4) {	
 					icon = new ImageIcon(imagePaths[0]+mov.getImgPath());
 					} else if (i < 8) {
@@ -224,7 +216,6 @@ public class Test extends JDialog implements ActionListener {
 						icon = new ImageIcon(imagePaths[2]+mov.getImgPath());
 					}
 			}
-			//icon = new ImageIcon("./image/poster/겨울왕국2.jpg");
 			movPoter = new JPanel() {
 				public void paintComponent(Graphics g) {
 					g.drawImage(icon.getImage(), 0, 0, getWidth(), getHeight(), null);
@@ -232,21 +223,9 @@ public class Test extends JDialog implements ActionListener {
 					super.paintComponent(g);
 				}
 			};
-			
-			//movPoter = new JPanel();
 			panel_9.add(movPoter, BorderLayout.WEST);
 			cardMgr = new CardLayout(140, 0);
 			movPoter.setLayout(cardMgr);
-			
-//			ArrayList<Movie> movList = MovieMain.MovieList;
-//			for (int i = 0; i < movList.size(); i++) {
-//				Movie mov = movList.get(i);
-//				MovieCard mc = new MovieCard(mov);
-//				// 카드 등록...
-//				movPoter.add(String.valueOf(
-//						"mov"+mov.getId()),mc);				
-//			}
-			
 		//
 		JPanel panel_11 = new JPanel();
 		panel_9.add(panel_11, BorderLayout.CENTER);
@@ -314,7 +293,7 @@ public class Test extends JDialog implements ActionListener {
 		textField.setText("\uB313\uAE00 \uC785\uB825\uD574\uC8FC\uC138\uC694...");
 		textField.setForeground(Color.LIGHT_GRAY);
 		textField.setHorizontalAlignment(SwingConstants.LEFT);
-		panel_17.add(textField, BorderLayout.WEST);
+		panel_17.add(textField, BorderLayout.CENTER);
 		textField.setColumns(30);
 
 		JButton btnNewButton_5 = new JButton("\uD55C\uC904\uD3C9\uC4F0\uAE30");
@@ -333,16 +312,6 @@ public class Test extends JDialog implements ActionListener {
 
 		});
 		panel_17.add(btnNewButton_5, BorderLayout.EAST);
-		// TODO 좋아요 하트 이미지
-		btnNewButton_9 = new JButton("");
-		btnNewButton_9.setIcon(new ImageIcon("./image/좋아요.png"));
-		btnNewButton_9.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ImageIcon l = new ImageIcon("./image/좋아요.png");
-				l.getImage();
-			}
-		});
-		panel_17.add(btnNewButton_9, BorderLayout.CENTER);
 
 		JPanel panel_20 = new JPanel();
 		panel_19.add(panel_20, BorderLayout.CENTER);
@@ -408,9 +377,9 @@ public class Test extends JDialog implements ActionListener {
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_3.setBackground(Color.DARK_GRAY);
 		panel_27.add(lblNewLabel_3);
+		
 		//TODO 동영상
 		JButton btnNewButton_6 = new JButton("\uC608\uACE0\uD3B8 \uB3D9\uC601\uC0C1 \uB9C1\uD06C");
-
 		btnNewButton_6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Runtime runtime = Runtime.getRuntime();
@@ -424,15 +393,8 @@ public class Test extends JDialog implements ActionListener {
 						runtime.exec("C:/Program Files/Internet Explorer/iexplore.exe "+URL[i]);
 					}
 				} catch (IOException ex) {
-					
+						System.out.println("주소가 없거나 올바르지 않습니다.");
 				}
-//				JDialog ydlg = new JDialog(dlg, false);
-//				ydlg.getContentPane().setLayout(new BorderLayout());
-//				JPanel yu = TestYoutube1.getBrowserPanel();
-//				ydlg.getContentPane().add(yu, BorderLayout.CENTER);
-//				ydlg.setVisible(true);
-				
-			
 			}
 		});
 		panel_27.add(btnNewButton_6);
@@ -449,25 +411,13 @@ public class Test extends JDialog implements ActionListener {
 		panel_31 = new JPanel();
 		poto.add(panel_31, BorderLayout.CENTER);
 		panel_31.setLayout(new BorderLayout(0, 0));
-//		l = new JLabel("", JLabel.CENTER);
-//		add(l, BorderLayout.CENTER);
-//		l.setIcon(imgIconList[0]);
 
-		//
-		
-//		for (int i = 0; i < movlist.size(); i++) {
-//			String file[] = {"./MoviePoster"+i};
-//		}
-
-		//String file[] = {"./MoviePoster1","./MoviePoster2","./MoviePoster3","./MoviePoster4"};
 		JPanel panel_5 = new JPanel();
 		panel_5.setBackground(Color.DARK_GRAY);
 		contentPane.add(panel_5, BorderLayout.EAST);
 		for (int i = 0; i < movlist.size(); i++) {
-			//Movie mov = movlist.get(i); 
-			//System.out.println(mov);
 			int index = i + 1;
-			String file[] = {"./MoviePosters/MoviePoster"+index};
+			String file[] = {"./image/MoviePosters/MoviePoster"+index};
 			//System.out.println(file[i]);
 			if(mv.getId() == i+1)
 			folder = new File(file[0]);
@@ -516,18 +466,4 @@ public class Test extends JDialog implements ActionListener {
 			}
 		}
 	}
-	//
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					test frame = new test();
-//					frame.setSize(810, 635);
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
 }

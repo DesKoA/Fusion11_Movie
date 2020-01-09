@@ -34,9 +34,6 @@ import java.awt.event.ActionEvent;
 
 public class MovieMain extends JFrame {
 
-	// 포스터 리스트
-//	ArrayList<Poster> posterList = null;
-
 	private JPanel contentPane;
 	ImageIcon icon;
 	JLabel lblMovie1;
@@ -46,7 +43,6 @@ public class MovieMain extends JFrame {
 	JPanel PotoList2;
 	JPanel PotoList3;
 	CardLayout cardMgr;
-//	File folder;
 	int index;
 	JButton btnWest;
 	JButton btnEast;
@@ -77,15 +73,10 @@ public class MovieMain extends JFrame {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			JLabel movMenu = (JLabel) e.getSource();
-
 			for (int i = 0; i < movieLabelList.size(); i++) {
-				// JLabel mov = movieLabelList.get(i);
 				JLabel mov = movieLabelList.get(i);
-				//System.out.println(mov);
 				if (movMenu == mov) {
 					Movie selMovie = MovieList.get(i);
-					//System.out.println(selMovie);
-					// System.out.println((i + 1) + "번 Movie 선택: " + mov.getText());
 					Test t1 = new Test(selMovie);
 					t1.setVisible(true);
 					t1.setSize(810, 635);
@@ -98,79 +89,28 @@ public class MovieMain extends JFrame {
 		@Override
 		public void mouseEntered(MouseEvent e) {
 			JLabel movMenu = (JLabel) e.getSource();
-//			movMenu.setBackground(Color.CYAN);
-//			super.mouseEntered(e);
 		}
 
 		@Override
 		public void mouseExited(MouseEvent e) {
 			JLabel movMenu = (JLabel) e.getSource();
-//			movMenu.setBackground(Color.YELLOW);
-//			super.mouseExited(e);
 		}
 
 	}
-
 	public static ArrayList<Movie> MovieList = new ArrayList<>();
 	public static ArrayList<JLabel> movieLabelList;
-	//
-//	//포스터 리스트 초기화
-//	public void initPosterList() {
-//		posterList = new ArrayList<Poster>();
-//		//int selRow = 마우스버튼이름.getSelectedRow(); // 마우스 선택된 번호
-//		Poster poster = new Poster();
-//		poster.setFile("./image/poster1/");
-//		posterList.add(poster);
-//		
-//		poster = new Poster();
-//		poster.setFile("./image/poster2/");
-//		posterList.add(poster);
-//		
-//		poster = new Poster();
-//		poster.setFile("./image/poster3/");
-//		posterList.add(poster);
-//	}
 	//
 	ArrayList<Movie> postList = new ArrayList<>();
 	
 	
 	public void prepareDummyMovieList() {
 
-//		final String[] movNames1 = { "겨울왕국2", "백두산", "쥬만지", "크롤" };
-//		final String[] movNames2 = { "시동", "판도라", "패딩턴", "폐교" };
-//		final String[] movNames3 = { "버닝", "사자", "알라딘", "해운대" };
-//		final String[] movInfo1 = { "겨울왕국2", "백두산", "쥬만지", "크롤" };
-//		final String[] movInfo2 = { "시동", "판도라", "패딩턴", "폐교" };
-//		final String[] movInfo3 = { "버닝", "사자", "알라딘", "해운대" };
-		final String[] movNames = { "겨울왕국2", "백두산", "쥬만지", "크롤","시동", "판도라", "패딩턴", "폐교","버닝", "사자", "알라딘", "해운대"};
-		//final String[][] movs = { movNames1, movNames2, movNames3 };
+		final String[] movNames = { "겨울왕국2", "백두산", "쥬만지", "크롤",
+				"시동", "판도라", "패딩턴", "폐교","버닝", "사자", "알라딘", "해운대"};
 
-		//for (int j = 0; j < movs.length; j++) {
-			//System.out.println("mov"+j);
-			//String[] movNames = movs[j];
-			//for (int i = 0; i < movNames.length; i++) {
 				for (int i = 0; i < movNames.length; i++) {
-				//System.out.println("movNames"+ i);
-				// if(index == 0) {
 				Movie movie = new Movie(i + 1, movNames[i], movNames[i] + ".jpg", movNames[i]);
-				//System.out.println(movie1);
 				MovieList.add(movie);
-				// postList.add(movie1);
-				// Movie movie2 = new Movie(i + 1, movNames2[i], movNames2[i] + ".jpg",
-				// movNames2[i]);
-				// postList.add(movie2);
-				// Movie movie3 = new Movie(i + 1, movNames3[i], movNames3[i] + ".jpg",
-				// movNames3[i]);
-				// postList.add(movie3);
-				// } else if (index == 1) {
-				// Movie movie2 = new Movie(i + 1, movNames2[i], movNames2[i] + ".jpg",
-				// movNames2[i]);
-				// MovieList.add(movie2);
-				// } else if (index == 2) {
-				// Movie movie3 = new Movie(i + 1, movNames3[i], movNames3[i] + ".jpg",
-				// movNames3[i]);
-				// MovieList.add(movie3);
-				// }
 			}
 		//}
 	}
@@ -342,26 +282,6 @@ public class MovieMain extends JFrame {
 		PotoList3.setLayout(new GridLayout(0, 4, 0, 0));
 
 		pnMovieInfo = new JPanel();
-
-//		for (int i = 0; i < posterList.size(); i++) {
-//			Poster p = posterList.get(i);
-//			//folder = new File(p.File);
-//			BufferedImage img;
-//			try {
-//				img = ImageIO.read(new File(p.getFile()));
-//				Image dimg = img.getScaledInstance(280, 380, Image.SCALE_SMOOTH);
-//				ImageIcon imageIcon = new ImageIcon(dimg);
-//				JLabel l = new JLabel(imageIcon);
-//				pnMovieInfo.add(l, "CARD_" + (i+1));
-//			} catch (IOException e1) {
-//				
-//				e1.printStackTrace();
-//			}
-//		}
-		//
-//		for (Movie pos : postList) {
-//			MovieList.add(pos);
-//		}
 		//
 		pnMovieList.add(pnMovieInfo, BorderLayout.CENTER);
 		cardMgr = new CardLayout(0, 0);
@@ -370,41 +290,6 @@ public class MovieMain extends JFrame {
 		pnMovieInfo.add("A", PotoList1);
 		pnMovieInfo.add("B", PotoList2);
 		pnMovieInfo.add("C", PotoList3);
-		//
-
-		//
-
-//		ArrayList<Movie> movList = MovieMain.MovieList;
-//		for (int i = 0; i < movList.size(); i++) {
-//			Movie mov = movList.get(i);
-//			pnMovieInfo.add(String.valueOf("mov"+mov.getId()),PotoList1);
-//		}
-//		
-//		//pnMovieInfo.setLayout(new GridLayout(0, 4, 0, 0));
-
-//		lblMovie1 = new JLabel() {
-//			ImageIcon icon = new ImageIcon("./image/poster/겨울왕국2.jpg");
-//	        Image img = icon.getImage();
-//			public void paintComponent(Graphics g) {
-//				g.drawImage(img, 0, 0, getWidth(), getHeight(), null);
-//				setOpaque(false); // 그림을 표시하세 설정, 투명하게 조절
-//				super.paintComponent(g);
-//			}
-//		};
-//		lblMovie1.addMouseListener(new MouseAdapter() {
-//			@Override
-//			public void mouseClicked(MouseEvent arg0) {
-//				System.out.println(MovieList.get(0));
-//			}
-//			@Override
-//			public void mouseEntered(MouseEvent e) {
-//			}
-//			@Override
-//			public void mouseExited(MouseEvent e) {
-//			}
-//		});
-//		pnMovieInfo.add(lblMovie1);
-//		movieLabelList.add(lblMovie1);
 		//
 		String imagePaths[] = { "./image/poster1/", "./image/poster2/", "./image/poster3/" };
 		JPanel potoPanels[] = { PotoList1, PotoList2, PotoList3 };
@@ -475,78 +360,5 @@ public class MovieMain extends JFrame {
 				lblMovieInfo.addMouseListener(movSelectHandle);
 			}
 		}
-		//
-//		for (int i = 0; i < MovieList.size(); i++) {
-//			
-//			Movie mov = MovieList.get(i);
-//			lblMovieInfo = new JLabel() {
-//				
-//				//String Path[] = {"./image/poster1/","./image/poster2/","./image/poster3/"};
-//				ImageIcon icon = new ImageIcon("./image/poster2/" + mov.getImgPath());
-//				
-//				Image img = icon.getImage();
-//				
-//				public void paintComponent(Graphics g) {
-//					g.drawImage(img, 0, 0, getWidth(), getHeight(), null);
-//					setOpaque(false); // 그림을 표시하세 설정, 투명하게 조절
-//					super.paintComponent(g);
-//				}
-//			};
-//			
-//			lblMovieInfo.setToolTipText("영화 클릭시 예매 및 상세보기");
-//			PotoList2.add(lblMovieInfo);
-//			//
-//			movieLabelList.add(lblMovieInfo);
-//			//
-//			lblMovieInfo.addMouseListener(movSelectHandle);
-//		}
-//		//
-//		for (int i = 0; i < MovieList.size(); i++) {
-//			
-//			Movie mov = MovieList.get(i);
-//			
-//			lblMovieInfo = new JLabel() {
-//				//String Path[] = {"./image/poster1/","./image/poster2/","./image/poster3/"};
-//				ImageIcon icon = new ImageIcon("./image/poster3/" + mov.getImgPath());
-//				
-//				Image img = icon.getImage();
-//				
-//				public void paintComponent(Graphics g) {
-//					g.drawImage(img, 0, 0, getWidth(), getHeight(), null);
-//					setOpaque(false); // 그림을 표시하세 설정, 투명하게 조절
-//					super.paintComponent(g);
-//				}
-//			};
-//			
-//			lblMovieInfo.setToolTipText("영화 클릭시 예매 및 상세보기");
-//			PotoList3.add(lblMovieInfo);
-//			//
-//			movieLabelList.add(lblMovieInfo);
-//			//
-//			lblMovieInfo.addMouseListener(movSelectHandle);
-//		}
-		// cardMgr.show(pnMovieInfo, "A");
-		// cardMgr.first(parent);
-
 	}
-// class Poster {
-//	 String File;
-//	 String content;
-//	 
-//	 public String getFile() {
-//		 return File;
-//	 }
-//	 
-//	 public void setFile(String File) {
-//		 
-//	 }
-//	 
-//	 public String getConrent() {
-//		 return content;
-//	 }
-//	 
-//	 public void setContent() {
-//		 this.content = content;
-//	 }
-// }
 }
