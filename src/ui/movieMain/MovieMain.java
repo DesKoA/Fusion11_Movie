@@ -5,7 +5,6 @@ import java.awt.CardLayout;
 import java.awt.EventQueue;
 import java.awt.Graphics;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -25,9 +24,6 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -61,6 +57,7 @@ public class MovieMain extends JFrame {
 					e.printStackTrace();
 				}
 			}
+			
 		});
 	}
 
