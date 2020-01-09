@@ -5,5 +5,6 @@
 	<classpathentry kind="lib" path="lib/AbsoluteLayout-RELEASE112.jar"/>
 	<classpathentry kind="lib" path="lib/JDBC_LIB/mysql-connector-java-5.1.47-bin.jar"/>
 	<classpathentry kind="lib" path="lib/JDBC_LIB/ojdbc6.jar"/>
+	<classpathentry kind="lib" path="lib/editlivejavabean.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
