@@ -538,7 +538,9 @@ public class MovieTicketing extends JFrame {
 					JToggleButton btn = (JToggleButton)e.getSource();
 					adPersons = Integer.parseInt(btn.getText());
 					sumPersons();
-					if (!btnReserve.isEnabled()) btnReserve.setEnabled(true);
+					if (!btnReserve.isEnabled() && adPersons + stPersons > 0)
+						btnReserve.setEnabled(true);
+					else if (adPersons + stPersons == 0) btnReserve.setEnabled(false);
 				}
 			});
 			bgAdult.add(bAdults[i]);
@@ -547,14 +549,17 @@ public class MovieTicketing extends JFrame {
 		bStudents = new JToggleButton[] {student0, student1, student2, student3, student4, student5, student6, student7};
 		bgStudent = new ButtonGroup();
 		
-		for (int i = 0; i < bAdults.length; i++) {
+		for (int i = 0; i < bStudents.length; i++) {
 			bStudents[i].addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					JToggleButton btn = (JToggleButton)e.getSource();
 					stPersons = Integer.parseInt(btn.getText());
 					sumPersons();
-					if (!btnReserve.isEnabled()) btnReserve.setEnabled(true);
+					// if (!btnReserve.isEnabled()) btnReserve.setEnabled(true);
+					if (!btnReserve.isEnabled() && adPersons + stPersons > 0)
+						btnReserve.setEnabled(true);
+					else if (adPersons + stPersons == 0) btnReserve.setEnabled(false);
 				}
 			});
 			bgStudent.add(bStudents[i]);
@@ -796,7 +801,8 @@ public class MovieTicketing extends JFrame {
 	// 극장 시간 선택 -> 달력체크
 	public void setTheaters() {
 		Calendar today = Calendar.getInstance();
-		JPanel timeBtPanel = new JPanel();
+		// JPanel timeBtPanel = new JPanel();
+		JPanel timeBtPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
 		Date date = new Date(calFrame.date.getTime());
 		timeList = thMgr.selectOneMovieStartByName(movTitle, date);
 		String[] keyList = timeList.keySet().toArray(new String[timeList.size()]);
@@ -865,6 +871,9 @@ public class MovieTicketing extends JFrame {
 	        	timeBtPanel.add(btn);
 			}
 		}
+		timeBtPanel.setBackground(Color.WHITE);
+		timeBtPanel.setBorder(null);
+		timeBtPanel.setAlignmentX(0);
 		timeBtPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 5, 5));
         // timeBtPanel.setLayout(new GridLayout(5, 3, 5, 5));
         timeBtPanel.setVisible(true);
