@@ -1,4 +1,4 @@
-package test;
+package ui.ticketing.test;
 
 //originally uploaded to http://blog.naver.com/azure0777
 
