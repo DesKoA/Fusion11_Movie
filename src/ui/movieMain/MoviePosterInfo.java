@@ -420,8 +420,7 @@ public class MoviePosterInfo extends JDialog implements ActionListener {
 			panel_27.add(btnNewButton_8);
 			btnNewButton_8.addActionListener(this);
 
-			JLabel lblNewLabel_3 = new JLabel(
-					"                                                                         ");
+			JLabel lblNewLabel_3 = new JLabel("                                                                   ");
 			lblNewLabel_3.setHorizontalAlignment(SwingConstants.LEFT);
 			lblNewLabel_3.setBackground(Color.DARK_GRAY);
 			panel_27.add(lblNewLabel_3);
