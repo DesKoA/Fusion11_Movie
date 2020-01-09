@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import data.Movie;
-import ui.ticketing.MovieTicketingTest;
+import ui.ticketing.MovieTicketing;
 
 import java.awt.FlowLayout;
 import java.awt.Graphics;
@@ -114,7 +114,7 @@ public class MoviePosterInfo extends JDialog implements ActionListener {
 					// TODO 예매 페이지로 이동
 					JOptionPane.showMessageDialog(contentPane, "예매 페이지로 이동합니다");
 					if( num == 0) {
-						MovieTicketingTest Mt = new MovieTicketingTest();
+						MovieTicketing Mt = new MovieTicketing();
 						Mt.setVisible(true);
 					}
 				} else if (result == JOptionPane.CANCEL_OPTION) {
