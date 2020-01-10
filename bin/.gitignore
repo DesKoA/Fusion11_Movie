@@ -1,8 +1,7 @@
-/ui/
-/movie/
-/data/
-/images/
-/main/
-/login/
 /Join/
+/data/
 /db/
+/login/
+/main/
+/movie/
+/ui/
