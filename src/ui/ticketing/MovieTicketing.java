@@ -41,6 +41,7 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
@@ -360,7 +361,7 @@ public class MovieTicketing extends JFrame {
 		
 		movieListSC.setViewportView(movieList);
 		movieListSC.setBorder(new LineBorder(Color.BLACK, 1));
-		Main.add(movieListSC, new AbsoluteConstraints(1, 70, 269, 540));
+		Main.add(movieListSC, new AbsoluteConstraints(1, 70, 269, 269)); // 10, 3, 180, 30
 
 		movieInfo.setBackground(new Color(45, 45, 45));
 		movieInfo.setLayout(new AbsoluteLayout());
@@ -703,13 +704,15 @@ public class MovieTicketing extends JFrame {
 		movieInfo.add(movieInfoStar, new AbsoluteConstraints(78, 347, 120, 25));
 		
 		setFrame();
-		Main.add(selMovieTime, new AbsoluteConstraints(270, 340, 200, 35));
+		Main.add(selMovieTime, new AbsoluteConstraints(1, 340, 470, 35));
 		timePanel.setBackground(new Color(255, 255, 255));
         // timePanel.setAlignmentX(0.0F);
         // timePanel.setAlignmentY(0.0F);
 		timePanel.setBorder(new LineBorder(Color.BLACK, 1));
-        Main.add(timePanel, new AbsoluteConstraints(268, 375, 202, 235));
-        timePanel.setLayout(new BorderLayout());
+		timePanel.setLayout(new BorderLayout());
+		// timePanel.setLayout(new GridLayout(1, 0));
+		// timePanel.setLayout(new GridLayout(0, 1));
+        Main.add(timePanel, new AbsoluteConstraints(1, 375, 469, 235));
         
 		GroupLayout layout = new GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
@@ -808,8 +811,9 @@ public class MovieTicketing extends JFrame {
 		for (int i = 0; i < keyList.length; i++) {
 			JLabel lbt = new JLabel();
 			lbt.setVisible(true);
-			lbt.setPreferredSize(new Dimension(200, 0));
-			timeBtPanel.add(lbt);
+			lbt.setOpaque(true);
+			lbt.setBackground(Color.BLACK);
+			lbt.setPreferredSize(new Dimension(469, 0));
 			ArrayList<String> tempList = timeList.get(keyList[i]);
 			JLabel lb = new JLabel(keyList[i]);
 			lb.setVisible(true);
@@ -817,18 +821,25 @@ public class MovieTicketing extends JFrame {
 			lb.setPreferredSize(new Dimension(30, 30));
 			lb.setLayout(new FlowLayout(FlowLayout.LEFT));
 			timeBtPanel.add(lb);
-	        for (int j = 0; j < tempList.size(); j++) {
-	        	int todayHourInt = today.get(Calendar.HOUR_OF_DAY) * 60 + today.get(Calendar.MINUTE);
-	        	int movieDate = Integer.parseInt(tempList.get(j).substring(0, 2)) * 60 + Integer.parseInt(tempList.get(j).substring(3, 5));
+			timeBtPanel.add(lbt);
+			JLabel lbt2 = new JLabel();
+			lbt2.setVisible(true);
+			lbt2.setPreferredSize(new Dimension(469, 0));
+			for (int j = 0; j < tempList.size(); j++) {
+				int todayHourInt = today.get(Calendar.HOUR_OF_DAY) * 60 + today.get(Calendar.MINUTE);
+				int movieDate = Integer.parseInt(tempList.get(j).substring(0, 2)) * 60
+						+ Integer.parseInt(tempList.get(j).substring(3, 5));
 				JButton btn = new JButton(tempList.get(j));
 				btn.setVisible(true);
-				if (todayHourInt >= movieDate) btn.setEnabled(false);
+				if (todayHourInt >= movieDate)
+					btn.setEnabled(false);
 				// btn.setBorder(new EmptyBorder(0, 10, 0, 10));
 				btn.setMargin(new Insets(0, 0, 0, 0)); // top left bottom right
 				btn.setFont(new Font("³ª´®¹Ù¸¥°íµñ", 0, 12));
 				btn.setPreferredSize(new Dimension(65, 30));
 				btn.addActionListener(new ActionListener() {
-					public String getKeyFromValue(LinkedHashMap<String, ArrayList<String>> map, ArrayList<String> value) {
+					public String getKeyFromValue(LinkedHashMap<String, ArrayList<String>> map,
+							ArrayList<String> value) {
 						for (String key : map.keySet()) {
 							if (map.get(key).equals(value)) {
 								return key;
@@ -836,7 +847,7 @@ public class MovieTicketing extends JFrame {
 						}
 						return "";
 					}
-					
+
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						movieInfoScreenName.setText(getKeyFromValue(timeList, tempList));
@@ -846,7 +857,7 @@ public class MovieTicketing extends JFrame {
 							bStudents[i].setEnabled(true);
 						}
 					}
-					
+
 					// ½Ã°£ ´Ã¸®±â
 					public void timeAddMovie() {
 						MovieInfo mov = movieMgr.movie_selectOneByTitle(movTitle);
@@ -855,10 +866,12 @@ public class MovieTicketing extends JFrame {
 						int movHour = (mov.getMovieTimes() / 60);
 						int movMin = mov.getMovieTimes() - (movHour * 60);
 						String startTime = String.format("%02d:%02d", hour, min);
-						
-						hour += movHour; min += movMin;
+
+						hour += movHour;
+						min += movMin;
 						if (min >= 60) {
-							min -= 60; hour++;
+							min -= 60;
+							hour++;
 						}
 						if (hour >= 24) {
 							hour -= 24;
@@ -867,16 +880,17 @@ public class MovieTicketing extends JFrame {
 						movieInfoTimeName.setText(startTime + " ~ " + addTime);
 					}
 				});
-	        	timeBtPanel.add(btn);
+				timeBtPanel.add(btn);
 			}
+			timeBtPanel.add(lbt2);
 		}
 		timeBtPanel.setBackground(Color.WHITE);
 		timeBtPanel.setBorder(null);
 		timeBtPanel.setAlignmentX(0);
-		timeBtPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 5, 5));
-        // timeBtPanel.setLayout(new GridLayout(5, 3, 5, 5));
-        timeBtPanel.setVisible(true);
-        timePanel.add(timeBtPanel, BorderLayout.CENTER);
+		timeBtPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 5, 0));
+		// timeBtPanel.setLayout(new GridLayout(5, 3, 5, 5));
+		timeBtPanel.setVisible(true);
+		timePanel.add(timeBtPanel);
 	}
 	
 	void sumPersons() {
