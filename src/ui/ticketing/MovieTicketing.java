@@ -49,6 +49,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -831,8 +832,10 @@ public class MovieTicketing extends JFrame {
 						+ Integer.parseInt(tempList.get(j).substring(3, 5));
 				JButton btn = new JButton(tempList.get(j));
 				btn.setVisible(true);
-				if (todayHourInt >= movieDate)
+				
+				if (date.getDay() == today.getTime().getDay() && todayHourInt >= movieDate) {
 					btn.setEnabled(false);
+				}
 				// btn.setBorder(new EmptyBorder(0, 10, 0, 10));
 				btn.setMargin(new Insets(0, 0, 0, 0)); // top left bottom right
 				btn.setFont(new Font("³ª´®¹Ù¸¥°íµñ", 0, 12));
