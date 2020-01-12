@@ -71,7 +71,9 @@ public class MovieTicketingSeat extends JFrame {
 	public ButtonGroup btnGr;
 	listenForSeat lForSeat = new listenForSeat();
 	
-	public ButtonGroup bg;
+	int clickCount = 0;
+	int count;
+	int temp;	
 
 	/**
 	 * Creates new form MovieReservation
@@ -232,7 +234,6 @@ public class MovieTicketingSeat extends JFrame {
         seatBtnPanel = new JPanel();
         seatBtnPanel.setBounds(54, 134, 428, 435);
         seatPanelLeft.add(seatBtnPanel);
-        bg = new ButtonGroup();
         for (char c = 'A'; c <= 'J'; c++) {
         	int i = c - 'A';
 			for (int j = 0; j < 10; j++) {
@@ -249,7 +250,6 @@ public class MovieTicketingSeat extends JFrame {
 				seatBtn[i][j].setForeground(Color.BLACK);
 				seatBtn[i][j].setBackground(Color.LIGHT_GRAY);
 				seatBtn[i][j].addActionListener(lForSeat);
-				bg.add(seatBtn[i][j]);
 				seatBtnPanel.add(seatBtn[i][j]);
 			}
 		}
@@ -297,7 +297,34 @@ public class MovieTicketingSeat extends JFrame {
         resetSeatBtn.setFont(new Font("±¼¸²", Font.PLAIN, 17));
         resetSeatBtn.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		seatBtn[0][0].setSelected(false);
+        		hsNumList.clear();
+        		hsLbList.clear();
+        		clickCount = 0;
+        		count = 0;
+        		temp = 0;
+        		
+        		for (int i = 0; i < seatBtn.length; i++) {
+					for (int j = 0; j < seatBtn[i].length; j++) {
+						seatBtn[i][j].setContentAreaFilled(false);
+						seatBtn[i][j].setFocusPainted(false);
+						seatBtn[i][j].setSelected(false);
+						seatBtn[i][j].setOpaque(true);
+						seatBtn[i][j].setBackground(Color.LIGHT_GRAY);
+					}
+				}
+        		
+        		selectSeatInfo.setFocusable(false);
+        		selectSeatInfo.removeAll();
+        		
+        		for (int i = 0; i < lbList.length; i++) {
+        			String tempStr = "ÁÂ¼®" + (i + 1);
+        			JLabel jlb = new JLabel(tempStr);
+        			lbList[i] = jlb;
+        			jlb.setBorder(new LineBorder(Color.BLACK, 1));
+        			jlb.setHorizontalAlignment(SwingConstants.CENTER);
+        			jlb.setPreferredSize(new Dimension(65, 35));
+        			selectSeatInfo.add(lbList[i]);
+        		}
         	}
         });
         resetSeatBtn.setBounds(517, 134, 176, 38);
@@ -325,9 +352,6 @@ public class MovieTicketingSeat extends JFrame {
 	}// </editor-fold>
 	
 	public class listenForSeat implements ActionListener {
-		int clickCount = 0;
-		int count;
-		int temp;
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			JButton btn = (JButton) e.getSource();
