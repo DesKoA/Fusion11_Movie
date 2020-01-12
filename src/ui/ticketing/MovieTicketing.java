@@ -913,7 +913,8 @@ public class MovieTicketing extends JFrame {
 	public Object[] getObjects() {
 		Object[] objList = new Object[] {
 				Icon, movieInfoName.getText(), movieInfoGrade.getText(), Icon2, movieInfoScreenName.getText(), 
-				movieInfoDayName.getText(), movieInfoPeopleName.getText(), movieInfoTimeName.getText(), movieInfoMoneyName.getText()
+				movieInfoDayName.getText(), movieInfoPeopleName.getText(), movieInfoTimeName.getText(), movieInfoMoneyName.getText(),
+				(adPersons + stPersons)
 		};
 		return objList;
 	}
