@@ -78,7 +78,6 @@ public class MovieTicketingSeat extends JFrame {
 		initComponents();
 	}
 	
-	// 예매 다시하기 
 	public void resetFrame() {
 		dispose();
 		mov.resetFrame();
@@ -188,7 +187,7 @@ public class MovieTicketingSeat extends JFrame {
 					seatMgr.insertSeat(seat);
 				}
 				JOptionPane.showMessageDialog(null, "예매가 완료되었습니다.");
-				dispose();
+				resetFrame();
 			}
 		});
 		movieInfo.add(btnSeatSelect, new AbsoluteConstraints(50, 540, 190, -1));
