@@ -78,9 +78,10 @@ public class MovieTicketingSeat extends JFrame {
 		initComponents();
 	}
 	
-	// 초기화 
+	// 예매 다시하기 
 	public void resetFrame() {
-		
+		dispose();
+		mov.resetFrame();
 	}
 	
 	/**    
