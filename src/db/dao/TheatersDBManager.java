@@ -92,6 +92,7 @@ public class TheatersDBManager {
 		return null;
 	}
 	
+	/* 아래 메소드 문제시 재사용
 	public LinkedHashMap<String, ArrayList<String>> selectOneMovieStartByNameSwitchCase(String movTitle, Date movDate) {
 		if (con != null) {
 			SimpleDateFormat sf = new SimpleDateFormat("YYYYMMDD");
@@ -99,10 +100,6 @@ public class TheatersDBManager {
 			String sql = "select movie_start, screen_name from movie_theaters where movie_title=" + "'" + movTitle + "'"
 					+ " and TO_CHAR(movie_date, 'YYYYMMDD')=" + "'" + dateStr + "'" + " order by movie_start asc";
 			
-			String grSql = "select screen_name from MOVIE_THEATERS where movie_title=" + "'" + movTitle + "'" // 그룹 sql 
-					+ " and TO_CHAR(movie_date, 'YYYYMMDD')=" + "'" + dateStr + "'" + " group by screen_name"; 
-			String orSql = "select movie_start, screen_name from movie_theaters where movie_title=" + "'" + movTitle + "'"
-					+ "and" + "???" + " and TO_CHAR(movie_date, 'YYYYMMDD')=" + "'" + dateStr + "'" + " order by screen_name, movie_start asc";
 			// 각각 관의 대해서 추가.
 			ArrayList<String> thList1 = new ArrayList<>();
 			ArrayList<String> thList2 = new ArrayList<>();
@@ -153,6 +150,7 @@ public class TheatersDBManager {
 		}
 		return null;
 	}
+	*/
 	
 	public LinkedHashMap<String, ArrayList<String>> selectOneMovieStartByName(String movTitle, Date movDate) {
 		if (con != null) {
