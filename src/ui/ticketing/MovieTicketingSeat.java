@@ -404,7 +404,7 @@ public class MovieTicketingSeat extends JFrame {
 				if (clickCount == lbList.length) btnSeatSelect.setEnabled(true);
 				hsLbList.get(toolTip).setText(toolTip);
 			} else {
-				JOptionPane.showMessageDialog(null, "인원 초과");
+				JOptionPane.showMessageDialog(null, "좌석을 모두 선택하셨습니다.\n현재 선택하신 좌석을 지우고 다시 선택하세요.");
 			}
 		}
 	}
