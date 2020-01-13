@@ -7,7 +7,9 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 
 import data.Theaters;
@@ -90,12 +92,17 @@ public class TheatersDBManager {
 		return null;
 	}
 	
-	public LinkedHashMap<String, ArrayList<String>> selectOneMovieStartByName(String movTitle, Date movDate) {
+	public LinkedHashMap<String, ArrayList<String>> selectOneMovieStartByNameSwitchCase(String movTitle, Date movDate) {
 		if (con != null) {
 			SimpleDateFormat sf = new SimpleDateFormat("YYYYMMDD");
 			String dateStr = sf.format(movDate);
 			String sql = "select movie_start, screen_name from movie_theaters where movie_title=" + "'" + movTitle + "'"
 					+ " and TO_CHAR(movie_date, 'YYYYMMDD')=" + "'" + dateStr + "'" + " order by movie_start asc";
+			
+			String grSql = "select screen_name from MOVIE_THEATERS where movie_title=" + "'" + movTitle + "'" // 그룹 sql 
+					+ " and TO_CHAR(movie_date, 'YYYYMMDD')=" + "'" + dateStr + "'" + " group by screen_name"; 
+			String orSql = "select movie_start, screen_name from movie_theaters where movie_title=" + "'" + movTitle + "'"
+					+ "and" + "???" + " and TO_CHAR(movie_date, 'YYYYMMDD')=" + "'" + dateStr + "'" + " order by screen_name, movie_start asc";
 			// 각각 관의 대해서 추가.
 			ArrayList<String> thList1 = new ArrayList<>();
 			ArrayList<String> thList2 = new ArrayList<>();
@@ -147,12 +154,76 @@ public class TheatersDBManager {
 		return null;
 	}
 	
+	public LinkedHashMap<String, ArrayList<String>> selectOneMovieStartByName(String movTitle, Date movDate) {
+		if (con != null) {
+			SimpleDateFormat sf = new SimpleDateFormat("YYYYMMDD");
+			String dateStr = sf.format(movDate);
+			String grSql = "select screen_name from MOVIE_THEATERS where movie_title=" + "'" + movTitle + "'" // 그룹 sql 
+					+ " and TO_CHAR(movie_date, 'YYYYMMDD')=" + "'" + dateStr + "'" + " group by screen_name order by screen_name";
+			
+			ArrayList<String> scArr = new ArrayList<>();
+			try {
+				Statement stmt = con.createStatement();
+				ResultSet rs = stmt.executeQuery(grSql);
+				
+				LinkedHashMap<String, ArrayList<String>> thList = new LinkedHashMap<>();
+				while (rs.next()) {
+					scArr.add(rs.getString(1));
+				}
+				
+				String scName = "(";
+				
+				for (int i = 0; i < scArr.size(); i++) {
+					if (i != scArr.size() - 1) scName += "screen_name = '" + scArr.get(i) + "' or "; // or screen_name = '2관'
+					else scName += "screen_name = '" + scArr.get(i) + "')";
+				}
+				
+				String orSql = "select movie_start, screen_name from movie_theaters where movie_title=" + "'" + movTitle + "'"
+						+ " and" + scName + " and TO_CHAR(movie_date, 'YYYYMMDD')=" + "'" + dateStr + "'" + " order by screen_name, movie_start asc";
+				Statement stmt2 = con.createStatement();
+				ResultSet rs2 = stmt2.executeQuery(orSql);
+				ArrayList<String> stListD = new ArrayList<>();
+				int j = 0;
+				while (rs2.next()) {
+					String temp = rs2.getString(2);
+					for (int i = 0; i < scArr.size(); i++) {
+						if (scArr.get(j).equals(temp)) {
+							stListD.add(rs2.getString(1));
+							if (j == scArr.size() - 1) {
+								HashSet<String> hs = new HashSet<String>(stListD);
+								ArrayList<String> stList = new ArrayList<>(hs);
+								Collections.sort(stList);
+								thList.put(scArr.get(j++), stList);
+							}
+							break;
+						} 
+						else if (!scArr.get(j).equals(temp)) {
+							HashSet<String> hs = new HashSet<String>(stListD);
+							ArrayList<String> stList = new ArrayList<>(hs);
+							Collections.sort(stList);
+							thList.put(scArr.get(j++), stList);
+							stListD = new ArrayList<>();
+							if (j < scArr.size()) stListD.add(rs2.getString(1));
+						}
+					}
+				}
+				return thList;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} else {
+			System.out.println("통신 오류");
+		}
+		return null;
+	}
+	
 	public static void main(String[] args) {
 		OracleDBUtil.connectDB();
 		TheatersDBManager thMgr = new TheatersDBManager();
 		Calendar cal = Calendar.getInstance();
-		cal.set(2020, 0, 10);
+		cal.set(2020, 0, 3);
 		Date tDate = cal.getTime();
+		// LinkedHashMap<?, ?> hash = thMgr.selectOneMovieStartByName("백두산", tDate);
 		LinkedHashMap<?, ?> hash = thMgr.selectOneMovieStartByName("백두산", tDate);
 		System.out.println(hash);
 		OracleDBUtil.closeDB();
