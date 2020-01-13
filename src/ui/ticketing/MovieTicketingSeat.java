@@ -300,6 +300,7 @@ public class MovieTicketingSeat extends JFrame {
         		hsNumList.clear();
         		hsLbList.clear();
         		clickCount = 0;
+        		btnSeatSelect.setEnabled(false);
         		count = 0;
         		temp = 0;
         		
@@ -313,17 +314,9 @@ public class MovieTicketingSeat extends JFrame {
 					}
 				}
         		
-        		selectSeatInfo.setFocusable(false);
-        		selectSeatInfo.removeAll();
-        		
         		for (int i = 0; i < lbList.length; i++) {
         			String tempStr = "ÁÂ¼®" + (i + 1);
-        			JLabel jlb = new JLabel(tempStr);
-        			lbList[i] = jlb;
-        			jlb.setBorder(new LineBorder(Color.BLACK, 1));
-        			jlb.setHorizontalAlignment(SwingConstants.CENTER);
-        			jlb.setPreferredSize(new Dimension(65, 35));
-        			selectSeatInfo.add(lbList[i]);
+        			lbList[i].setText(tempStr);
         		}
         	}
         });
