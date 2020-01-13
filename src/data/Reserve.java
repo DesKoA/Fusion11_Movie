@@ -5,7 +5,8 @@ import java.util.Date;
 // 예약
 
 public class Reserve {
-	private int reserveNo; // 예약 번호(자동증가)
+	private int reserveIndex; // 예약 인덱스 번호(자동증가)
+	private int reserveNo; // 예매번호 ex) 123-XA-WIN
 	private String movieTitle; // 영화 제목(영화 테이블)
 	private String memberID; // 회원 아이디(회원 테이블)
 	private int screenNo; // 상영관 번호(상영관 테이블)
@@ -27,8 +28,9 @@ public class Reserve {
 
 	public Reserve() {}
 
-	public Reserve(int reserveNo, int reserveAdult, int reserveStudent, int reserveMoney, int reserveDis, Date disDay,
+	public Reserve(int reserveIndex, int reserveNo, int reserveAdult, int reserveStudent, int reserveMoney, int reserveDis, Date disDay,
 			Date reserveDay) {
+		this.reserveIndex = reserveIndex;
 		this.reserveNo = reserveNo;
 		this.movieTitle = mov.getMovieTitle();
 		this.memberID = mb.getMemberID();
@@ -45,9 +47,10 @@ public class Reserve {
 		this.reserveDay = reserveDay;
 	}
 
-	public Reserve(int reserveNo, String movieTitle, String memberID, int screenNo, Date movieDate, String movieStart,
+	public Reserve(int reserveIndex, int reserveNo, String movieTitle, String memberID, int screenNo, Date movieDate, String movieStart,
 			String movieEnd, int seatNo, int reserveAdult, int reserveStudent, int reserveMoney, int reserveDis,
 			Date disDay, Date reserveDay) {
+		this.reserveIndex = reserveIndex;
 		this.reserveNo = reserveNo;
 		this.movieTitle = movieTitle;
 		this.memberID = memberID;
@@ -63,6 +66,15 @@ public class Reserve {
 		this.disDay = disDay;
 		this.reserveDay = reserveDay;
 	}
+	
+	public int reserveIndex() {
+		return reserveIndex;
+	}
+
+	public void reserveIndex(int reserveIndex) {
+		this.reserveIndex = reserveIndex;
+	}
+
 
 	public int getReserveNo() {
 		return reserveNo;
@@ -178,11 +190,12 @@ public class Reserve {
 
 	@Override
 	public String toString() {
-		return "Reserve [reserveNo=" + reserveNo + ", movieTitle=" + movieTitle + ", memberID=" + memberID
-				+ ", screenNo=" + screenNo + ", movieDate=" + movieDate + ", movieStart=" + movieStart + ", movieEnd="
-				+ movieEnd + ", seatNo=" + seatNo + ", reserveAdult=" + reserveAdult + ", reserveStudent="
-				+ reserveStudent + ", reserveMoney=" + reserveMoney + ", reserveDis=" + reserveDis + ", disDay="
-				+ disDay + ", reserveDay=" + reserveDay + "]";
+		return "Reserve [reserveIndex=" + reserveIndex + ", reserveNo=" + reserveNo + ", movieTitle=" + movieTitle
+				+ ", memberID=" + memberID + ", screenNo=" + screenNo + ", movieDate=" + movieDate + ", movieStart="
+				+ movieStart + ", movieEnd=" + movieEnd + ", seatNo=" + seatNo + ", reserveAdult=" + reserveAdult
+				+ ", reserveStudent=" + reserveStudent + ", reserveMoney=" + reserveMoney + ", reserveDis=" + reserveDis
+				+ ", disDay=" + disDay + ", reserveDay=" + reserveDay + ", mov=" + mov + ", mb=" + mb + ", th=" + th
+				+ ", st=" + st + "]";
 	}
-
+	
 }
