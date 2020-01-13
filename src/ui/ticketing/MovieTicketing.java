@@ -73,10 +73,14 @@ public class MovieTicketing extends JFrame {
 	public MovieDBManager movieMgr;
 	public TheatersDBManager thMgr;
 	
+	public JPanel timeBtPanel;
+	
 	public JDesktopPane desktop;
 	
 	public ImageIcon Icon;
 	public ImageIcon Icon2; 
+	
+	public Date movDate;
 	
 	public LinkedHashMap<String, ArrayList<String>> timeList;
 	
@@ -348,6 +352,10 @@ public class MovieTicketing extends JFrame {
 							Image changedImg2 = image2.getScaledInstance(120, 25, Image.SCALE_SMOOTH);
 							Icon2 = new ImageIcon(changedImg2);
 							movieInfoStar.setIcon(Icon2);
+							TheatersDBManager thMgr = new TheatersDBManager();
+							if (thMgr.selectOneMovie(selection).size() == 0) {
+								timePanel.setVisible(false);
+							}
 							// calFrame.setVisible(true);
 						} catch (IOException e1) {
 							e1.printStackTrace();
@@ -805,9 +813,9 @@ public class MovieTicketing extends JFrame {
 	public void setTheaters() {
 		Calendar today = Calendar.getInstance();
 		// JPanel timeBtPanel = new JPanel();
-		JPanel timeBtPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
-		Date date = new Date(calFrame.date.getTime());
-		timeList = thMgr.selectOneMovieStartByName(movTitle, date);
+		timeBtPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+		movDate = new Date(calFrame.date.getTime());
+		timeList = thMgr.selectOneMovieStartByName(movTitle, movDate);
 		String[] keyList = timeList.keySet().toArray(new String[timeList.size()]);
 		for (int i = 0; i < keyList.length; i++) {
 			JLabel lbt = new JLabel();
@@ -833,7 +841,7 @@ public class MovieTicketing extends JFrame {
 				JButton btn = new JButton(tempList.get(j));
 				btn.setVisible(true);
 				
-				if (date.getDay() == today.getTime().getDay() && todayHourInt >= movieDate) {
+				if (movDate.getDay() == today.getTime().getDay() && todayHourInt >= movieDate) {
 					btn.setEnabled(false);
 				}
 				// btn.setBorder(new EmptyBorder(0, 10, 0, 10));
@@ -914,7 +922,7 @@ public class MovieTicketing extends JFrame {
 		Object[] objList = new Object[] {
 				Icon, movieInfoName.getText(), movieInfoGrade.getText(), Icon2, movieInfoScreenName.getText(), 
 				movieInfoDayName.getText(), movieInfoPeopleName.getText(), movieInfoTimeName.getText(), movieInfoMoneyName.getText(),
-				(adPersons + stPersons)
+				(adPersons + stPersons), movDate
 		};
 		return objList;
 	}

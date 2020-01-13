@@ -217,15 +217,39 @@ public class TheatersDBManager {
 		return null;
 	}
 	
+	public int selectOneScreenNo(String scName, String mvTitle, Date movDate, String movStart) {
+		if (con != null) {
+			SimpleDateFormat sf = new SimpleDateFormat("YYYYMMDD");
+			String dateStr = sf.format(movDate);
+			String sql = String.format("select screen_no from movie_theaters where screen_name = '%s' and movie_title = '%s'"
+					+ " and TO_CHAR(movie_date, 'YYYYMMDD') = '%s' and movie_start = '%s'", scName, mvTitle, dateStr, movStart);
+			try {
+				Statement stmt = con.createStatement();
+				ResultSet rs = stmt.executeQuery(sql);
+				
+				if (rs.next()) {
+					int ret = rs.getInt(1);
+					return ret;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		} else {
+			
+		}
+		return 0;
+	}
+	
 	public static void main(String[] args) {
 		OracleDBUtil.connectDB();
 		TheatersDBManager thMgr = new TheatersDBManager();
 		Calendar cal = Calendar.getInstance();
-		cal.set(2020, 0, 3);
+		cal.set(2020, 0, 24);
 		Date tDate = cal.getTime();
 		// LinkedHashMap<?, ?> hash = thMgr.selectOneMovieStartByName("백두산", tDate);
-		LinkedHashMap<?, ?> hash = thMgr.selectOneMovieStartByName("백두산", tDate);
-		System.out.println(hash);
+		// LinkedHashMap<?, ?> hash = thMgr.selectOneMovieStartByName("백두산", tDate);
+		System.out.println(thMgr.selectOneScreenNo("1관", "백두산", tDate, "12:00"));
 		OracleDBUtil.closeDB();
 	}
 	
