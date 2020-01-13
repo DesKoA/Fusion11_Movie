@@ -15,6 +15,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerListModel;
 import java.awt.Choice;
@@ -89,7 +90,7 @@ public class join extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(88,105,219));//(124, 166, 150));
-		panel.setBounds(0, 86, 210, 384);
+		panel.setBounds(0, 86, 210, 392);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -114,7 +115,7 @@ public class join extends JFrame {
 		JPanel panel_1 = new JPanel();
 		ImageIcon icn = new ImageIcon(
 //				final String ic = 
-						".\\imgs\\회원가입제목1.png");
+						".\\image\\회원가입제목1.png");
 						
 		panel_2 = new JPanel() {
 	   public void paintComponent(Graphics g) {
@@ -151,7 +152,7 @@ public class join extends JFrame {
      //   File file = new File("C:\\Users\\alfo4-11\\Desktop\\1차 프로젝트\\티켓보라색.png");
 		ImageIcon ic = new ImageIcon(
 //		final String ic = 
-				".\\imgs\\티켓보라색.png");
+				".\\image\\티켓보라색.png");
 				
 				JPanel centens = new JPanel() {
 			   public void paintComponent(Graphics g) {
@@ -176,28 +177,47 @@ public class join extends JFrame {
 //        }
 //		contentPane = new ImagePanel(ic.getImage(), 
 //				"bg_cafe.jpg");
-    	centens.setBounds(222, 86, 727, 387);
+    	centens.setBounds(209, 86, 775, 392);
 		contentPane.add(centens);
 		centens.setLayout(null);
 		
 		JButton canel = new JButton("\uCDE8\uC18C\uD558\uAE30");
 		canel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
 			}
 		});
+		
+/*
+ * 		JButton btnLogout = new JButton("Logout");
+		btnLogout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int result = JOptionPane.showConfirmDialog(pnMovieInfo, "Logout 하시겠습니까?", "이용해 주셔서 감사합니다.",
+						JOptionPane.OK_CANCEL_OPTION, 1);
+
+				if (result == JOptionPane.OK_OPTION) {
+					System.exit(0);
+				} else if (result == JOptionPane.CANCEL_OPTION) {
+					// JOptionPane.showMessageDialog(pnMovieInfo, "취소하였습니다");
+				}
+			}
+		});
+ */
 		canel.setBackground(new Color(123, 104, 238));
-		canel.setBounds(206, 332, 90, 23);
+		
+		canel.setBounds(243, 331, 90, 23);
 		centens.add(canel);
+		//?? frame.getContentPane().add(canel); 
 		
 		JButton pwCheck = new JButton("\uC911\uBCF5\uD655\uC778");
 		pwCheck.setForeground(new Color(240, 248, 255));
 		pwCheck.setBackground(new Color(47, 79, 79));
-		pwCheck.setBounds(191, 103, 90, 23);
+		pwCheck.setBounds(228, 102, 90, 23);
 		centens.add(pwCheck);
 		pwCheck.setBorderPainted(false);
 		
 		JLabel emailWhelk = new JLabel("  @");
-		emailWhelk.setBounds(431, 76, 24, 21);
+		emailWhelk.setBounds(497, 75, 24, 21);
 		centens.add(emailWhelk);
 		
 		JButton OKButton = new JButton("\uB4F1\uB85D\uD558\uAE30");
@@ -205,37 +225,37 @@ public class join extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		OKButton.setBounds(397, 332, 97, 23);
+		OKButton.setBounds(434, 331, 97, 23);
 		centens.add(OKButton);
 		OKButton.setOpaque(true); //투명화
 		OKButton.setForeground(UIManager.getColor("CheckBox.shadow"));
 		OKButton.setBackground(new Color(123, 104, 238));
 		
 		JLabel yymmdd = new JLabel("\uC0DD\uB144\uC6D4\uC77C");
-		yymmdd.setBounds(104, 262, 140, 25);
+		yymmdd.setBounds(141, 261, 140, 25);
 		centens.add(yymmdd);
 		yymmdd.setFont(new Font("한컴돋움", Font.PLAIN, 20));
 		
 		phoneMid = new JTextField();
-		phoneMid.setBounds(431, 297, 54, 21);
+		phoneMid.setBounds(477, 296, 54, 21);
 		centens.add(phoneMid);
 		phoneMid.setColumns(4);
 		
 		phoneEnd = new JTextField();
-		phoneEnd.setBounds(497, 297, 54, 21);
+		phoneEnd.setBounds(546, 296, 54, 21);
 		centens.add(phoneEnd);
 		phoneEnd.setColumns(4);
 		
-		JLabel _2 = new JLabel(" -");
-		_2.setBounds(485, 300, 18, 15);
+		JLabel _2 = new JLabel("   -");
+		_2.setBounds(527, 300, 18, 15);
 		centens.add(_2);
 		
 		JLabel _1 = new JLabel("   -");
-		_1.setBounds(411, 298, 18, 18);
+		_1.setBounds(453, 298, 18, 18);
 		centens.add(_1);
 		
 		JLabel pw = new JLabel("\uBE44\uBC00\uBC88\uD638");
-		pw.setBounds(104, 160, 140, 25);
+		pw.setBounds(141, 159, 140, 25);
 		centens.add(pw);
 		pw.setFont(new Font("한컴돋움", Font.PLAIN, 20));
 		
@@ -251,7 +271,7 @@ public class join extends JFrame {
 			}
 		});
 		pwfirst.setColumns(8);
-		pwfirst.setBounds(114, 195, 116, 21);
+		pwfirst.setBounds(151, 194, 116, 21);
 		centens.add(pwfirst);
 		pwfirst.setColumns(10);
 
@@ -260,7 +280,7 @@ public class join extends JFrame {
 
 		
 		pwpwField = new JPasswordField();
-		pwpwField.setBounds(364, 195, 116, 21);
+		pwpwField.setBounds(401, 194, 116, 21);
 		centens.add(pwpwField);
 		pwpwField.addFocusListener(new FocusAdapter() {
 			@Override
@@ -302,55 +322,55 @@ public class join extends JFrame {
 //		pwpwField.setColumns(10);
 		
 		JLabel pwpw = new JLabel("\uBE44\uBC00\uBC88\uD638 \uD655\uC778");
-		pwpw.setBounds(354, 160, 140, 25);
+		pwpw.setBounds(391, 159, 140, 25);
 		centens.add(pwpw);
 		pwpw.setFont(new Font("한컴돋움", Font.PLAIN, 20));
 		
 		JLabel phone = new JLabel("\uC804\uD654\uBC88\uD638");
-		phone.setBounds(350, 262, 140, 25);
+		phone.setBounds(387, 261, 140, 25);
 		centens.add(phone);
 		phone.setFont(new Font("한컴돋움", Font.PLAIN, 20));
 
 		
 		idEnter = new JTextField();
-		idEnter.setBounds(114, 76, 116, 21);
+		idEnter.setBounds(151, 75, 116, 21);
 		centens.add(idEnter);
 		idEnter.setText("\uC544\uC774\uB514 \uC785\uB825");
 		idEnter.setColumns(10);
 		
 		emailField = new JTextField();
-		emailField.setBounds(335, 76, 97, 21);
+		emailField.setBounds(401, 75, 97, 21);
 		centens.add(emailField);
 		emailField.setColumns(10);
 		
 		JLabel email = new JLabel("\uC774\uBA54\uC77C");
-		email.setBounds(354, 39, 140, 25);
+		email.setBounds(391, 38, 140, 25);
 		centens.add(email);
 		email.setFont(new Font("한컴돋움", Font.PLAIN, 20));
 		
 		JLabel id = new JLabel("\uC544\uC774\uB514");
-		id.setBounds(104, 39, 140, 25);
+		id.setBounds(141, 38, 140, 25);
 		centens.add(id);
 		id.setFont(new Font("한컴돋움", Font.PLAIN, 20));
 		
 		JComboBox emailCombo = new JComboBox();
 		emailCombo.setModel(new DefaultComboBoxModel(new String[] {"naver.com", "gmail.com"}));
-		emailCombo.setBounds(567, 76, 109, 21);
+		emailCombo.setBounds(491, 103, 109, 21);
 		centens.add(emailCombo);
 		
 		JSpinner mm = new JSpinner();
 		mm.setModel(new SpinnerNumberModel(6, 1, 12, 1));
-		mm.setBounds(172, 300, 40, 22);
+		mm.setBounds(209, 299, 40, 22);
 		centens.add(mm);
 		
 		JSpinner yy = new JSpinner();
 		yy.setModel(new SpinnerListModel(new String[] {"1999", "1998", "1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990", "1989", "1988", "1987", "1986", "1985", "1984", "1983", "1982", "1981", "1980"}));
-		yy.setBounds(114, 300, 59, 22);
+		yy.setBounds(151, 299, 59, 22);
 		centens.add(yy);
 		
 		JSpinner dd = new JSpinner();
 		dd.setModel(new SpinnerNumberModel(new Integer(15), null, null, new Integer(1)));
-		dd.setBounds(211, 300, 41, 22);
+		dd.setBounds(248, 299, 41, 22);
 		centens.add(dd);
 		
 		lblStatus = new JLabel("");
@@ -359,12 +379,12 @@ public class join extends JFrame {
 		
 		phone1st = new JTextField();
 		phone1st.setColumns(4);
-		phone1st.setBounds(365, 297, 54, 21);
+		phone1st.setBounds(402, 296, 54, 21);
 		centens.add(phone1st);
 		
 		emailAddress = new JTextField();
 		emailAddress.setColumns(10);
-		emailAddress.setBounds(454, 76, 97, 21);
+		emailAddress.setBounds(520, 75, 97, 21);
 		centens.add(emailAddress);
 		
 
