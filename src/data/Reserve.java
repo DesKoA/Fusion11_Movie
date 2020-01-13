@@ -67,11 +67,11 @@ public class Reserve {
 		this.reserveDay = reserveDay;
 	}
 	
-	public int reserveIndex() {
+	public int getReserveIndex() {
 		return reserveIndex;
 	}
 
-	public void reserveIndex(int reserveIndex) {
+	public void setReserveIndex(int reserveIndex) {
 		this.reserveIndex = reserveIndex;
 	}
 
