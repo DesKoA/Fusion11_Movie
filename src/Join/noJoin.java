@@ -95,7 +95,7 @@ public class noJoin extends JFrame {
 		fstbutton.setBounds(19, 50, 133, 35);
 		panel.add(fstbutton);
 		
-		JButton nojoinBtn = new JButton("\uBE44\uD68C\uC6D0\uC608\uB9E4");
+		JButton nojoinBtn = new JButton("\uAC00\uC785\uD558\uAE30");
 		nojoinBtn.setFont(new Font("±¼¸²", Font.BOLD, 15));
 		nojoinBtn.setBackground(new Color(219, 86, 114));
 		nojoinBtn.setBounds(19, 119, 133, 35);
