@@ -187,6 +187,8 @@ public class MovieTicketingSeat extends JFrame {
 					Seat seat = new Seat(0, scNum, seatStr.charAt(0), seatStr.charAt(1) - '0');
 					seatMgr.insertSeat(seat);
 				}
+				JOptionPane.showMessageDialog(null, "예매가 완료되었습니다.");
+				dispose();
 			}
 		});
 		movieInfo.add(btnSeatSelect, new AbsoluteConstraints(50, 540, 190, -1));
