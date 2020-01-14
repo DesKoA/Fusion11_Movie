@@ -48,6 +48,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.geom.CubicCurve2D;
 import java.awt.Window.Type;
 import javax.swing.UIManager;
@@ -63,8 +65,8 @@ public class MoviePosterInfo extends JDialog implements ActionListener {
 	private JLabel lblNewLabel_5;
 	private JTextField textField;
 	private JPanel panel_31;
-	private JButton btnNewButton_7;
-	private JButton btnNewButton_8;
+	private JButton btnPotoLeft;
+	private JButton btnPotoRight;
 	private JTextArea txtArea;
 	public CardLayout cardMgr;
 
@@ -90,6 +92,10 @@ public class MoviePosterInfo extends JDialog implements ActionListener {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(600, 150, 872, 746);
+		//
+		setFocusable(true);
+		setFocusTraversalKeysEnabled(false);
+		//
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -413,22 +419,21 @@ public class MoviePosterInfo extends JDialog implements ActionListener {
 			flowLayout_5.setAlignment(FlowLayout.LEFT);
 			panel_26.add(panel_27, BorderLayout.SOUTH);
 			// 버튼 이벤트
-			btnNewButton_7 = new JButton("\u25C0");
-			panel_27.add(btnNewButton_7);
-			btnNewButton_7.addActionListener(this);
-			btnNewButton_8 = new JButton("\u25B6"); // => 오른쪽
-			panel_27.add(btnNewButton_8);
-			btnNewButton_8.addActionListener(this);
+			btnPotoLeft = new JButton("\u25C0");
+			panel_27.add(btnPotoLeft);
+			btnPotoLeft.addActionListener(this);
+			btnPotoRight = new JButton("\u25B6"); // => 오른쪽
+			panel_27.add(btnPotoRight);
+			btnPotoRight.addActionListener(this);
 
-			JLabel lblNewLabel_3 = new JLabel(
-					"                                                                         ");
+			JLabel lblNewLabel_3 = new JLabel("                                                                   ");
 			lblNewLabel_3.setHorizontalAlignment(SwingConstants.LEFT);
 			lblNewLabel_3.setBackground(Color.DARK_GRAY);
 			panel_27.add(lblNewLabel_3);
 
 			// TODO 동영상
-			JButton btnNewButton_6 = new JButton("\uC608\uACE0\uD3B8 \uB3D9\uC601\uC0C1 \uB9C1\uD06C");
-			btnNewButton_6.addActionListener(new ActionListener() {
+			JButton btnMovieLink = new JButton("\uC608\uACE0\uD3B8 \uB3D9\uC601\uC0C1 \uB9C1\uD06C");
+			btnMovieLink.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					Runtime runtime = Runtime.getRuntime();
 					String URL[] = { "https://youtu.be/eSEs4B4H-EA", "https://youtu.be/FKAbTcss1ow",
@@ -448,7 +453,7 @@ public class MoviePosterInfo extends JDialog implements ActionListener {
 					}
 				}
 			});
-			panel_27.add(btnNewButton_6);
+			panel_27.add(btnMovieLink);
 
 			JPanel panel_32 = new JPanel();
 			panel_26.add(panel_32, BorderLayout.CENTER);
@@ -457,7 +462,36 @@ public class MoviePosterInfo extends JDialog implements ActionListener {
 			panel_32.add(poto, BorderLayout.CENTER);
 			poto.setLayout(new BorderLayout(0, 0));
 			//
-
+			addKeyListener(new KeyListener() {
+				
+				@Override
+				public void keyTyped(KeyEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void keyReleased(KeyEvent e) {
+					int code = e.getKeyCode();
+					switch (code) {
+					case KeyEvent.VK_LEFT:
+							cardMgr.previous(movPoter);
+						break;
+						
+					case KeyEvent.VK_RIGHT:
+							cardMgr.next(movPoter);
+						break;	
+					default:
+						break;
+					}
+				}
+				
+				@Override
+				public void keyPressed(KeyEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
 			// 포토존
 			panel_31 = new JPanel();
 			poto.add(panel_31, BorderLayout.CENTER);
@@ -503,7 +537,7 @@ public class MoviePosterInfo extends JDialog implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnNewButton_7) {
+		if (e.getSource() == btnPotoLeft) {
 			if (l == 0) {
 				JOptionPane.showMessageDialog(lblNewLabel_5, "처음 이미지 입니다");
 			} else {
@@ -512,7 +546,7 @@ public class MoviePosterInfo extends JDialog implements ActionListener {
 			}
 		}
 
-		if (e.getSource() == btnNewButton_8) {
+		if (e.getSource() == btnPotoRight) {
 			if (l == imgIconList.length - 1) {
 				JOptionPane.showMessageDialog(lblNewLabel_5, "마지막 이미지 입니다");
 			} else {

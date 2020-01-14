@@ -34,6 +34,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class MovieMain extends JFrame {
 	MovieDBManager mvDB;
@@ -112,26 +114,6 @@ public class MovieMain extends JFrame {
 	//
 	ArrayList<MovieInfo> postList = new ArrayList<>();
 
-//	public void prepareDummyMovieList() {
-//
-//		final String[] movNames = { "겨울왕국 2", "백두산", "쥬만지", "크롤",
-//				"시동", "판도라", "패딩턴", "폐교","버닝", "사자", "알라딘", "해운대"};
-//
-//				for (int i = 0; i < movNames.length; i++) {
-//				MovieInfo movie = new Movie(i + 1, movNames[i], movNames[i] + ".jpg", movNames[i]);
-//				MovieList.add(movie);
-//			}
-//		//}
-//	}
-
-//	public void potoMovieList(MovieInfo list) {
-//		for (int i = 0; i < MovieList.size(); i++) {
-//			MovieInfo movie = new MovieInfo(i + 1, list.getMovieTitle() + ".jpg", list.getMoviePoster(), "", "", 0, 0,
-//					"", "", "", 0);
-//			MovieList.add(movie);
-//		}
-//	}
-
 	MovieMain movMain;
 
 	private ImageIcon[] imgIconList;
@@ -142,6 +124,10 @@ public class MovieMain extends JFrame {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(500, 150, 1000, 600);
+		// TODO 포커스를 받을수 있게 설정
+		setFocusable(true);
+		setFocusTraversalKeysEnabled(false);
+		//
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -158,7 +144,7 @@ public class MovieMain extends JFrame {
 		};
 		contentPane.add(pnBackground, BorderLayout.CENTER);
 		pnBackground.setLayout(new BorderLayout(0, 0));
-
+		
 		// prepareDummyMovieList();
 		mvDB = new MovieDBManager();
 		titleList = mvDB.movieTitle_selectAll();
@@ -192,7 +178,25 @@ public class MovieMain extends JFrame {
 		pnMovieList.setOpaque(false);
 		pnBackground.add(pnMovieList, BorderLayout.CENTER);
 		pnMovieList.setLayout(new BorderLayout(0, 0));
-
+		
+		addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				int code = e.getKeyCode();
+				switch (code) {
+				case KeyEvent.VK_LEFT:
+						cardMgr.previous(pnMovieInfo);
+					break;
+					
+				case KeyEvent.VK_RIGHT:
+						cardMgr.next(pnMovieInfo);
+					break;	
+				default:
+					break;
+				}
+			}
+		});
+		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.DARK_GRAY);
 		pnMovieList.add(panel, BorderLayout.WEST);
@@ -434,44 +438,5 @@ public class MovieMain extends JFrame {
 				l[i].addMouseListener(movSelectHandle);
 				}
 			}
-//			} else if (i < index2) {
-//				//System.out.println("2번 카드"+i);
-//				lblMovieInfo = new JLabel() {
-//
-//					//ImageIcon icon = new ImageIcon(imagePaths[1] + mov.getMoviePoster());
-//					Image img = icon.getImage();
-//
-//					public void paintComponent(Graphics g) {
-//						g.drawImage(img, 0, 0, getWidth(), getHeight(), null);
-//						setOpaque(false); // 그림을 표시하세 설정, 투명하게 조절
-//						super.paintComponent(g);
-//					}
-//				};
-//				lblMovieInfo.setToolTipText("영화 클릭시 예매 및 상세보기");
-//				//potoPanels[1].add(lblMovieInfo);
-//				//
-//				movieLabelList.add(lblMovieInfo);
-//				//
-//				lblMovieInfo.addMouseListener(movSelectHandle);
-//			} else if (i < index3) {
-//				//System.out.println("3번 카드"+i);
-//				lblMovieInfo = new JLabel() {
-//
-//					//ImageIcon icon = new ImageIcon(imagePaths[2] + mov.getMoviePoster());
-//					Image img = icon.getImage();
-//
-//					public void paintComponent(Graphics g) {
-//						g.drawImage(img, 0, 0, getWidth(), getHeight(), null);
-//						setOpaque(false); // 그림을 표시하세 설정, 투명하게 조절
-//						super.paintComponent(g);
-//					}
-//				};
-//				lblMovieInfo.setToolTipText("영화 클릭시 예매 및 상세보기");
-//				//potoPanels[2].add(lblMovieInfo);
-//				//
-//				movieLabelList.add(lblMovieInfo);
-//				//
-//				lblMovieInfo.addMouseListener(movSelectHandle);
-			
 	}
 }

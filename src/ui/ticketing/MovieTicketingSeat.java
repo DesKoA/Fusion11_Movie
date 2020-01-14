@@ -5,31 +5,34 @@
  */
 package ui.ticketing;
 
+import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
 import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
 import javax.swing.border.LineBorder;
 
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 
+import data.Seat;
 import db.dao.MovieDBManager;
+import db.dao.SeatDBManager;
 import db.dao.TheatersDBManager;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.EventQueue;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import javax.swing.GroupLayout.Alignment;
 import java.awt.GridLayout;
@@ -54,9 +57,17 @@ public class MovieTicketingSeat extends JFrame {
 	public LinkedHashMap<String, ArrayList<String>> timeList;
 	public JButton seatBtn[][] = new JButton[10][10];
 	public char ch;
-	public int seatNum;
-	
+	public int peopleNum;
+	public LinkedHashMap<String, JLabel> hsLbList = new LinkedHashMap<String, JLabel>();
+	public LinkedHashMap<String, String> hsNumList = new LinkedHashMap<String, String>();
+	public JLabel[] lbList;
 	public MovieTicketing mov;
+	public ButtonGroup btnGr;
+	listenForSeat lForSeat = new listenForSeat();
+	
+	int clickCount = 0;
+	int count;
+	int temp;	
 
 	/**
 	 * Creates new form MovieReservation
@@ -67,9 +78,9 @@ public class MovieTicketingSeat extends JFrame {
 		initComponents();
 	}
 	
-	// ÃÊ±âÈ­ 
 	public void resetFrame() {
-		
+		dispose();
+		mov.resetFrame();
 	}
 	
 	/**    
@@ -102,9 +113,12 @@ public class MovieTicketingSeat extends JFrame {
 		movieInfoPeopleName = new JLabel();
 		movieInfoTimeName = new JLabel();
 		movieInfoMoneyName = new JLabel();
+		selectSeatInfo = new JPanel();
 		movieInfoStar = new JLabel();
+		peopleNum = (int)obj[9];
+		lbList = new JLabel[peopleNum];
 		
-		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setBackground(new Color(255, 255, 255));
 
 		Main.setBackground(new Color(255, 255, 255));
@@ -164,6 +178,16 @@ public class MovieTicketingSeat extends JFrame {
 		btnSeatSelect.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				TheatersDBManager thMgr = new TheatersDBManager();
+				int scNum = thMgr.selectOneScreenNo(movieInfoScreenName.getText(), movieInfoName.getText(), (Date)obj[10] , movieInfoTimeName.getText().substring(0, 5));
+				SeatDBManager seatMgr = new SeatDBManager();
+				for (int i = 0; i < lbList.length; i++) {
+					String seatStr = lbList[i].getText();
+					Seat seat = new Seat(0, scNum, seatStr.charAt(0), seatStr.charAt(1) - '0');
+					seatMgr.insertSeat(seat);
+				}
+				JOptionPane.showMessageDialog(null, "¿¹¸Å°¡ ¿Ï·áµÇ¾ú½À´Ï´Ù.");
+				resetFrame();
 			}
 		});
 		movieInfo.add(btnSeatSelect, new AbsoluteConstraints(50, 540, 190, -1));
@@ -207,9 +231,18 @@ public class MovieTicketingSeat extends JFrame {
         Main.add(seatPanelLeft, new AbsoluteConstraints(0, 0, 730, 600));
         seatPanelLeft.setLayout(null);
         
+        selectSeatInfo.setBounds(517, 243, 176, 326);
+        selectSeatInfo.setBorder(new LineBorder(Color.BLACK, 1));
+        selectSeatInfo.setOpaque(true);
+        
         seatBtnPanel = new JPanel();
-        seatBtnPanel.setBounds(54, 134, 488, 435);
+        seatBtnPanel.setBounds(54, 134, 428, 435);
         seatPanelLeft.add(seatBtnPanel);
+        
+        SeatDBManager stMgr = new SeatDBManager();
+        int scNum = thMgr.selectOneScreenNo(movieInfoScreenName.getText(), movieInfoName.getText(), (Date)obj[10] , movieInfoTimeName.getText().substring(0, 5));
+        
+        ArrayList<String> selSeatList = stMgr.selectAllSeatsName(scNum);
         for (char c = 'A'; c <= 'J'; c++) {
         	int i = c - 'A';
 			for (int j = 0; j < 10; j++) {
@@ -217,35 +250,55 @@ public class MovieTicketingSeat extends JFrame {
 				seatBtn[i][j].setVisible(true);
 				seatBtn[i][j].setMargin(new Insets(0, 0, 0, 0));
 				seatBtn[i][j].setText(j + 1 + "");
+				seatBtn[i][j].setToolTipText(c + "" + (j + 1));
 				seatBtn[i][j].setFont(new Font("³ª´®¹Ù¸¥°íµñ", 1, 15));
-				seatBtn[i][j].setPreferredSize(new Dimension(30, 30));
+				seatBtn[i][j].setPreferredSize(new Dimension(25, 25));
 				seatBtn[i][j].setContentAreaFilled(false);
 				seatBtn[i][j].setFocusPainted(false);
 				seatBtn[i][j].setOpaque(true);
 				seatBtn[i][j].setForeground(Color.BLACK);
 				seatBtn[i][j].setBackground(Color.LIGHT_GRAY);
-				seatBtn[i][j].addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						JButton btn = (JButton)e.getSource();
-						if (btn.getBackground() == Color.RED) {
-							btn.setBackground(Color.LIGHT_GRAY);
-							btn.setSelected(false);
-						} else {
-							btn.setBackground(Color.RED);
-						}
+				for (int k = 0; k < selSeatList.size(); k++) {
+					if (seatBtn[i][j].getToolTipText().equals(selSeatList.get(k))) {
+						seatBtn[i][j].setEnabled(false);
+						// seatBtn[i][j].setUndecorated(true);
+						seatBtn[i][j].setBorder(new LineBorder(Color.BLACK, 1));
+						seatBtn[i][j].setBackground(Color.WHITE);
+						seatBtn[i][j].setForeground(Color.BLACK);
+						seatBtn[i][j].setFont(new Font("", 1, 30));
+						seatBtn[i][j].setText("X");
+						break;
 					}
-				});
+				}
+				seatBtn[i][j].addActionListener(lForSeat);
 				seatBtnPanel.add(seatBtn[i][j]);
 			}
 		}
+<<<<<<< HEAD
+=======
+        
+        for (int i = 0; i < lbList.length; i++) {
+        	String tempStr = "ÁÂ¼®" + (i + 1);
+        	JLabel jlb = new JLabel(tempStr);
+        	lbList[i] = jlb;
+        	jlb.setBorder(new LineBorder(Color.BLACK, 1));
+        	jlb.setHorizontalAlignment(SwingConstants.CENTER);
+        	jlb.setPreferredSize(new Dimension(65, 35));
+        	selectSeatInfo.add(lbList[i]);
+        }
+        
+        // selectSeatInfo.setLayout(new FlowLayout(10, 5, 10, 5));
+        selectSeatInfo.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        seatPanelLeft.add(selectSeatInfo);
+        
+>>>>>>> branch 'master' of https://github.com/DesKoA/MovieProject.git
         seatBtnPanel.setLayout(new GridLayout(10, 5, 5, 5));
         
         lblScreen = new JLabel("S c r e e n");
         lblScreen.setFont(new Font("³ª´®¹Ù¸¥°íµñ", Font.PLAIN, 60));
         lblScreen.setBorder(new LineBorder(Color.black, 2));
         lblScreen.setHorizontalAlignment(SwingConstants.CENTER);
-        lblScreen.setBounds(54, 41, 488, 62);
+        lblScreen.setBounds(54, 41, 428, 62);
         seatPanelLeft.add(lblScreen);
         
         seatAZPanel = new JPanel();
@@ -258,13 +311,60 @@ public class MovieTicketingSeat extends JFrame {
 			seatAZPanel.add(lbl);
 		}
         seatAZPanel.setLayout(new GridLayout(10, 0, 0, 0));
+        selectSeatLb = new JLabel("\uC120\uD0DD\uD55C \uC88C\uC11D \uBC88\uD638");
+        selectSeatLb.setHorizontalAlignment(SwingConstants.CENTER);
+        selectSeatLb.setFont(new Font("±¼¸²", Font.PLAIN, 25));
+        selectSeatLb.setBounds(496, 178, 220, 52);
+        seatPanelLeft.add(selectSeatLb);
+        
+        JButton resetSeatBtn = new JButton("\uC88C\uC11D \uB2E4\uC2DC\uC120\uD0DD");
+        resetSeatBtn.setFont(new Font("±¼¸²", Font.PLAIN, 17));
+        resetSeatBtn.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		hsNumList.clear();
+        		hsLbList.clear();
+        		clickCount = 0;
+        		btnSeatSelect.setEnabled(false);
+        		count = 0;
+        		temp = 0;
+        		
+        		for (int i = 0; i < seatBtn.length; i++) {
+					for (int j = 0; j < seatBtn[i].length; j++) {
+						seatBtn[i][j].setContentAreaFilled(false);
+						seatBtn[i][j].setFocusPainted(false);
+						seatBtn[i][j].setSelected(false);
+						seatBtn[i][j].setOpaque(true);
+						seatBtn[i][j].setBackground(Color.LIGHT_GRAY);
+						seatBtn[i][j].setForeground(Color.BLACK);
+						for (int k = 0; k < selSeatList.size(); k++) {
+							if (seatBtn[i][j].getToolTipText().equals(selSeatList.get(k))) {
+								seatBtn[i][j].setEnabled(false);
+								// seatBtn[i][j].setUndecorated(true);
+								seatBtn[i][j].setBorder(new LineBorder(Color.BLACK, 1));
+								seatBtn[i][j].setBackground(Color.WHITE);
+								seatBtn[i][j].setForeground(Color.BLACK);
+								seatBtn[i][j].setFont(new Font("", 1, 30));
+								seatBtn[i][j].setText("X");
+								break;
+							}
+						}
+					}
+				}
+        		
+        		for (int i = 0; i < lbList.length; i++) {
+        			String tempStr = "ÁÂ¼®" + (i + 1);
+        			lbList[i].setText(tempStr);
+        		}
+        	}
+        });
+        resetSeatBtn.setBounds(517, 134, 176, 38);
+        seatPanelLeft.add(resetSeatBtn);
         
 		movieInfoStar.setBackground(new Color(255, 255, 255));
 		movieInfoStar.setAlignmentY(0.0F);
 		movieInfoStar.setIcon((Icon)obj[3]);
 		movieInfo.add(movieInfoStar, new AbsoluteConstraints(78, 347, 120, 25));
 		
-        
 		GroupLayout layout = new GroupLayout(getContentPane());
 		layout.setHorizontalGroup(
 			layout.createParallelGroup(Alignment.LEADING)
@@ -280,10 +380,94 @@ public class MovieTicketingSeat extends JFrame {
 		// mov = this;
 	}// </editor-fold>
 	
+	public class listenForSeat implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			JButton btn = (JButton) e.getSource();
+			String toolTip = btn.getToolTipText();
+			int ret = returnCheckNum();
+				temp = count;
+				if (ret != 9999) count = ret;
+				else count = temp;
+			if (btn.isSelected()) {
+				clickCount--;
+				btn.setBackground(Color.LIGHT_GRAY);
+				btn.setForeground(Color.BLACK);
+				btn.setSelected(false);
+				hsLbList.get(toolTip).setText(hsNumList.get(toolTip));
+				if (count > 0) hsLbList.remove(toolTip, lbList[--count]);
+				else hsLbList.remove(toolTip, lbList[count]);
+				if (clickCount < lbList.length) btnSeatSelect.setEnabled(false);
+			} else if (ret != 9999 && !btn.isSelected()) {
+				clickCount++;
+				btn.setBackground(new Color(106, 119, 189));
+				btn.setForeground(Color.WHITE);
+				btn.setSelected(true);
+				hsNumList.put(toolTip, lbList[count].getText());
+				hsLbList.put(toolTip, lbList[count++]);
+				if (clickCount == lbList.length) btnSeatSelect.setEnabled(true);
+				hsLbList.get(toolTip).setText(toolTip);
+			} else {
+				JOptionPane.showMessageDialog(null, "ÁÂ¼®À» ¸ðµÎ ¼±ÅÃÇÏ¼Ì½À´Ï´Ù.\nÇöÀç ¼±ÅÃÇÏ½Å ÁÂ¼®À» Áö¿ì°í ´Ù½Ã ¼±ÅÃÇÏ¼¼¿ä.");
+			}
+		}
+	}
+	
+	int returnCheckNum() {
+		int ret;
+		for (int i = 0; i < lbList.length; i++) {
+			if (lbList[i].getText().contains("ÁÂ¼®")) {
+				ret = i;
+				return ret;
+			}
+		}
+		return 9999;
+	}
+	/*
+	 * public void actionPerformed(ActionEvent e) {
+			JButton btn = (JButton) e.getSource();
+			String toolTip = btn.getToolTipText();
+			int checkNum = returnCheckNum();
+			// checkNum = Integer.parseInt(hsNumList.get(toolTip).substring(2, 3));
+			if (btn.isSelected()) {
+				btn.setBackground(Color.LIGHT_GRAY);
+				btn.setSelected(false);
+				if (hsLbList.size() > 0) hsLbList.remove(toolTip, lbList[--count]);
+				hsLbList.get(toolTip).setText(hsNumList.get(toolTip));
+			} else {
+				btn.setBackground(Color.RED);
+				btn.setSelected(true);
+				if (hsNumList.size() > 0) hsNumList.put(toolTip, lbList[count].getText());
+				// if (hsLbList.get(toolTip).getText().contains("ÁÂ¼®"))
+				// hsLbList.put(toolTip, lbList[checkNum]);
+				checkNum = returnCheckNum();
+				if (checkNum != 0) hsLbList.put(toolTip, lbList[count++]);
+				else {
+					System.out.println(checkNum);
+					hsLbList.put(toolTip, lbList[checkNum]);
+				}
+				hsLbList.get(toolTip).setText(toolTip);
+			}
+		}
+
+		int returnCheckNum() {
+			int ret;
+			for (int i = 0; i < lbList.length; i++) {
+				if (lbList[i].getText().contains("ÁÂ¼®")) {
+					ret = i;
+					return ret;
+				}
+			}
+			return 0;
+		}
+
+	 */
+	
 	private JPanel Main;
-	private JButton btnSeatSelect;
+	public JButton btnSeatSelect;
 	private JPanel movieInfo;
 	private JPanel seatPanelLeft;
+	public JPanel selectSeatInfo;
 	public JLabel movieInfoDayName;
 	public JLabel movieInfoMoneyName;
 	public JLabel movieInfoScreenName;
@@ -303,4 +487,5 @@ public class MovieTicketingSeat extends JFrame {
 	private JPanel seatBtnPanel;
 	private JLabel lblScreen;
 	private JPanel seatAZPanel;
+	private JLabel selectSeatLb;
 }
