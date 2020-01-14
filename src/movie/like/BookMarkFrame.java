@@ -14,6 +14,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import movie.mypage.ImagePanel;
+import movie.mypage.MyPageFrame;
 
 import javax.swing.JTable;
 import javax.swing.UIManager;
@@ -21,6 +22,9 @@ import javax.swing.JSlider;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.Image;
 
 public class BookMarkFrame extends JFrame {
 	private JPanel contentPane;
@@ -46,7 +50,7 @@ public class BookMarkFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public BookMarkFrame() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\predi\\eclipse-workspace\\movie\\images\\movie-symbol-of-video-camera_icon-icons.com_72981.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("./images/movie-symbol-of-video-camera_icon-icons.com_72981.png"));
 		setTitle("\uB098 \uBA3C\uC800 \uC608\uB9E4");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1000, 600);
@@ -69,11 +73,27 @@ public class BookMarkFrame extends JFrame {
 		lblTitle.setFont(new Font("굴림", Font.BOLD, 35));
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		JLabel label = new JLabel("\uB9C8\uC774\uD398\uC774\uC9C0");
-		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setFont(new Font("굴림", Font.ITALIC, 25));
-		label.setBounds(5, 171, 213, 47);
-		panel_1.add(label);
+		JLabel lblmyPage = new JLabel("\uB9C8\uC774\uD398\uC774\uC9C0");
+		lblmyPage.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println("마이페이지로");
+				MyPageFrame myPage = new MyPageFrame();
+				myPage.setVisible(true);
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblmyPage.setForeground(Color.gray);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblmyPage.setForeground(Color.black);
+			}
+		});
+		lblmyPage.setHorizontalAlignment(SwingConstants.CENTER);
+		lblmyPage.setFont(new Font("굴림", Font.ITALIC, 25));
+		lblmyPage.setBounds(5, 171, 213, 47);
+		panel_1.add(lblmyPage);
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setLayout(null);
@@ -112,23 +132,44 @@ public class BookMarkFrame extends JFrame {
 		lblMP.setFont(new Font("맑은 고딕", Font.BOLD, 30));
 		lblMP.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		JPanel like1 = new JPanel();
-		like1.setBounds(285, 287, 115, 130);
-		ImageIcon frozen = new ImageIcon("./mages/poster/겨울왕국2.PNG");
-		contentPaneIg = new ImagePanel(frozen.getImage(), "겨울왕국2.PNG");
-		contentPaneIg.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPaneIg.setLayout(new BorderLayout(0, 0));
+//		JPanel like1 = new JPanel();
+		ImageIcon frozen = new ImageIcon("./images/poster/겨울왕국2.jpg");
+
+		ImagePanel like1 = new ImagePanel(frozen.getImage(), "겨울왕국2.jpg");
+		like1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				System.out.println("마우스클릭");
+			}
+		});
+
+		like1.setBounds(285, 287, 150, 215);
+		like1.setBorder(new EmptyBorder(5, 5, 5, 5));
+		like1.setLayout(new BorderLayout(0, 0));
 		panel.add(like1);
-		like1.setLayout(null);
+		//like1.setLayout(null);
 		
-		JPanel like2 = new JPanel();
-		like2.setBounds(468, 287, 115, 130);
-		ImageIcon ctDown = new ImageIcon("./mages/poster/카운트다운.PNG");
-		contentPaneIg = new ImagePanel(ctDown.getImage(), "카운트다운.PNG");
-		contentPaneIg.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPaneIg.setLayout(new BorderLayout(0, 0));
+	//	JPanel like2 = new JPanel();
+		
+		ImageIcon ctDown = new ImageIcon("./images/poster/카운트다운.jpg");
+	//	contentPaneIg = new ImagePanel(ctDown.getImage(), "카운트다운.PNG");
+		ImagePanel like2 = new ImagePanel(ctDown.getImage(), "카운트다운.jpg");
+		
+		like2.setBounds(520, 287, 150, 213);
+		like2.setBorder(new EmptyBorder(5, 5, 5, 5));
+		like2.setLayout(new BorderLayout(0, 0));
 		panel.add(like2);
-		like2.setLayout(null);
+		//like2.setLayout(null);
+		
+		ImageIcon ford = new ImageIcon("./images/poster/포드v페라리.jpg");
+		
+		ImagePanel like3 = new ImagePanel(ford.getImage(), "포드v페라리.jpg");
+		
+		like3.setBounds(754, 287, 150, 214);
+		like3.setBorder(new EmptyBorder(5, 5, 5, 5));
+		like3.setLayout(new BorderLayout(0, 0));
+		panel.add(like3);
+		
 		
 		JLabel lblLike = new JLabel("\uC88B\uC544\uC694");
 		lblLike.setHorizontalAlignment(SwingConstants.CENTER);

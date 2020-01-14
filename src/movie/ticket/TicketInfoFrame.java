@@ -11,7 +11,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+
+import movie.mypage.MyPageFrame;
+
 import javax.swing.JTable;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class TicketInfoFrame extends JFrame {
 
@@ -37,7 +42,7 @@ public class TicketInfoFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public TicketInfoFrame() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\predi\\eclipse-workspace\\movie\\images\\movie-symbol-of-video-camera_icon-icons.com_72981.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("./images/movie-symbol-of-video-camera_icon-icons.com_72981.png"));
 		setTitle("\uB098 \uBA3C\uC800 \uC608\uB9E4");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1000, 600);
@@ -60,11 +65,27 @@ public class TicketInfoFrame extends JFrame {
 		lblTitle.setFont(new Font("±º∏≤", Font.BOLD, 35));
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		JLabel label = new JLabel("\uB9C8\uC774\uD398\uC774\uC9C0");
-		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setFont(new Font("±º∏≤", Font.ITALIC, 25));
-		label.setBounds(5, 171, 213, 47);
-		panel_1.add(label);
+		JLabel lblmyPage = new JLabel("\uB9C8\uC774\uD398\uC774\uC9C0");
+		lblmyPage.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println("∏∂¿Ã∆‰¿Ã¡ˆ∑Œ");
+				MyPageFrame myPage = new MyPageFrame();
+				myPage.setVisible(true);
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblmyPage.setForeground(Color.gray);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblmyPage.setForeground(Color.black);
+			}
+		});
+		lblmyPage.setHorizontalAlignment(SwingConstants.CENTER);
+		lblmyPage.setFont(new Font("±º∏≤", Font.ITALIC, 25));
+		lblmyPage.setBounds(5, 171, 213, 47);
+		panel_1.add(lblmyPage);
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setLayout(null);

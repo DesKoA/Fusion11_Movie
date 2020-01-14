@@ -238,7 +238,7 @@ public class MovieTicketingSeat extends JFrame {
 				});
 				seatBtnPanel.add(seatBtn[i][j]);
 			}
-		} 
+		}
         seatBtnPanel.setLayout(new GridLayout(10, 5, 5, 5));
         
         lblScreen = new JLabel("S c r e e n");
