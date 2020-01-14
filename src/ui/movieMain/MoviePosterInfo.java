@@ -84,14 +84,15 @@ public class MoviePosterInfo extends JDialog implements ActionListener {
 	private MovieInfo mv;
 	public static JLabel movPoter;
 
-	public void showMovie(int sel) {
-		cardMgr.show(movPoter, "mov" + sel);
-	}
+//	public void showMovie(int sel) {
+//		cardMgr.show(movPoter, "mov" + sel);
+//	}
 
 	public MoviePosterInfo(MovieInfo mv) {
+		
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(600, 150, 872, 746);
+		setBounds(600, 150, 828, 635);
 		//
 		setFocusable(true);
 		setFocusTraversalKeysEnabled(false);
@@ -102,6 +103,7 @@ public class MoviePosterInfo extends JDialog implements ActionListener {
 		contentPane.setLayout(new BorderLayout(0, 0));
 
 		JPanel panel = new JPanel();
+		FlowLayout flowLayout_2 = (FlowLayout) panel.getLayout();
 		panel.setBackground(Color.DARK_GRAY);
 		contentPane.add(panel, BorderLayout.NORTH);
 
@@ -220,19 +222,11 @@ public class MoviePosterInfo extends JDialog implements ActionListener {
 		panel_9.add(panel_10, BorderLayout.SOUTH);
 		// 포스터 화면
 		MovieDBManager db = new MovieDBManager();
-		// String imagePaths[] = { "./image/poster1/", "./image/poster2/",
-		// "./image/poster3/" };
-		ArrayList<MovieInfo> movlist = MovieMain.mf;
+		ArrayList<MovieInfo> movlist = MainFrame2.mf;
 		for (int i = 0; i < movlist.size(); i++) {
 			MovieInfo mf = movlist.get(i);
 			if (mv.getMovieNo() == i + 1)
 				if (i < 4) {
-//					icon = new ImageIcon(imagePaths[0]+mov.getMoviePoster());
-//					} else if (i < 8) {
-//						icon = new ImageIcon(imagePaths[1]+mov.getMoviePoster());
-//					} else if (i < 12) {
-//						icon = new ImageIcon(imagePaths[2]+mov.getMoviePoster());
-//					}
 					String strURL = mf.getMoviePoster();
 					URL url;
 					try {
@@ -271,12 +265,6 @@ public class MoviePosterInfo extends JDialog implements ActionListener {
 				}
 			movPoter = new JLabel(Icon);
 			
-//				public void paintComponent(Graphics g) {
-//					g.drawImage(Icon.getImage(), 0, 0, getWidth(), getHeight(), null);
-//					setOpaque(false); // 그림을 표시하세 설정, 투명하게 조절
-//					super.paintComponent(g);
-//				}
-//			};
 			panel_9.add(movPoter, BorderLayout.WEST);
 			cardMgr = new CardLayout(140, 0);
 			movPoter.setLayout(cardMgr);
@@ -426,7 +414,7 @@ public class MoviePosterInfo extends JDialog implements ActionListener {
 			panel_27.add(btnPotoRight);
 			btnPotoRight.addActionListener(this);
 
-			JLabel lblNewLabel_3 = new JLabel("                                                                   ");
+			JLabel lblNewLabel_3 = new JLabel("                                                                          ");
 			lblNewLabel_3.setHorizontalAlignment(SwingConstants.LEFT);
 			lblNewLabel_3.setBackground(Color.DARK_GRAY);
 			panel_27.add(lblNewLabel_3);

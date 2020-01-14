@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import data.MovieInfo;
 import db.util.OracleDBUtil;
+import ui.movieMain.MainFrame2;
 
 public class MovieDBManager {
 //	public static final String USER = "java";
@@ -94,8 +95,31 @@ public class MovieDBManager {
 		}
 		return null;
 	}
-	// 영화 평점 조회
-		public String[] movie_selectMovieRating() {
+	//영화 평점 조회
+	public ArrayList<MovieInfo> movie_selectMovieRating() {
+		if(con != null) {
+			String sql = "select * from movie_info order by movie_rating desc";
+				try {
+					Statement stmt = con.createStatement();
+					ResultSet rs = stmt.executeQuery(sql);
+					ArrayList<MovieInfo> mvList = new ArrayList<>();
+					while (rs.next()) {
+						MovieInfo tp = new MovieInfo(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
+								rs.getString(5), rs.getInt(6), rs.getFloat(7), rs.getString(8), rs.getString(9),
+								rs.getString(10), rs.getInt(11));
+								mvList.add(tp);	
+					}
+					return mvList;
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			} else {
+				System.out.println("DB 통신 오류");
+			}
+			return null;
+	}
+	// 영화 TOP3 평점 조회
+		public String[] movie_selectMovieTop3Rating() {
 			if(con != null) {
 				String sql = "select movie_poster from movie_info order by movie_rating desc";
 				String countSql = "select count(movie_poster) from movie_info";
@@ -108,8 +132,22 @@ public class MovieDBManager {
 							String[] mvRList = new String[count];
 							ResultSet rs2 = stmt.executeQuery(sql);
 						int i = 0;
+						//MainFrame2.TOP3mf.clear();
 						while (i < 3 && rs2.next()) {
-							mvRList[i++] = rs2.getString(1);
+							mvRList[i++] = rs2.getString(1);// movie_poster
+//							int movieNo = rs.getInt("movie_no");
+//							String movieTitle = rs.getString("movie_title");
+//							String moviePoster = rs.getString("movie_poster");
+//							String movieTrailer = rs.getString("movie_trailer");
+//							String movieContent = rs.getString("movie_content");
+//							int movieTimes = rs.getInt("movie_time");
+//							float movieRating = rs.getFloat("movie_rating");
+//							String movieGenre = rs.getString("movie_genre");
+//							String movieDirector = rs.getString("movie_director");
+//							String movieActors = rs.getString("movie_actors");
+//							int movieGrade = rs.getInt("movie_grade");
+//							MovieInfo e = new MovieInfo(movieNo, movieTitle, moviePoster, movieTrailer, movieContent, movieTimes, movieRating, movieGenre, movieDirector, movieActors, movieGrade);
+//							MainFrame2.TOP3mf.add(e);
 						}
 						return mvRList;
 					} catch (SQLException e) {
