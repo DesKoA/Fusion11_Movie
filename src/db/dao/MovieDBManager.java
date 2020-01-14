@@ -94,6 +94,32 @@ public class MovieDBManager {
 		}
 		return null;
 	}
+	// 영화 평점 조회
+		public String[] movie_selectMovieRating() {
+			if(con != null) {
+				String sql = "select movie_poster from movie_info order by movie_rating desc";
+				String countSql = "select count(movie_poster) from movie_info";
+					try {
+						Statement stmt = con.createStatement();
+						ResultSet rs = stmt.executeQuery(countSql);
+						int count = 0;
+						if (rs.next())
+							count = rs.getInt(1);
+							String[] mvRList = new String[count];
+							ResultSet rs2 = stmt.executeQuery(sql);
+						int i = 0;
+						while (i < 3 && rs2.next()) {
+							mvRList[i++] = rs2.getString(1);
+						}
+						return mvRList;
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				} else {
+					System.out.println("DB 통신 오류");
+				}
+				return null;
+		}
 	// 영화 제목 출력 true면 평점 false면 가나다순
 	public String[] movie_selectAllTitle(boolean b) {
 		if (con != null) {
