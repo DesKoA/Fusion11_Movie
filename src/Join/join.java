@@ -56,7 +56,6 @@ public class join extends JFrame {
 	private JPanel panel_2;
 	private JLabel lblStatus;
 	private JTextField phone1st;
-	private JTextField emailAddress;
 	/**
 	 * Launch the application.
 	 */
@@ -152,7 +151,7 @@ public class join extends JFrame {
      //   File file = new File("C:\\Users\\alfo4-11\\Desktop\\1차 프로젝트\\티켓보라색.png");
 		ImageIcon ic = new ImageIcon(
 //		final String ic = 
-				".\\image\\티켓보라색.png");
+				".\\image\\티켓보라색1.png");
 				
 				JPanel centens = new JPanel() {
 			   public void paintComponent(Graphics g) {
@@ -203,10 +202,18 @@ public class join extends JFrame {
 			}
 		});
  */
-		canel.setBackground(new Color(123, 104, 238));
 		
-		canel.setBounds(243, 331, 90, 23);
-		centens.add(canel);
+		JLabel id = new JLabel("\uC544\uC774\uB514");
+		id.setBounds(141, 38, 140, 25);
+		centens.add(id);
+		id.setFont(new Font("한컴돋움", Font.PLAIN, 20));
+		
+				
+				idEnter = new JTextField();
+				idEnter.setBounds(151, 75, 116, 25);
+				centens.add(idEnter);
+				idEnter.setText("\uC544\uC774\uB514 \uC785\uB825");
+				idEnter.setColumns(10);
 		//?? frame.getContentPane().add(canel); 
 		
 		JButton pwCheck = new JButton("\uC911\uBCF5\uD655\uC778");
@@ -216,43 +223,15 @@ public class join extends JFrame {
 		centens.add(pwCheck);
 		pwCheck.setBorderPainted(false);
 		
-		JLabel emailWhelk = new JLabel("  @");
-		emailWhelk.setBounds(497, 75, 24, 21);
-		centens.add(emailWhelk);
+		JLabel email = new JLabel("\uC774\uBA54\uC77C");
+		email.setBounds(391, 38, 140, 25);
+		centens.add(email);
+		email.setFont(new Font("한컴돋움", Font.PLAIN, 20));
 		
-		JButton OKButton = new JButton("\uB4F1\uB85D\uD558\uAE30");
-		OKButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		OKButton.setBounds(434, 331, 97, 23);
-		centens.add(OKButton);
-		OKButton.setOpaque(true); //투명화
-		OKButton.setForeground(UIManager.getColor("CheckBox.shadow"));
-		OKButton.setBackground(new Color(123, 104, 238));
-		
-		JLabel yymmdd = new JLabel("\uC0DD\uB144\uC6D4\uC77C");
-		yymmdd.setBounds(141, 261, 140, 25);
-		centens.add(yymmdd);
-		yymmdd.setFont(new Font("한컴돋움", Font.PLAIN, 20));
-		
-		phoneMid = new JTextField();
-		phoneMid.setBounds(477, 296, 54, 21);
-		centens.add(phoneMid);
-		phoneMid.setColumns(4);
-		
-		phoneEnd = new JTextField();
-		phoneEnd.setBounds(546, 296, 54, 21);
-		centens.add(phoneEnd);
-		phoneEnd.setColumns(4);
-		
-		JLabel _2 = new JLabel("   -");
-		_2.setBounds(527, 300, 18, 15);
-		centens.add(_2);
-		
-		JLabel _1 = new JLabel("   -");
-		_1.setBounds(453, 298, 18, 18);
-		centens.add(_1);
+		emailField = new JTextField();
+		emailField.setBounds(401, 75, 199, 25);
+		centens.add(emailField);
+		emailField.setColumns(10);
 		
 		JLabel pw = new JLabel("\uBE44\uBC00\uBC88\uD638");
 		pw.setBounds(141, 159, 140, 25);
@@ -271,51 +250,14 @@ public class join extends JFrame {
 			}
 		});
 		pwfirst.setColumns(8);
-		pwfirst.setBounds(151, 194, 116, 21);
+		pwfirst.setBounds(151, 194, 116, 25);
 		centens.add(pwfirst);
 		pwfirst.setColumns(10);
-
-	//	pwFirst.setForeground(Color.LIGHT_GRAY);
-	//	pwFirst.setFont(new Font("굴림", Font.BOLD, 16));
-
 		
-		pwpwField = new JPasswordField();
-		pwpwField.setBounds(401, 194, 116, 21);
-		centens.add(pwpwField);
-		pwpwField.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				pwpwField.setBackground(Color.yellow);
-				String pw1 = new String(pwfirst.getPassword());
-				System.out.println("pw1: " + pw1);
-				if (pw1.isEmpty()) {
-					lblStatus.setForeground(Color.RED);
-				//	lblStatus.setText("첫번째 암호 입력하세요!");
-					pwfirst.requestFocusInWindow();
-				}
-			}
-			@Override
-			public void focusLost(FocusEvent e) {
-				pwpwField.setBackground(Color.white);				
-				String pw1 = new String(pwfirst.getPassword());
-				String pw2 = new String(pwpwField.getPassword());
-				System.out.println("pw2: " + pw2);
-				if (pw2.isEmpty()) {
-					lblStatus.setForeground(Color.RED);
-			//		lblStatus.setText("두번째 암호 입력하세요!");
-				} else {
-					// 4자 길이?
-					if( pw1.equals(pw2) ) {
-						lblStatus.setForeground(Color.BLUE);
-						lblStatus.setText("암호 일치");
-					} else {
-						lblStatus.setForeground(Color.RED);
-						lblStatus.setText("암호 불일치!");
-					}
-				}
-			}
-		});
-			
+		lblStatus = new JLabel("");
+		lblStatus.setBounds(116, 237, 148, 15);
+		centens.add(lblStatus);
+		
 //		pwpwField = new JTextField();
 //		pwpwField.setBounds(364, 195, 116, 21);
 //		centens.add(pwpwField);
@@ -326,66 +268,109 @@ public class join extends JFrame {
 		centens.add(pwpw);
 		pwpw.setFont(new Font("한컴돋움", Font.PLAIN, 20));
 		
-		JLabel phone = new JLabel("\uC804\uD654\uBC88\uD638");
-		phone.setBounds(387, 261, 140, 25);
-		centens.add(phone);
-		phone.setFont(new Font("한컴돋움", Font.PLAIN, 20));
-
+			//	pwFirst.setForeground(Color.LIGHT_GRAY);
+			//	pwFirst.setFont(new Font("굴림", Font.BOLD, 16));
 		
-		idEnter = new JTextField();
-		idEnter.setBounds(151, 75, 116, 21);
-		centens.add(idEnter);
-		idEnter.setText("\uC544\uC774\uB514 \uC785\uB825");
-		idEnter.setColumns(10);
+				
+				pwpwField = new JPasswordField();
+				pwpwField.setBounds(401, 194, 116, 25);
+				centens.add(pwpwField);
+				pwpwField.addFocusListener(new FocusAdapter() {
+					@Override
+					public void focusGained(FocusEvent e) {
+						pwpwField.setBackground(Color.yellow);
+						String pw1 = new String(pwfirst.getPassword());
+						System.out.println("pw1: " + pw1);
+						if (pw1.isEmpty()) {
+							lblStatus.setForeground(Color.RED);
+						//	lblStatus.setText("첫번째 암호 입력하세요!");
+							pwfirst.requestFocusInWindow();
+						}
+					}
+					@Override
+					public void focusLost(FocusEvent e) {
+						pwpwField.setBackground(Color.white);				
+						String pw1 = new String(pwfirst.getPassword());
+						String pw2 = new String(pwpwField.getPassword());
+						System.out.println("pw2: " + pw2);
+						if (pw2.isEmpty()) {
+							lblStatus.setForeground(Color.RED);
+					//		lblStatus.setText("두번째 암호 입력하세요!");
+						} else {
+							// 4자 길이?
+							if( pw1.equals(pw2) ) {
+								lblStatus.setForeground(Color.BLUE);
+								lblStatus.setText("암호 일치");
+							} else {
+								lblStatus.setForeground(Color.RED);
+								lblStatus.setText("암호 불일치!");
+							}
+						}
+					}
+				});
 		
-		emailField = new JTextField();
-		emailField.setBounds(401, 75, 97, 21);
-		centens.add(emailField);
-		emailField.setColumns(10);
-		
-		JLabel email = new JLabel("\uC774\uBA54\uC77C");
-		email.setBounds(391, 38, 140, 25);
-		centens.add(email);
-		email.setFont(new Font("한컴돋움", Font.PLAIN, 20));
-		
-		JLabel id = new JLabel("\uC544\uC774\uB514");
-		id.setBounds(141, 38, 140, 25);
-		centens.add(id);
-		id.setFont(new Font("한컴돋움", Font.PLAIN, 20));
-		
-		JComboBox emailCombo = new JComboBox();
-		emailCombo.setModel(new DefaultComboBoxModel(new String[] {"naver.com", "gmail.com"}));
-		emailCombo.setBounds(491, 103, 109, 21);
-		centens.add(emailCombo);
-		
-		JSpinner mm = new JSpinner();
-		mm.setModel(new SpinnerNumberModel(6, 1, 12, 1));
-		mm.setBounds(209, 299, 40, 22);
-		centens.add(mm);
+		JLabel yymmdd = new JLabel("\uC0DD\uB144\uC6D4\uC77C");
+		yymmdd.setBounds(141, 261, 140, 25);
+		centens.add(yymmdd);
+		yymmdd.setFont(new Font("한컴돋움", Font.PLAIN, 20));
 		
 		JSpinner yy = new JSpinner();
 		yy.setModel(new SpinnerListModel(new String[] {"1999", "1998", "1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990", "1989", "1988", "1987", "1986", "1985", "1984", "1983", "1982", "1981", "1980"}));
 		yy.setBounds(151, 299, 59, 22);
 		centens.add(yy);
 		
+		JSpinner mm = new JSpinner();
+		mm.setModel(new SpinnerNumberModel(6, 1, 12, 1));
+		mm.setBounds(209, 299, 40, 22);
+		centens.add(mm);
+		
 		JSpinner dd = new JSpinner();
 		dd.setModel(new SpinnerNumberModel(new Integer(15), null, null, new Integer(1)));
 		dd.setBounds(248, 299, 41, 22);
 		centens.add(dd);
 		
-		lblStatus = new JLabel("");
-		lblStatus.setBounds(116, 237, 148, 15);
-		centens.add(lblStatus);
+		JLabel phone = new JLabel("\uC804\uD654\uBC88\uD638");
+		phone.setBounds(387, 261, 140, 25);
+		centens.add(phone);
+		phone.setFont(new Font("한컴돋움", Font.PLAIN, 20));
 		
 		phone1st = new JTextField();
 		phone1st.setColumns(4);
 		phone1st.setBounds(402, 296, 54, 21);
 		centens.add(phone1st);
 		
-		emailAddress = new JTextField();
-		emailAddress.setColumns(10);
-		emailAddress.setBounds(520, 75, 97, 21);
-		centens.add(emailAddress);
+		JLabel _1 = new JLabel("   -");
+		_1.setBounds(453, 298, 18, 18);
+		centens.add(_1);
+		
+		phoneMid = new JTextField();
+		phoneMid.setBounds(477, 296, 54, 21);
+		centens.add(phoneMid);
+		phoneMid.setColumns(4);
+		
+		JLabel _2 = new JLabel("   -");
+		_2.setBounds(527, 300, 18, 15);
+		centens.add(_2);
+		
+		phoneEnd = new JTextField();
+		phoneEnd.setBounds(546, 296, 54, 21);
+		centens.add(phoneEnd);
+		phoneEnd.setColumns(4);
+		canel.setBackground(new Color(123, 104, 238));
+		
+		canel.setBounds(243, 331, 90, 23);
+		centens.add(canel);
+		
+		JButton OKButton = new JButton("\uB4F1\uB85D\uD558\uAE30");
+		OKButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		OKButton.setBounds(434, 331, 97, 23);
+		centens.add(OKButton);
+		OKButton.setOpaque(true); //투명화
+		OKButton.setForeground(UIManager.getColor("CheckBox.shadow"));
+		OKButton.setBackground(new Color(123, 104, 238));
 		
 
 	}

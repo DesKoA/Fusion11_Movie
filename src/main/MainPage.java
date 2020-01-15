@@ -1,6 +1,7 @@
 package main;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Graphics;
 
@@ -44,7 +45,7 @@ public class MainPage extends JFrame {
 	public MainPage() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1002, 537);
-		ImageIcon ic = new ImageIcon(".\\image\\시작화면투.png");
+		ImageIcon ic = new ImageIcon(".\\image\\startPage.png");
 		contentPane = new JPanel() {
 		   public void paintComponent(Graphics g) { //투명도 조절크기 조절
 			    g.drawImage(ic.getImage(), 0, 0, null);
@@ -63,13 +64,19 @@ public class MainPage extends JFrame {
 		panel.setLayout(null);
 		
 		JFormattedTextField formattedTextField_1 = new JFormattedTextField();
-		formattedTextField_1.setText("\uB098\uBA3C\uC800\uC608\uB9E4 \uC0AC\uC774\uD2B8\uC5D0 \uC624\uC2E0\uAC83\uC744 \uD658\uC601\uD569\uB2C8\uB2E4.");
-		formattedTextField_1.setBounds(132, 34, 637, 35);
+		formattedTextField_1.setFont(new Font("맑은 고딕", Font.BOLD, 26));
+		formattedTextField_1.setText(" \uB098 \uBA3C\uC800 \uC608\uB9E4  \uC0AC\uC774\uD2B8\uC5D0  \uC624\uC2E0\uAC83\uC744  \uD658\uC601\uD569\uB2C8\uB2E4.");
+		formattedTextField_1.setBounds(209, 19, 637, 61);
 		//formattedTextField_1.setVisible(false);
+		//배경에 알파 formattedTextField_1
+		formattedTextField_1.setOpaque(true);
+		formattedTextField_1.setBackground(new Color(0, 0, 0, 0)); //마지막알파 0이 투명하게
+		formattedTextField_1.setBorder(new EmptyBorder(0, 0, 0, 0)); //보더 없애기
+		formattedTextField_1.setFocusable(false);//커서 없애기
 		panel.add(formattedTextField_1);
 		
 		
-		ImageIcon icon = new ImageIcon(	".\\image\\movie-camera.png");
+		ImageIcon icon = new ImageIcon(	".\\image\\cam44.png");
 		JPanel moviepanel = new JPanel() {
 			   public void paintComponent(Graphics g) { //투명도 조절크기 조절
 				    g.drawImage(icon.getImage(), 0, 0, null);
@@ -78,7 +85,7 @@ public class MainPage extends JFrame {
 				   }
 			};
 
-		moviepanel.setBounds(33, 8, 89, 83);
+		moviepanel.setBounds(108, 10, 89, 83);
 		panel.add(moviepanel);
 		
 		JPanel panel_1 = new JPanel();
@@ -96,21 +103,21 @@ public class MainPage extends JFrame {
 				System.exit(0);
 			}
 		});
-		joinBtn.setBounds(90, 36, 192, 175);
+		joinBtn.setBounds(120, 36, 192, 175);
 		panel_1.add(joinBtn);
 		
-		JButton loginBtn = new JButton(new ImageIcon(".\\image\\초록.png"));
+		JButton loginBtn = new JButton(new ImageIcon(".\\image\\green.png"));
 		//loginBtn.setBorderPainted(false);//버튼 테두리 설정
 		loginBtn.setContentAreaFilled(false);//버튼 영역 배경 표시 설정
 		loginBtn.setFocusPainted(false);
-		loginBtn.setBounds(309, 36, 192, 175);
+		loginBtn.setBounds(347, 36, 192, 175);
 		panel_1.add(loginBtn);
 		
-		JButton nojoinBtn = new JButton(new ImageIcon(".\\image\\파랑.png"));
+		JButton nojoinBtn = new JButton(new ImageIcon(".\\image\\blue.png"));
 		//nojoinBtn.setBorderPainted(false);//버튼 테두리 설정
 		nojoinBtn.setContentAreaFilled(false);//버튼 영역 배경 표시 설정
 		nojoinBtn.setFocusPainted(false);
-		nojoinBtn.setBounds(531, 36, 192, 175);
+		nojoinBtn.setBounds(577, 36, 192, 175);
 		panel_1.add(nojoinBtn);
 		
 		JFormattedTextField formattedTextField = new JFormattedTextField();
