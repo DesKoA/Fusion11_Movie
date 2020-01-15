@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import MovieList.Info;
+import a.a.a.j;
 import data.MovieInfo;
 import db.dao.MovieDBManager;
 import db.util.OracleDBUtil;
@@ -23,8 +24,11 @@ import javax.swing.JRadioButton;
 import javax.swing.JButton;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Label;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import javax.swing.Timer;
+
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -42,7 +46,7 @@ public class MainFrame2 extends JFrame {
 	public static ArrayList<MovieInfo> TOP3mf;
 	private CardLayout cardMgr2;
 	private ImageIcon Icon;
-	//public static ArrayList<JLabel> movieLabelList;
+	// public static ArrayList<JLabel> movieLabelList;
 	public static ArrayList<JLabel> movieTOPList;
 	JPanel PotoList1;
 	JPanel PotoList2;
@@ -54,6 +58,9 @@ public class MainFrame2 extends JFrame {
 	JLabel movPoto2;
 	JLabel movPoto3;
 	private String[] movieR;
+	MovieInfo mv;
+	private int random1, random2, random3;
+	private ArrayList<JLabel> movt;
 
 	/**
 	 * Launch the application.
@@ -74,7 +81,30 @@ public class MainFrame2 extends JFrame {
 //	/**
 //	 * Create the frame.
 //	 */
-//	// 동적으로 구현된 공통 핸들러
+
+	// 트레일러
+	public JLabel MovieTrailer(JLabel jl, int random) {
+		random = (int) (Math.random() * 10);
+		for (int i = 0; i < mf.size(); i++) {
+			if (i == random) {
+				String strURL = mf.get(random).getMoviePoster();
+				URL url;
+				try {
+					url = new URL(strURL);
+					Image image = ImageIO.read(url);
+					Image changedImg = image.getScaledInstance(350, 500, Image.SCALE_SMOOTH);
+					Icon = new ImageIcon(changedImg);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				jl = new JLabel(Icon);
+			}
+			
+		}
+		return jl;
+	}
+	// 동적으로 구현된 공통 핸들러
 	public class MovieSelectHandle extends MouseAdapter {
 
 		@Override
@@ -107,6 +137,7 @@ public class MainFrame2 extends JFrame {
 //				super.mouseExited(e);
 		}
 	}
+
 	//
 	//
 	public MainFrame2() {
@@ -129,27 +160,31 @@ public class MainFrame2 extends JFrame {
 		paWest.add(panel, BorderLayout.SOUTH);
 		panel.setLayout(new BorderLayout(0, 0));
 		// TODO 라디오 버튼
-		JPanel pnRB = new JPanel();
-		pnRB.setBackground(Color.BLACK);
-		panel.add(pnRB, BorderLayout.CENTER);
-
-		JRadioButton rdBtn1 = new JRadioButton("");
-		rdBtn1.setBackground(Color.BLACK);
-		rdBtn1.setSelected(true);
-		pnRB.add(rdBtn1);
-
-		JRadioButton rdBtn2 = new JRadioButton("");
-		rdBtn2.setBackground(Color.BLACK);
-		pnRB.add(rdBtn2);
-
-		JRadioButton rdBtn3 = new JRadioButton("");
-		rdBtn3.setBackground(Color.BLACK);
-		pnRB.add(rdBtn3);
-
-		ButtonGroup rdBtnG = new ButtonGroup();
-		rdBtnG.add(rdBtn1);
-		rdBtnG.add(rdBtn2);
-		rdBtnG.add(rdBtn3);
+		JPanel pnMovieTrailer = new JPanel();
+		pnMovieTrailer.setBackground(Color.BLACK);
+		panel.add(pnMovieTrailer, BorderLayout.CENTER);
+		
+		JLabel lblMovieTrailer = new JLabel("MovieTrailer");
+		lblMovieTrailer.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+					mv = mf.get(random1);
+				Runtime runtime = Runtime.getRuntime();
+				String URL = mv.getMovieTrailer();
+				try {
+					// https://www.youtube.com/watch_popup?v=eSEs4B4H-EA
+					for (int i = 0; i < mf.size(); i++) {
+						if (mv.getMovieNo() == i + 1)
+							runtime.exec("C:/Program Files/Internet Explorer/iexplore.exe " + URL);
+					}
+				} catch (IOException ex) {
+					System.out.println("주소가 없거나 올바르지 않습니다.");
+				}
+			}
+		});
+		lblMovieTrailer.setForeground(Color.WHITE);
+		lblMovieTrailer.setFont(new Font("휴먼엑스포", Font.BOLD, 18));
+		pnMovieTrailer.add(lblMovieTrailer);
 		//
 		JButton btnWest = new JButton("\u25C0");
 		btnWest.addActionListener(new ActionListener() {
@@ -196,56 +231,29 @@ public class MainFrame2 extends JFrame {
 		paWest.add(pnMovie, BorderLayout.CENTER);
 		cardMgr = new CardLayout(0, 0);
 		pnMovie.setLayout(cardMgr);
-		JLabel rLabel[] = { movPoto1, movPoto2, movPoto3 };
-		int random = (int) (Math.random()*11);
-		int random2 = (int) (Math.random()*11);
-		int random3 = (int) (Math.random()*11);
-		for (int i = 0; i < mf.size(); i++) {
-			if (i == random && random != random2 && random != random3) {
-				String strURL = mf.get(random).getMoviePoster();
-				URL url;
-				try {
-					url = new URL(strURL);
-					Image image = ImageIO.read(url);
-					Image changedImg = image.getScaledInstance(350, 500, Image.SCALE_SMOOTH);
-					Icon = new ImageIcon(changedImg);
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				rLabel[0] = new JLabel(Icon);
-				pnMovie.add(rLabel[0]);
-			} else if (i == random2 && random2 != random && random2 != random3) {
-				String strURL = mf.get(random2).getMoviePoster();
-				URL url;
-				try {
-					url = new URL(strURL);
-					Image image = ImageIO.read(url);
-					Image changedImg = image.getScaledInstance(350, 500, Image.SCALE_SMOOTH);
-					Icon = new ImageIcon(changedImg);
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				rLabel[1] = new JLabel(Icon);
-				pnMovie.add(rLabel[1]);
-			} else if (i == random3 && random3 != random2 && random3 != random) {
-				String strURL = mf.get(random3).getMoviePoster();
-				URL url;
-				try {
-					url = new URL(strURL);
-					Image image = ImageIO.read(url);
-					Image changedImg = image.getScaledInstance(350, 500, Image.SCALE_SMOOTH);
-					Icon = new ImageIcon(changedImg);
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				rLabel[2] = new JLabel(Icon);
-				pnMovie.add(rLabel[2]);
-			}
-		}
 		
+		random1 = (int) (Math.random() * 10);
+		random2 = (int) (Math.random() * 10);
+		random3 = (int) (Math.random() * 10);
+
+		movPoto1 = new JLabel();
+		movPoto2 = new JLabel();
+		movPoto3 = new JLabel();
+		
+		//if(random1 != random2 && random1 != random3)	
+		pnMovie.add(MovieTrailer(movPoto1, random1), "1");
+		
+		//if(random2 != random1 && random2 != random3)
+		pnMovie.add(MovieTrailer(movPoto2, random1), "2");
+		
+		//if(random3 != random1 && random3 != random2)
+		pnMovie.add(MovieTrailer(movPoto3, random1), "3");
+		
+		movt = new ArrayList<JLabel>();
+		movt.add(movPoto1);
+		movt.add(movPoto2);
+		movt.add(movPoto3);
+		//
 		JPanel paEast = new JPanel();
 		contentPane.add(paEast, BorderLayout.CENTER);
 		paEast.setLayout(new BorderLayout(301, 0));
@@ -390,35 +398,35 @@ public class MainFrame2 extends JFrame {
 		pnTOP.add(pnMovieTOP3, BorderLayout.CENTER);
 		pnMovieTOP3.setLayout(new GridLayout(0, 3, 0, 0));
 		//
-		//TODO 평점 순 이미지 
+		// TODO 평점 순 이미지
 		TOP3mf = mMgr.movie_selectMovieRating();
 		movieR = mMgr.movie_selectMovieTop3Rating();
 		JLabel lblTOP1 = new JLabel();
 		JLabel lblTOP2 = new JLabel();
 		JLabel lblTOP3 = new JLabel();
-		JLabel[] lblTOPS = {lblTOP1,lblTOP2,lblTOP3};
+		JLabel[] lblTOPS = { lblTOP1, lblTOP2, lblTOP3 };
 		MovieSelectHandle movSelectHandle = new MovieSelectHandle();
 		for (int i = 0; i < lblTOPS.length; i++) {
-				String strURL = movieR[i];
-				URL url;
-				try {
-					url = new URL(strURL);
-					Image image = ImageIO.read(url);
-					Image changedImg = image.getScaledInstance(250, 230, Image.SCALE_SMOOTH);
-					Icon = new ImageIcon(changedImg);
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				//JLabel lblTOP1 = new JLabel(Icon);
-				
-					lblTOPS[i] = new JLabel(Icon);
-					lblTOPS[i].setHorizontalAlignment(SwingConstants.CENTER);
-					lblTOPS[i].setToolTipText("클릭시 예매 및 상세보기");
-					pnMovieTOP3.add(lblTOPS[i]);
-					movieTOPList.add(lblTOPS[i]);
-					lblTOPS[i].addMouseListener(movSelectHandle);
-				}
+			String strURL = movieR[i];
+			URL url;
+			try {
+				url = new URL(strURL);
+				Image image = ImageIO.read(url);
+				Image changedImg = image.getScaledInstance(250, 230, Image.SCALE_SMOOTH);
+				Icon = new ImageIcon(changedImg);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			// JLabel lblTOP1 = new JLabel(Icon);
+
+			lblTOPS[i] = new JLabel(Icon);
+			lblTOPS[i].setHorizontalAlignment(SwingConstants.CENTER);
+			lblTOPS[i].setToolTipText("클릭시 예매 및 상세보기");
+			pnMovieTOP3.add(lblTOPS[i]);
+			movieTOPList.add(lblTOPS[i]);
+			lblTOPS[i].addMouseListener(movSelectHandle);
+		}
 		OracleDBUtil.closeDB();
 	}
 

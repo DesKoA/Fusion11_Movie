@@ -2,21 +2,15 @@ package ui.movieMain;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import com.mysql.fabric.xmlrpc.base.Data;
-
-import data.Movie;
 import data.MovieInfo;
-import db.dao.MovieDBManager;
 import ui.ticketing.MovieTicketing;
 
 import java.awt.FlowLayout;
-import java.awt.Graphics;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -24,22 +18,17 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
 
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.TextField;
 
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.imageio.ImageIO;
-import javax.swing.DefaultComboBoxModel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -49,14 +38,10 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.geom.CubicCurve2D;
-import java.awt.Window.Type;
-import javax.swing.UIManager;
 import java.awt.Font;
 
 public class MoviePosterInfo extends JDialog implements ActionListener {
@@ -85,7 +70,7 @@ public class MoviePosterInfo extends JDialog implements ActionListener {
 	/**
 	 * Create the frame.
 	 */
-	private MovieInfo mv;
+	private JLabel movPoter;
 
 //	public void showMovie(int sel) {
 //		cardMgr.show(movPoter, "mov" + sel);
@@ -248,7 +233,6 @@ public class MoviePosterInfo extends JDialog implements ActionListener {
 		panel_10.setBackground(Color.BLACK);
 		panel_9.add(panel_10, BorderLayout.SOUTH);
 		// TODO 포스터 화면
-		MovieDBManager db = new MovieDBManager();
 		ArrayList<MovieInfo> movlist = MainFrame2.mf;
 		for (int i = 0; i < movlist.size(); i++) {
 			MovieInfo mf = movlist.get(i);
@@ -291,8 +275,8 @@ public class MoviePosterInfo extends JDialog implements ActionListener {
 					}
 				}
 		}
-		JLabel movPoter = new JLabel(Icon);
-
+		movPoter = new JLabel(Icon);
+		
 		panel_9.add(movPoter, BorderLayout.WEST);
 		cardMgr = new CardLayout(140, 0);
 		// movPoter.setLayout(cardMgr);
@@ -381,7 +365,7 @@ public class MoviePosterInfo extends JDialog implements ActionListener {
 		btnComments.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource().equals(btnComments)) {
-					String text = txtComments.getText();	
+					String text = txtComments.getText(); //DB받음	
 					SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
 					Date time = new Date();
 					String time1 = format1.format(time);
@@ -504,36 +488,7 @@ public class MoviePosterInfo extends JDialog implements ActionListener {
 		panel_32.add(poto, BorderLayout.CENTER);
 		poto.setLayout(new BorderLayout(0, 0));
 		//
-		addKeyListener(new KeyListener() {
-
-			@Override
-			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-				int code = e.getKeyCode();
-				switch (code) {
-				case KeyEvent.VK_LEFT:
-					cardMgr.previous(movPoter);
-					break;
-
-				case KeyEvent.VK_RIGHT:
-					cardMgr.next(movPoter);
-					break;
-				default:
-					break;
-				}
-			}
-
-			@Override
-			public void keyPressed(KeyEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-		});
+		
 		// 포토존
 		panel_31 = new JPanel();
 		poto.add(panel_31, BorderLayout.CENTER);
