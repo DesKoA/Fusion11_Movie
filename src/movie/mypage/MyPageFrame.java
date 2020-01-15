@@ -111,6 +111,17 @@ public class MyPageFrame extends JFrame {
 		lblMP.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 30));
 		lblMP.setHorizontalAlignment(SwingConstants.CENTER);
 		
+		JPanel panel_4 = new JPanel();
+		panel_4.setBounds(547, 0, 223, 107);
+		panel_2.add(panel_4);
+		panel_4.setBackground(Color.PINK);
+		panel_4.setLayout(null);
+		
+		JLabel lblMember = new JLabel("minmin\uB2D8");
+		lblMember.setBounds(31, 0, 192, 97);
+		panel_4.add(lblMember);
+		lblMember.setFont(new Font("±¼¸²", Font.PLAIN, 35));
+		
 		JPanel panel_5 = new JPanel();
 		panel_5.setBounds(223, 99, 770, 472);
 		panel.add(panel_5);
@@ -133,17 +144,6 @@ public class MyPageFrame extends JFrame {
 		panel_5.add(lblBookMark);
 		lblBookMark.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBookMark.setFont(new Font("±¼¸²", Font.PLAIN, 25));
-		
-		JPanel panel_4 = new JPanel();
-		panel_4.setBounds(12, 10, 223, 107);
-		panel_5.add(panel_4);
-		panel_4.setBackground(Color.PINK);
-		panel_4.setLayout(null);
-		
-		JLabel lblMember = new JLabel("minmin\uB2D8");
-		lblMember.setBounds(31, 0, 192, 105);
-		panel_4.add(lblMember);
-		lblMember.setFont(new Font("±¼¸²", Font.PLAIN, 35));
 		lblBookMark.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {

@@ -128,6 +128,17 @@ public class SeatFrame extends JFrame {
 		lblMP.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 30));
 		lblMP.setHorizontalAlignment(SwingConstants.CENTER);
 		
+		JPanel panel_5 = new JPanel();
+		panel_5.setLayout(null);
+		panel_5.setBackground(Color.PINK);
+		panel_5.setBounds(547, 0, 223, 107);
+		panel_2.add(panel_5);
+		
+		JLabel lblIoiooioi = new JLabel("minmin\uB2D8");
+		lblIoiooioi.setFont(new Font("±¼¸²", Font.PLAIN, 35));
+		lblIoiooioi.setBounds(31, 0, 192, 97);
+		panel_5.add(lblIoiooioi);
+		
 		JPanel panel_4 = new JPanel();
 		panel_4.setBounds(233, 110, 749, 451);
 		panel.add(panel_4);
@@ -156,6 +167,22 @@ public class SeatFrame extends JFrame {
 		JButton btnTime = new JButton("\uC2DC\uAC04 \uC124\uC815\uD558\uB7EC \uAC00\uAE30");
 		btnTime.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnTime.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				btnTime.setForeground(Color.green);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnTime.setForeground(Color.black);
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println("½Ã°£ ¼³Á¤");
+				SelectTImeDialog selTime = new SelectTImeDialog();
+				selTime.setVisible(true);
 			}
 		});
 		btnTime.setBounds(440, 174, 170, 73);

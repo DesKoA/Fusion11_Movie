@@ -132,6 +132,17 @@ public class BookMarkFrame extends JFrame {
 		lblMP.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 30));
 		lblMP.setHorizontalAlignment(SwingConstants.CENTER);
 		
+		JPanel panel_4 = new JPanel();
+		panel_4.setBounds(547, 0, 223, 107);
+		panel_2.add(panel_4);
+		panel_4.setLayout(null);
+		panel_4.setBackground(Color.PINK);
+		
+		JLabel label_3 = new JLabel("minmin\uB2D8");
+		label_3.setBounds(31, 0, 192, 97);
+		panel_4.add(label_3);
+		label_3.setFont(new Font("±¼¸²", Font.PLAIN, 35));
+		
 //		JPanel like1 = new JPanel();
 		ImageIcon frozen = new ImageIcon("./images/poster/°Ü¿ï¿Õ±¹2.jpg");
 
@@ -143,7 +154,7 @@ public class BookMarkFrame extends JFrame {
 			}
 		});
 
-		like1.setBounds(285, 287, 150, 215);
+		like1.setBounds(285, 223, 150, 215);
 		like1.setBorder(new EmptyBorder(5, 5, 5, 5));
 		like1.setLayout(new BorderLayout(0, 0));
 		panel.add(like1);
@@ -155,7 +166,7 @@ public class BookMarkFrame extends JFrame {
 	//	contentPaneIg = new ImagePanel(ctDown.getImage(), "Ä«¿îÆ®´Ù¿î.PNG");
 		ImagePanel like2 = new ImagePanel(ctDown.getImage(), "Ä«¿îÆ®´Ù¿î.jpg");
 		
-		like2.setBounds(520, 287, 150, 213);
+		like2.setBounds(518, 225, 150, 213);
 		like2.setBorder(new EmptyBorder(5, 5, 5, 5));
 		like2.setLayout(new BorderLayout(0, 0));
 		panel.add(like2);
@@ -165,7 +176,7 @@ public class BookMarkFrame extends JFrame {
 		
 		ImagePanel like3 = new ImagePanel(ford.getImage(), "Æ÷µåvÆä¶ó¸®.jpg");
 		
-		like3.setBounds(754, 287, 150, 214);
+		like3.setBounds(754, 223, 150, 214);
 		like3.setBorder(new EmptyBorder(5, 5, 5, 5));
 		like3.setLayout(new BorderLayout(0, 0));
 		panel.add(like3);
@@ -174,18 +185,7 @@ public class BookMarkFrame extends JFrame {
 		JLabel lblLike = new JLabel("\uC88B\uC544\uC694");
 		lblLike.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLike.setFont(new Font("±¼¸²", Font.PLAIN, 18));
-		lblLike.setBounds(285, 248, 68, 21);
+		lblLike.setBounds(285, 170, 68, 21);
 		panel.add(lblLike);
-		
-		JPanel panel_4 = new JPanel();
-		panel_4.setLayout(null);
-		panel_4.setBackground(Color.PINK);
-		panel_4.setBounds(250, 110, 223, 107);
-		panel.add(panel_4);
-		
-		JLabel label_3 = new JLabel("minmin\uB2D8");
-		label_3.setBounds(31, 0, 192, 105);
-		panel_4.add(label_3);
-		label_3.setFont(new Font("±¼¸²", Font.PLAIN, 35));
 	}
 }

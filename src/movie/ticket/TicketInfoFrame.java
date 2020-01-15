@@ -12,6 +12,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import movie.db.dao.ReserveDBMgr;
+import movie.db.util.OracleDBUtil;
 import movie.mypage.MyPageFrame;
 
 import javax.swing.JTable;
@@ -29,6 +31,7 @@ public class TicketInfoFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					OracleDBUtil.connectDB();
 					TicketInfoFrame frame = new TicketInfoFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -125,14 +128,22 @@ public class TicketInfoFrame extends JFrame {
 		lblMP.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JPanel panel_4 = new JPanel();
+		panel_4.setBounds(547, 0, 223, 107);
+		panel_2.add(panel_4);
 		panel_4.setLayout(null);
 		panel_4.setBackground(Color.PINK);
-		panel_4.setBounds(250, 110, 223, 107);
-		panel.add(panel_4);
 		
 		JLabel label_2 = new JLabel("minmin\uB2D8");
-		label_2.setFont(new Font("±¼¸²", Font.PLAIN, 35));
-		label_2.setBounds(31, 0, 192, 105);
+		label_2.setBounds(31, 0, 192, 97);
 		panel_4.add(label_2);
+		label_2.setFont(new Font("±¼¸²", Font.PLAIN, 35));
+		
+		JPanel panel_5 = new JPanel();
+		panel_5.setBounds(233, 110, 749, 451);
+		panel.add(panel_5);
+		panel_5.setLayout(null);
+		
+		ReserveDBMgr rvMgr = new ReserveDBMgr();
+		fff = rvMgr.selectSeat();
 	}
 }
