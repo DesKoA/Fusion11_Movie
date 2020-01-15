@@ -274,8 +274,6 @@ public class MovieTicketingSeat extends JFrame {
 				seatBtnPanel.add(seatBtn[i][j]);
 			}
 		}
-<<<<<<< HEAD
-=======
         
         for (int i = 0; i < lbList.length; i++) {
         	String tempStr = "ÁÂ¼®" + (i + 1);
@@ -291,7 +289,6 @@ public class MovieTicketingSeat extends JFrame {
         selectSeatInfo.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
         seatPanelLeft.add(selectSeatInfo);
         
->>>>>>> branch 'master' of https://github.com/DesKoA/MovieProject.git
         seatBtnPanel.setLayout(new GridLayout(10, 5, 5, 5));
         
         lblScreen = new JLabel("S c r e e n");

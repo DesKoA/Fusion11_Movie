@@ -7,6 +7,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
+
+import data.Member;
+/*import db.dao.MemberDBMgr;
+import ui.member.MemberPasswordMgr;*/
+
 import javax.swing.JDesktopPane;
 import javax.swing.JLabel;
 import javax.swing.JToggleButton;
@@ -14,6 +19,8 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.SystemColor;
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class loginpop extends JFrame {
 
@@ -64,8 +71,58 @@ public class loginpop extends JFrame {
 		panel.add(btnNewButton_1);
 		
 		JButton btnNewButton = new JButton("\uB85C\uADF8\uC778");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnNewButton.setBounds(152, 155, 97, 23);
 		panel.add(btnNewButton);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
+		
+		/*
+		 		btnLoginProc = new JButton("\uB85C\uADF8\uC778");
+		btnLoginProc.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if( LOGGED_IN == null ) {
+					String login = txtLogin.getText();
+					char[] pw = password.getPassword();
+					String strPW = new String(pw);
+					System.out.println(login+"__"+strPW);
+					
+					MemberDBMgr mbMgr = new MemberDBMgr();
+					Member foundMb = mbMgr.selectOneMember(login);
+					if( foundMb == null ) {
+						txtWelcome.setText(login+" 회원이 존재하지 않음!");
+					} else {
+						// db에 회원이 존재하면..
+						String resPW = 
+							MemberPasswordMgr.decrypt(foundMb.getPw());
+							// 암호화 패스워드 복원... XOR 단순방식
+						System.out.println("resPW = " + resPW);						
+						//if(strPW.equals(foundMb.getPw())) {
+						if(strPW.equals(resPW)) {
+							txtWelcome.setText(login+" 회원 로그인 성공!!");
+							LOGGED_IN = foundMb.getLogin();
+							frm.setTitle("MyCaffee :: "+ LOGGED_IN + "로그인 중");
+						} else {
+							txtWelcome.setText(login+" 회원 암호 불일치!");
+						}
+					}
+				} else {
+					txtWelcome.setText(LOGGED_IN+" 로그아웃 됨");
+					LOGGED_IN = null;
+					frm.setTitle("MyCaffee :: ");	
+					//txtLogin.requestFocus();
+				}
+				checkLOGGED_IN();
+			}
+		});
+		btnLoginProc.setFont(new Font("굴림", Font.BOLD, 18));
+		btnLoginProc.setBounds(184, 127, 146, 23);
+		panel.add(btnLoginProc);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		 */
 		
 		JLabel lblNewLabel = new JLabel("\uC544\uC774\uB514");
 		lblNewLabel.setBounds(12, 46, 57, 15);
