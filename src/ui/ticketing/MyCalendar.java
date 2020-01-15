@@ -482,7 +482,7 @@ public class MyCalendar extends JInternalFrame { // CalendarDataManager의 GUI + 
 						dateButs[i][j].setBorder(new LineBorder(Color.RED, 3));
 						mov.movieInfoDayName.setText(calYear + "년 " + (calMonth + 1) + "월 " + calDates[i][j] + "일");
 						// !!! InternalFrameDemo.dayLb.setText(String.valueOf(calDates[i][j])); !!!
-						mov.setTheaters();
+						if (mov.movTitle != null) mov.setTheaters();
 						mov.timePanel.setVisible(true);
 					} else {
 						dateButs[i][j].setBorderPainted(false);
