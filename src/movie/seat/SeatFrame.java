@@ -13,6 +13,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import movie.mypage.MyPageFrame;
+import ui.movieMain.MainFrame2;
 
 import javax.swing.JTable;
 import java.awt.GridLayout;
@@ -75,11 +76,27 @@ public class SeatFrame extends JFrame {
 		panel_3.setBounds(0, 99, 223, 472);
 		panel_1.add(panel_3);
 		
-		JLabel mvInfoP = new JLabel("\uC601\uD654\uC815\uBCF4 \uD398\uC774\uC9C0");
-		mvInfoP.setHorizontalAlignment(SwingConstants.CENTER);
-		mvInfoP.setFont(new Font("±¼¸²", Font.ITALIC, 25));
-		mvInfoP.setBounds(12, 21, 199, 30);
-		panel_3.add(mvInfoP);
+		JLabel lblMVInfoP = new JLabel("\uC601\uD654\uC815\uBCF4 \uD398\uC774\uC9C0");
+		lblMVInfoP.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				MainFrame2 mf2 = new MainFrame2();
+				mf2.setSize(1000, 600);
+				mf2.setVisible(true);
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblMVInfoP.setForeground(Color.gray);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblMVInfoP.setForeground(Color.black);
+			}
+		});
+		lblMVInfoP.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMVInfoP.setFont(new Font("±¼¸²", Font.ITALIC, 25));
+		lblMVInfoP.setBounds(12, 21, 199, 30);
+		panel_3.add(lblMVInfoP);
 		
 		JLabel logOut = new JLabel("\uB85C\uADF8\uC544\uC6C3");
 		logOut.setHorizontalAlignment(SwingConstants.CENTER);

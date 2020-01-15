@@ -17,7 +17,7 @@ public class ReserveDBMgr {
 		this.con = OracleDBUtil.con;
 	}
 	
-	public ArrayList<Reserve1> () {
+	public ArrayList<Reserve1> reveResult() {
 		
 		Member ID = new Member();
 		ID.setMemberID("minmin");
