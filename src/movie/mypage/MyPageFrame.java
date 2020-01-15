@@ -76,6 +76,12 @@ public class MyPageFrame extends JFrame {
 		panel_3.setLayout(null);
 		
 		JLabel lblMVInfoP = new JLabel("\uC601\uD654\uC815\uBCF4 \uD398\uC774\uC9C0");
+		lblMVInfoP.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+			}
+		});
 		lblMVInfoP.setBounds(12, 21, 199, 30);
 		panel_3.add(lblMVInfoP);
 		lblMVInfoP.setFont(new Font("±¼¸²", Font.ITALIC, 25));

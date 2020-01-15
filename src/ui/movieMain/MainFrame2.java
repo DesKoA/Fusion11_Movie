@@ -15,6 +15,7 @@ import a.a.a.j;
 import data.MovieInfo;
 import db.dao.MovieDBManager;
 import db.util.OracleDBUtil;
+import movie.mypage.MyPageFrame;
 
 import java.awt.FlowLayout;
 import java.awt.Color;
@@ -276,6 +277,14 @@ public class MainFrame2 extends JFrame {
 		pnInfoTitle.add(pnMyPageLogout, BorderLayout.WEST);
 
 		JLabel lblMyPage = new JLabel("MyPage");
+		lblMyPage.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				MyPageFrame mpf = new MyPageFrame();
+				mpf.setSize(1000, 600);
+				mpf.setVisible(true);
+			}
+		});
 		lblMyPage.setForeground(Color.WHITE);
 		lblMyPage.setFont(new Font("ÈÞ¸Õ¿¢½ºÆ÷", Font.BOLD, 20));
 		pnMyPageLogout.add(lblMyPage);

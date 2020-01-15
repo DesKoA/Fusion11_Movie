@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import data.MovieInfo;
+import movie.mypage.MyPageFrame;
 import ui.ticketing.MovieTicketing;
 
 import java.awt.FlowLayout;
@@ -112,6 +113,9 @@ public class MoviePosterInfo extends JDialog implements ActionListener {
 		btnMyPage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(contentPane, "MyPage로 이동합니다");
+				MyPageFrame mpf = new MyPageFrame();
+				mpf.setSize(1000, 600);
+				mpf.setVisible(true);
 			}
 		});
 		panel_6.add(btnMyPage);
