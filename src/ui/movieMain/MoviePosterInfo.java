@@ -67,11 +67,11 @@ public class MoviePosterInfo extends JDialog implements ActionListener {
 	private JPanel panel_27;
 	private JPanel panel_26;
 	private JLabel lblPotoList;
-	private JTextField textField;
+	private JTextField txtComments;
 	private JPanel panel_31;
 	private JButton btnPotoLeft;
 	private JButton btnPotoRight;
-	private JTextArea txtArea;
+	private JTextArea txtAreaComments;
 	public CardLayout cardMgr;
 
 	int l, l1;
@@ -102,14 +102,10 @@ public class MoviePosterInfo extends JDialog implements ActionListener {
 		setFocusTraversalKeysEnabled(false);
 		//
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.BLACK);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
-
-		JPanel panel = new JPanel();
-		FlowLayout flowLayout_2 = (FlowLayout) panel.getLayout();
-		panel.setBackground(Color.BLACK);
-		contentPane.add(panel, BorderLayout.NORTH);
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(Color.BLACK);
@@ -121,33 +117,33 @@ public class MoviePosterInfo extends JDialog implements ActionListener {
 		panel_6.setBackground(Color.BLACK);
 		panel_1.add(panel_6, BorderLayout.EAST);
 
-		JButton btnNewButton_3 = new JButton("MyPage");
-		btnNewButton_3.setBorderPainted(false); // 버튼 외각선을 없애준다.
-		btnNewButton_3.setContentAreaFilled(true); // 내용영역 채우기 않함
-		btnNewButton_3.setFocusPainted(false); // 선택 되었을때 생기는 테두리 사용안함
-		btnNewButton_3.setBackground(Color.BLACK);
-		btnNewButton_3.setForeground(Color.WHITE);
-		btnNewButton_3.setFont(new Font("휴먼엑스포", Font.BOLD, 18));
-		btnNewButton_3.addActionListener(new ActionListener() {
+		JButton btnMyPage = new JButton("MyPage");
+		btnMyPage.setBorderPainted(false); // 버튼 외각선을 없애준다.
+		btnMyPage.setContentAreaFilled(true); // 내용영역 채우기 않함
+		btnMyPage.setFocusPainted(false); // 선택 되었을때 생기는 테두리 사용안함
+		btnMyPage.setBackground(Color.BLACK);
+		btnMyPage.setForeground(Color.WHITE);
+		btnMyPage.setFont(new Font("휴먼엑스포", Font.BOLD, 18));
+		btnMyPage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(contentPane, "MyPage로 이동합니다");
 			}
 		});
-		panel_6.add(btnNewButton_3);
+		panel_6.add(btnMyPage);
 
-		JButton btnNewButton_4 = new JButton("Home");
-		btnNewButton_4.setBorderPainted(false); // 버튼 외각선을 없애준다.
-		btnNewButton_4.setContentAreaFilled(true); // 내용영역 채우기 않함
-		btnNewButton_4.setFocusPainted(false); // 선택 되었을때 생기는 테두리 사용안함
-		btnNewButton_4.setBackground(Color.BLACK);
-		btnNewButton_4.setForeground(Color.WHITE);
-		btnNewButton_4.setFont(new Font("휴먼엑스포", Font.BOLD, 18));
-		btnNewButton_4.addActionListener(new ActionListener() {
+		JButton btnHome = new JButton("Home");
+		btnHome.setBorderPainted(false); // 버튼 외각선을 없애준다.
+		btnHome.setContentAreaFilled(true); // 내용영역 채우기 않함
+		btnHome.setFocusPainted(false); // 선택 되었을때 생기는 테두리 사용안함
+		btnHome.setBackground(Color.BLACK);
+		btnHome.setForeground(Color.WHITE);
+		btnHome.setFont(new Font("휴먼엑스포", Font.BOLD, 18));
+		btnHome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 			}
 		});
-		panel_6.add(btnNewButton_4);
+		panel_6.add(btnHome);
 
 		JLabel lblNewLabel = new JLabel("");
 		panel_6.add(lblNewLabel);
@@ -155,14 +151,14 @@ public class MoviePosterInfo extends JDialog implements ActionListener {
 		JPanel panel_4 = new JPanel();
 		panel_4.setBackground(Color.BLACK);
 		panel_1.add(panel_4, BorderLayout.WEST);
-		JButton btnNewButton = new JButton("\uC608\uB9E4\uD558\uAE30");
-		btnNewButton.setBorderPainted(false); // 버튼 외각선을 없애준다.
-		btnNewButton.setContentAreaFilled(true); // 내용영역 채우기 않함
-		btnNewButton.setFocusPainted(false); // 선택 되었을때 생기는 테두리 사용안함
-		btnNewButton.setBackground(Color.BLACK);
-		btnNewButton.setForeground(Color.WHITE);
-		btnNewButton.setFont(new Font("휴먼엑스포", Font.BOLD, 18));
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnTicketing = new JButton("\uC608\uB9E4\uD558\uAE30");
+		btnTicketing.setBorderPainted(false); // 버튼 외각선을 없애준다.
+		btnTicketing.setContentAreaFilled(true); // 내용영역 채우기 않함
+		btnTicketing.setFocusPainted(false); // 선택 되었을때 생기는 테두리 사용안함
+		btnTicketing.setBackground(Color.BLACK);
+		btnTicketing.setForeground(Color.WHITE);
+		btnTicketing.setFont(new Font("휴먼엑스포", Font.BOLD, 18));
+		btnTicketing.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int result = JOptionPane.showConfirmDialog(contentPane, "예매 하시겠습니까?", "메시지",
 						JOptionPane.OK_CANCEL_OPTION, 1);
@@ -185,16 +181,16 @@ public class MoviePosterInfo extends JDialog implements ActionListener {
 
 		JLabel lblNewLabel_4 = new JLabel("");
 		panel_4.add(lblNewLabel_4);
-		panel_4.add(btnNewButton);
+		panel_4.add(btnTicketing);
 
-		JButton btnNewButton_1 = new JButton("\uBE60\uB978\uC608\uB9E4");
-		btnNewButton_1.setBorderPainted(false); // 버튼 외각선을 없애준다.
-		btnNewButton_1.setContentAreaFilled(true); // 내용영역 채우기 않함
-		btnNewButton_1.setFocusPainted(false); // 선택 되었을때 생기는 테두리 사용안함
-		btnNewButton_1.setBackground(Color.BLACK);
-		btnNewButton_1.setForeground(Color.WHITE);
-		btnNewButton_1.setFont(new Font("휴먼엑스포", Font.BOLD, 18));
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton btnQickTicketing = new JButton("\uBE60\uB978\uC608\uB9E4");
+		btnQickTicketing.setBorderPainted(false); // 버튼 외각선을 없애준다.
+		btnQickTicketing.setContentAreaFilled(true); // 내용영역 채우기 않함
+		btnQickTicketing.setFocusPainted(false); // 선택 되었을때 생기는 테두리 사용안함
+		btnQickTicketing.setBackground(Color.BLACK);
+		btnQickTicketing.setForeground(Color.WHITE);
+		btnQickTicketing.setFont(new Font("휴먼엑스포", Font.BOLD, 18));
+		btnQickTicketing.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 //				int result = JOptionPane.showConfirmDialog(contentPane, "예매를 확인하시겠습니까?", "예매하였습니다",
 				int result = JOptionPane.showConfirmDialog(contentPane, "빠른예매를 하시겠습니까?", "메시지",
@@ -206,16 +202,16 @@ public class MoviePosterInfo extends JDialog implements ActionListener {
 				}
 			}
 		});
-		panel_4.add(btnNewButton_1);
+		panel_4.add(btnQickTicketing);
 
-		JButton btnNewButton_2 = new JButton("\u2661 \uC88B\uC544\uC694");
-		btnNewButton_2.setBorderPainted(false); // 버튼 외각선을 없애준다.
-		btnNewButton_2.setContentAreaFilled(true); // 내용영역 채우기 않함
-		btnNewButton_2.setFocusPainted(false); // 선택 되었을때 생기는 테두리 사용안함
-		btnNewButton_2.setBackground(Color.BLACK);
-		btnNewButton_2.setForeground(Color.WHITE);
-		btnNewButton_2.setFont(new Font("휴먼엑스포", Font.BOLD, 18));
-		btnNewButton_2.addActionListener(new ActionListener() {
+		JButton btnFavor = new JButton("\u2661 \uC88B\uC544\uC694");
+		btnFavor.setBorderPainted(false); // 버튼 외각선을 없애준다.
+		btnFavor.setContentAreaFilled(true); // 내용영역 채우기 않함
+		btnFavor.setFocusPainted(false); // 선택 되었을때 생기는 테두리 사용안함
+		btnFavor.setBackground(Color.BLACK);
+		btnFavor.setForeground(Color.WHITE);
+		btnFavor.setFont(new Font("휴먼엑스포", Font.BOLD, 18));
+		btnFavor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int result = JOptionPane.showConfirmDialog(contentPane, "영화를 북마크 하시겠습니까?", "메시지",
 						JOptionPane.OK_CANCEL_OPTION, 1);
@@ -227,12 +223,7 @@ public class MoviePosterInfo extends JDialog implements ActionListener {
 			}
 
 		});
-		panel_4.add(btnNewButton_2);
-
-		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(Color.BLACK);
-		contentPane.add(panel_2, BorderLayout.WEST);
-		panel_2.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		panel_4.add(btnFavor);
 
 		JPanel panel_3 = new JPanel();
 		contentPane.add(panel_3, BorderLayout.CENTER);
@@ -252,6 +243,8 @@ public class MoviePosterInfo extends JDialog implements ActionListener {
 		panel_9.setLayout(new BorderLayout(0, 0));
 
 		JPanel panel_10 = new JPanel();
+		FlowLayout flowLayout_2 = (FlowLayout) panel_10.getLayout();
+		flowLayout_2.setVgap(3);
 		panel_10.setBackground(Color.BLACK);
 		panel_9.add(panel_10, BorderLayout.SOUTH);
 		// TODO 포스터 화면
@@ -313,6 +306,8 @@ public class MoviePosterInfo extends JDialog implements ActionListener {
 		panel_13.setLayout(new BorderLayout(0, 0));
 
 		JPanel panel_12 = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) panel_12.getLayout();
+		flowLayout.setHgap(3);
 		panel_12.setBackground(Color.BLACK);
 		panel_13.add(panel_12, BorderLayout.WEST);
 
@@ -347,59 +342,59 @@ public class MoviePosterInfo extends JDialog implements ActionListener {
 		panel_19.add(panel_17, BorderLayout.SOUTH);
 		panel_17.setLayout(new BorderLayout(0, 0));
 
-		textField = new JTextField();
-		textField.setFont(new Font("휴먼엑스포", Font.BOLD, 18));
-		textField.addFocusListener(new FocusAdapter() {
+		txtComments = new JTextField();
+		txtComments.setFont(new Font("휴먼엑스포", Font.BOLD, 18));
+		txtComments.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent arg0) {
-				textField.setForeground(Color.BLACK);
+				txtComments.setForeground(Color.BLACK);
 				String guide = "댓글 입력해주세요...";
-				String mbField = textField.getText();
+				String mbField = txtComments.getText();
 				if (guide.equals(mbField))
-					textField.setText("");
+					txtComments.setText("");
 			}
 
 			@Override
 			public void focusLost(FocusEvent e) {
 				String guide = "댓글 입력해주세요...";
-				String mbField = textField.getText();
+				String mbField = txtComments.getText();
 				if (mbField.isEmpty()) {
-					textField.setText(guide);
-					textField.setForeground(Color.LIGHT_GRAY);
+					txtComments.setText(guide);
+					txtComments.setForeground(Color.LIGHT_GRAY);
 				} else if (guide.equals(guide))
-					textField.setForeground(Color.LIGHT_GRAY);
+					txtComments.setForeground(Color.LIGHT_GRAY);
 			}
 		});
-		textField.setText("\uB313\uAE00 \uC785\uB825\uD574\uC8FC\uC138\uC694...");
-		textField.setForeground(Color.LIGHT_GRAY);
-		textField.setHorizontalAlignment(SwingConstants.LEFT);
-		panel_17.add(textField, BorderLayout.CENTER);
-		textField.setColumns(30);
+		txtComments.setText("\uB313\uAE00 \uC785\uB825\uD574\uC8FC\uC138\uC694...");
+		txtComments.setForeground(Color.LIGHT_GRAY);
+		txtComments.setHorizontalAlignment(SwingConstants.LEFT);
+		panel_17.add(txtComments, BorderLayout.CENTER);
+		txtComments.setColumns(30);
 
-		JButton btnNewButton_5 = new JButton("\uD55C\uC904\uD3C9\uC4F0\uAE30");
-		btnNewButton_5.setBorderPainted(false); // 버튼 외각선을 없애준다.
-		btnNewButton_5.setContentAreaFilled(true); // 내용영역 채우기 않함
-		btnNewButton_5.setFocusPainted(false); // 선택 되었을때 생기는 테두리 사용안함
-		btnNewButton_5.setBackground(Color.BLACK);
-		btnNewButton_5.setForeground(Color.WHITE);
-		btnNewButton_5.setFont(new Font("휴먼엑스포", Font.BOLD, 18));
-		btnNewButton_5.addActionListener(new ActionListener() {
+		JButton btnComments = new JButton("\uD55C\uC904\uD3C9\uC4F0\uAE30");
+		btnComments.setBorderPainted(false); // 버튼 외각선을 없애준다.
+		btnComments.setContentAreaFilled(true); // 내용영역 채우기 않함
+		btnComments.setFocusPainted(false); // 선택 되었을때 생기는 테두리 사용안함
+		btnComments.setBackground(Color.BLACK);
+		btnComments.setForeground(Color.WHITE);
+		btnComments.setFont(new Font("휴먼엑스포", Font.BOLD, 18));
+		btnComments.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (e.getSource().equals(btnNewButton_5)) {
-					String text = textField.getText();	
+				if (e.getSource().equals(btnComments)) {
+					String text = txtComments.getText();	
 					SimpleDateFormat format1 = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
 					Date time = new Date();
 					String time1 = format1.format(time);
-					txtArea.append(text +" "+ time1 + newline);	
-					textField.selectAll();
-					txtArea.setCaretPosition(txtArea.getDocument().getLength());
+					txtAreaComments.append(text +" "+ time1 + newline);	
+					txtComments.selectAll();
+					txtAreaComments.setCaretPosition(txtAreaComments.getDocument().getLength());
 				}
-				textField.setText("댓글 입력해주세요...");
-				textField.setForeground(Color.LIGHT_GRAY);
+				txtComments.setText("댓글 입력해주세요...");
+				txtComments.setForeground(Color.LIGHT_GRAY);
 			}
 
 		});
-		panel_17.add(btnNewButton_5, BorderLayout.EAST);
+		panel_17.add(btnComments, BorderLayout.EAST);
 
 		JPanel panel_20 = new JPanel();
 		panel_19.add(panel_20, BorderLayout.CENTER);
@@ -413,11 +408,11 @@ public class MoviePosterInfo extends JDialog implements ActionListener {
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		panel_21.add(scrollPane);
 
-		txtArea = new JTextArea();
-		txtArea.setFont(new Font("휴먼엑스포", Font.BOLD, 15));
-		txtArea.setEditable(false);
-		txtArea.setRows(4);
-		scrollPane.setViewportView(txtArea);
+		txtAreaComments = new JTextArea();
+		txtAreaComments.setFont(new Font("휴먼엑스포", Font.BOLD, 15));
+		txtAreaComments.setEditable(false);
+		txtAreaComments.setRows(4);
+		scrollPane.setViewportView(txtAreaComments);
 
 		JPanel panel_22 = new JPanel();
 		panel_20.add(panel_22, BorderLayout.CENTER);
@@ -429,10 +424,10 @@ public class MoviePosterInfo extends JDialog implements ActionListener {
 		flowLayout_3.setAlignment(FlowLayout.LEFT);
 		panel_22.add(panel_23, BorderLayout.SOUTH);
 
-		JLabel lblNewLabel_2 = new JLabel("\uD55C\uC904\uD3C9");
-		lblNewLabel_2.setForeground(Color.WHITE);
-		lblNewLabel_2.setFont(new Font("휴먼엑스포", Font.BOLD, 18));
-		panel_23.add(lblNewLabel_2);
+		JLabel lblComments = new JLabel("\uD55C\uC904\uD3C9");
+		lblComments.setForeground(Color.WHITE);
+		lblComments.setFont(new Font("휴먼엑스포", Font.BOLD, 18));
+		panel_23.add(lblComments);
 
 		JPanel panel_24 = new JPanel();
 		panel_22.add(panel_24, BorderLayout.CENTER);
@@ -543,10 +538,6 @@ public class MoviePosterInfo extends JDialog implements ActionListener {
 		panel_31 = new JPanel();
 		poto.add(panel_31, BorderLayout.CENTER);
 		panel_31.setLayout(new BorderLayout(0, 0));
-
-		JPanel panel_5 = new JPanel();
-		panel_5.setBackground(Color.BLACK);
-		contentPane.add(panel_5, BorderLayout.EAST);
 		// System.out.println(movlist);
 		for (int j = 0; j < movlist.size(); j++) {
 			// System.out.println(i);
@@ -573,7 +564,7 @@ public class MoviePosterInfo extends JDialog implements ActionListener {
 
 		for (int q = 0; q < imgIconList.length; q++) {
 			Image tempImg = imgIconList[q].getImage();
-			Image changeImg = tempImg.getScaledInstance(485, 220, Image.SCALE_SMOOTH);
+			Image changeImg = tempImg.getScaledInstance(485, 225, Image.SCALE_SMOOTH);
 			imgIconList[q] = new ImageIcon(changeImg);
 		}
 

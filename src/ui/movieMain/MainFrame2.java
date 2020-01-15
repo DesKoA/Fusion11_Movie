@@ -18,20 +18,16 @@ import db.util.OracleDBUtil;
 import java.awt.FlowLayout;
 import java.awt.Color;
 import java.awt.CardLayout;
-import java.awt.Window.Type;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.Label;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -180,7 +176,6 @@ public class MainFrame2 extends JFrame {
 		btnEast.setContentAreaFilled(true); // 내용영역 채우기 않함
 		btnEast.setFocusPainted(false); // 선택 되었을때 생기는 테두리 사용안함
 		panel.add(btnEast, BorderLayout.EAST);
-
 		JPanel pnMovieTitle = new JPanel();
 		pnMovieTitle.setBackground(Color.BLACK);
 		FlowLayout fl_pnMovieTitle = (FlowLayout) pnMovieTitle.getLayout();
@@ -202,10 +197,12 @@ public class MainFrame2 extends JFrame {
 		cardMgr = new CardLayout(0, 0);
 		pnMovie.setLayout(cardMgr);
 		JLabel rLabel[] = { movPoto1, movPoto2, movPoto3 };
+		int random = (int) (Math.random()*11);
+		int random2 = (int) (Math.random()*11);
+		int random3 = (int) (Math.random()*11);
 		for (int i = 0; i < mf.size(); i++) {
-
-			if (i == 2) {
-				String strURL = mf.get(i).getMoviePoster();
+			if (i == random && random != random2 && random != random3) {
+				String strURL = mf.get(random).getMoviePoster();
 				URL url;
 				try {
 					url = new URL(strURL);
@@ -218,8 +215,8 @@ public class MainFrame2 extends JFrame {
 				}
 				rLabel[0] = new JLabel(Icon);
 				pnMovie.add(rLabel[0]);
-			} else if (i == 6) {
-				String strURL = mf.get(i).getMoviePoster();
+			} else if (i == random2 && random2 != random && random2 != random3) {
+				String strURL = mf.get(random2).getMoviePoster();
 				URL url;
 				try {
 					url = new URL(strURL);
@@ -232,8 +229,8 @@ public class MainFrame2 extends JFrame {
 				}
 				rLabel[1] = new JLabel(Icon);
 				pnMovie.add(rLabel[1]);
-			} else if (i == 9) {
-				String strURL = mf.get(i).getMoviePoster();
+			} else if (i == random3 && random3 != random2 && random3 != random) {
+				String strURL = mf.get(random3).getMoviePoster();
 				URL url;
 				try {
 					url = new URL(strURL);
@@ -248,6 +245,7 @@ public class MainFrame2 extends JFrame {
 				pnMovie.add(rLabel[2]);
 			}
 		}
+		
 		JPanel paEast = new JPanel();
 		contentPane.add(paEast, BorderLayout.CENTER);
 		paEast.setLayout(new BorderLayout(301, 0));
@@ -329,41 +327,20 @@ public class MainFrame2 extends JFrame {
 		pnCardMovie.add(PotoList1, "card1");
 		PotoList1.setLayout(new GridLayout(0, 3, 0, 0));
 		//
-		JLabel post1 = new JLabel("New label");
-		JLabel post2 = new JLabel("New label");
-		JLabel post3 = new JLabel("New label");
-		//
 		PotoList2 = new JPanel();
 		pnCardMovie.add(PotoList2, "card2");
 		PotoList2.setLayout(new GridLayout(0, 3, 0, 0));
-		//
-		JLabel post4 = new JLabel("New label");
-		JLabel post5 = new JLabel("New label");
-		JLabel post6 = new JLabel("New label");
 		//
 		PotoList3 = new JPanel();
 		pnCardMovie.add(PotoList3, "card3");
 		PotoList3.setLayout(new GridLayout(0, 3, 0, 0));
 		//
-		JLabel post7 = new JLabel("New label");
-		JLabel post8 = new JLabel("New label");
-		JLabel post9 = new JLabel("New label");
-		//
 		PotoList4 = new JPanel();
 		pnCardMovie.add(PotoList4, "card4");
 		PotoList4.setLayout(new GridLayout(0, 3, 0, 0));
 		//
-		JLabel post10 = new JLabel("New label");
-		JLabel post11 = new JLabel("New label");
-		JLabel post12 = new JLabel("New label");
-		//
-		//JLabel l[] = { post1, post2, post3, post4, post5, post6, post7, post8, post9, post10, post11, post12 };
 		JPanel potoPanels[] = { PotoList1, PotoList2, PotoList3, PotoList4 };
-		
 		//
-		MovieInfo mo = new MovieInfo();
-		//
-		int index1 = 4;
 		for (int i = 0; i < mf.size(); i++) {
 			if (i < 3) {
 				MovieInfo mov = mf.get(i);
