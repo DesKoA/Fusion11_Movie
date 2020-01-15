@@ -72,7 +72,7 @@ public class SelectSeatDialog extends JDialog {
 	ArrayList<JButton> daylist;
 	
 	public SelectSeatDialog() {
-		final int seatLim = 36;
+		final int seatLim = 101;
 		daylist = new ArrayList<JButton>();
 		setIconImage(Toolkit.getDefaultToolkit().getImage("./icons/status_online.png"));
 		setTitle("\uBE60\uB978 \uC608\uB9E4 \uC88C\uC11D \uC124\uC815");
@@ -80,7 +80,7 @@ public class SelectSeatDialog extends JDialog {
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(new GridLayout(5, 7, 0, 0));
+		contentPanel.setLayout(new GridLayout(10, 10, 0, 0));
 		{
 //			@Override
 //			public void mouseClicked(MouseEvent e) {
