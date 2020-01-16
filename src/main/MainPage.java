@@ -10,6 +10,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Join.join;
+import Join.noJoin;
 import login.loginpop;
 
 import javax.swing.JButton;
@@ -103,8 +105,8 @@ public class MainPage extends JFrame {
 		joinBtn.setFocusPainted(false);
 		joinBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				loginpop login = new loginpop();
-				login.setVisible(true);
+				join join = new join();
+				join.setVisible(true);
 			}
 		});
 		joinBtn.setBounds(120, 36, 192, 175);
@@ -114,6 +116,12 @@ public class MainPage extends JFrame {
 		//loginBtn.setBorderPainted(false);//버튼 테두리 설정
 		loginBtn.setContentAreaFilled(false);//버튼 영역 배경 표시 설정
 		loginBtn.setFocusPainted(false);
+		loginBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				loginpop login = new loginpop();
+				login.setVisible(true);
+			}
+		});
 		loginBtn.setBounds(347, 36, 192, 175);
 		panel_1.add(loginBtn);
 		
@@ -121,6 +129,12 @@ public class MainPage extends JFrame {
 		//nojoinBtn.setBorderPainted(false);//버튼 테두리 설정
 		nojoinBtn.setContentAreaFilled(false);//버튼 영역 배경 표시 설정
 		nojoinBtn.setFocusPainted(false);
+		nojoinBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				noJoin nojoin = new noJoin();
+				nojoin.setVisible(true);
+			}
+		});
 		nojoinBtn.setBounds(577, 36, 192, 175);
 		panel_1.add(nojoinBtn);
 		

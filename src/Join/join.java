@@ -11,6 +11,8 @@ import javax.swing.border.EmptyBorder;
 import data.Member;
 import db.dao.MemberDBManager;
 import db.util.OracleDBUtil;
+import login.loginpop;
+import main.MainPage;
 
 import javax.swing.JDesktopPane;
 import javax.swing.JLabel;
@@ -108,10 +110,22 @@ public class join extends JFrame {
 		JButton button = new JButton("\uCC98\uC74C\uD654\uBA74\uC73C\uB85C");
 		button.setFont(new Font("굴림", Font.BOLD, 15));
 		button.setBackground(new Color(127, 109, 242));
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MainPage main = new MainPage();
+				main.setVisible(true);
+			}
+		});
 		button.setBounds(19, 50, 133, 35);
 		panel.add(button);
 		
 		JButton button_1 = new JButton("\uBE44\uD68C\uC6D0\uC608\uB9E4");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				noJoin nojoin = new noJoin();
+				nojoin.setVisible(true);
+			}
+		});
 		button_1.setFont(new Font("굴림", Font.BOLD, 15));
 		button_1.setBackground(new Color(127, 109, 242));
 		button_1.setBounds(19, 119, 133, 35);
@@ -367,7 +381,10 @@ public class join extends JFrame {
 				cal.set(Integer.parseInt(String.valueOf(yy.getValue())), Integer.parseInt(String.valueOf(mm.getValue())), Integer.parseInt(String.valueOf(dd.getValue())));
 				Date date = cal.getTime();
 				// 이름 추가해주세요
-				Member mb = new Member(idEnter.getText(), pwfirst.getText(), "test", emailField.getText(), new java.sql.Date(date.getTime()), phone1st.getText(), null);
+				String encPw = new String(pwfirst.getPassword());
+				encPw = loginpop.encrypt(encPw);
+				
+				Member mb = new Member(idEnter.getText(),encPw, "test", emailField.getText(), new java.sql.Date(date.getTime()), phone1st.getText(), null);
 				MemberDBManager mbMgr = new MemberDBManager();
 				mbMgr.insertNewMember(mb) ;
 			}

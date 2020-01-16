@@ -8,6 +8,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 
+import db.util.OracleDBUtil;
+
 import javax.swing.JDesktopPane;
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -47,9 +49,7 @@ public class noJoin extends JFrame {
 	private JPanel contentPane;
 	private JTextField pwField;
 	private JTextField pwpwField;
-	private JTextField phoneMid;
 	private JTextField emailField;
-	private JTextField phoneEnd;
 	private JLabel lblStatus;
 	private BufferedImage background;
 	private JPanel panel_2;
@@ -68,6 +68,7 @@ public class noJoin extends JFrame {
 				}
 			}
 		});
+		OracleDBUtil.closeDB();
 	}
 
 	/**
@@ -75,7 +76,7 @@ public class noJoin extends JFrame {
 	 */
 	
 	public noJoin() {
-		
+		OracleDBUtil.connectDB();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1002, 537);
 		contentPane = new JPanel();
@@ -98,6 +99,11 @@ public class noJoin extends JFrame {
 		panel.add(fstbutton);
 		
 		JButton nojoinBtn = new JButton("\uAC00\uC785\uD558\uAE30");
+		nojoinBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		nojoinBtn.setFont(new Font("±¼¸²", Font.BOLD, 15));
 		nojoinBtn.setBackground(new Color(219, 86, 114));
 		nojoinBtn.setBounds(19, 119, 133, 35);
@@ -290,26 +296,8 @@ public class noJoin extends JFrame {
 		
 		phone1st = new JTextField();
 		phone1st.setColumns(4);
-		phone1st.setBounds(401, 75, 54, 25);
+		phone1st.setBounds(401, 75, 175, 25);
 		centens.add(phone1st);
-		
-		JLabel _1 = new JLabel("   -");
-		_1.setBounds(452, 77, 18, 18);
-		centens.add(_1);
-		
-		phoneMid = new JTextField();
-		phoneMid.setBounds(476, 75, 54, 25);
-		centens.add(phoneMid);
-		phoneMid.setColumns(4);
-		
-		JLabel _2 = new JLabel("   -");
-		_2.setBounds(526, 79, 18, 15);
-		centens.add(_2);
-		
-		phoneEnd = new JTextField();
-		phoneEnd.setBounds(545, 75, 54, 25);
-		centens.add(phoneEnd);
-		phoneEnd.setColumns(4);
 		canel.setBackground(new Color(123, 104, 238));
 		
 		canel.setBounds(509, 287, 90, 23);
@@ -318,6 +306,9 @@ public class noJoin extends JFrame {
 		JButton OKButton = new JButton("\uC608\uB9E4\uD558\uAE30");
 		OKButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Calendar cal = Calendar.getInstance();
+				cal.set(Integer.parseInt(String.valueOf(yy.getValue())), Integer.parseInt(String.valueOf(mm.getValue())), Integer.parseInt(String.valueOf(dd.getValue())));
+				Date date = cal.getTime();
 			}
 		});
 		OKButton.setBounds(401, 287, 97, 23);

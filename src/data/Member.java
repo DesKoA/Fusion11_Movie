@@ -7,7 +7,7 @@ import java.sql.Date;
 
 public class Member {
 
-	private String memberID; // 아이디
+	private static String memberID; // 아이디
 	private String memberPW; // 비밀번호
 	// private int memberGrade;
 	private String memberName; // 이름
@@ -42,7 +42,7 @@ public class Member {
 		this.memberFavor = memberFavor;
 	}
 
-	public String getMemberID() {
+	public static String getMemberID() {
 		return memberID;
 	}
 

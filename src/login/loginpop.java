@@ -14,6 +14,7 @@ import db.dao.MemberDBManager;
 /*import db.dao.MemberDBMgr;
 import ui.member.MemberPasswordMgr;*/
 import db.util.OracleDBUtil;
+//import ui.member.MemberPasswordMgr;
 
 import javax.swing.JDesktopPane;
 import javax.swing.JLabel;
@@ -24,13 +25,14 @@ import java.awt.SystemColor;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class loginpop extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
-	protected JTextComponent txtWelcome;
+	protected JLabel txtWelcome;
 
 	/**
 	 * Launch the application.
@@ -63,9 +65,15 @@ public class loginpop extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(72, 32, 249, 178);
+		panel.setBounds(72, 32, 324, 178);
 		contentPane.add(panel);
 		panel.setLayout(null);
+		
+		txtWelcome = new JLabel("\uB098 \uBA3C\uC800 \uC608\uBA54");
+		txtWelcome.setFont(new Font("HY견고딕", Font.PLAIN, 15));
+		txtWelcome.setForeground(Color.LIGHT_GRAY);
+		txtWelcome.setBounds(171, 50, 126, 31);
+		panel.add(txtWelcome);
 		
 		JLabel label = new JLabel("\uB098 \uBA3C\uC800 \uC608\uBA54");
 		label.setFont(new Font("HY헤드라인M", Font.PLAIN, 20));
@@ -80,42 +88,28 @@ public class loginpop extends JFrame {
 		JButton btnNewButton = new JButton("\uB85C\uADF8\uC778");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if( LOGGED_IN == null ) {
-					String login = textField.getText();
-					char[] pw = ((JPasswordField) textField_1).getPassword();
-					String strPW = new String(pw);
-					System.out.println(login+"__"+strPW);
-					
-					Member mbMgr = new Member();
-					Member foundMb = mbMgr.selectOneMember(login);
-					if( foundMb == null ) {
-						txtWelcome.setText(login+" 회원이 존재하지 않음!");
-					} else {
-						// db에 회원이 존재하면..
-						String resPW = 
-							MemberPasswordMgr.decrypt(foundMb.getPw());
-							// 암호화 패스워드 복원... XOR 단순방식
-						System.out.println("resPW = " + resPW);						
-						//if(strPW.equals(foundMb.getPw())) {
-						if(strPW.equals(resPW)) {
-							txtWelcome.setText(login+" 회원 로그인 성공!!");
-							LOGGED_IN = foundMb.getLogin();
-							frm.setTitle("MyCaffee :: "+ LOGGED_IN + "로그인 중");
-						} else {
-							txtWelcome.setText(login+" 회원 암호 불일치!");
-						}
-					}
-				} else {
-					txtWelcome.setText(LOGGED_IN+" 로그아웃 됨");
-					LOGGED_IN = null;
-					frm.setTitle("MyCaffee :: ");	
-					//txtLogin.requestFocus();
-				}
-				checkLOGGED_IN();
-			
-				Member mb = new Member(textField.getText(), textField_1.getText(), "test", null, null, null, null);
+				String login = textField.getText();
+				char[] pw = ((JPasswordField) textField_1).getPassword();
+				String strPW = new String(pw);
+				System.out.println(login+"__"+strPW);
+				
 				MemberDBManager mbMgr = new MemberDBManager();
-				mbMgr.insertNewMember(mb) ;
+				Member foundMb = mbMgr.selectOneMember(login, strPW);
+				if( foundMb == null ) {
+					txtWelcome.setText(login+" 회원이 존재하지 않음!");
+				} else {
+					// db에 회원이 존재하면..
+					String resPW = loginpop.decrypt(foundMb.getMemberPW());
+						// 암호화 패스워드 복원... XOR 단순방식
+					System.out.println("resPW = " + resPW);						
+					//if(strPW.equals(foundMb.getPw())) {
+					if(strPW.equals(resPW)) {
+						txtWelcome.setText(login+" 회원 로그인 성공!!");
+						LOGGED_IN = Member.getMemberID();
+					} else {
+						txtWelcome.setText(login+" 회원 암호 불일치!");
+					}
+				}
 			}
 		});
 		btnNewButton.setBounds(152, 155, 97, 23);
@@ -187,19 +181,41 @@ public class loginpop extends JFrame {
 		textField_1.setColumns(10);
 	}
 	public static String LOGGED_IN;
-//	public static int LOGGED_IN_ID;
-	
-	public void checkLOGGED_IN() {
-		if( LOGGED_IN == null ) {
-			btnLoginProc.setText("로그인");
-			txtLogin.setEnabled(true);
-			password.setEnabled(true);
-			txtLogin.requestFocus();
-		} else {
-			btnLoginProc.setText("로그아웃");
-			txtLogin.setText("");
-			txtLogin.setEnabled(false);
-			password.setText("");
-			password.setEnabled(false);
+	public static int LOGGED_IN_ID;
+	public static String encrypt(String inPW) {
+		char xorPW[] = new char[4];
+		for (int i = 0; i < inPW.length(); i++) {
+			int xorC = xor(inPW.charAt(i));
+			xorPW[i] = (char) xorC;
 		}
+		return new String(xorPW);
+	}
+	public static String decrypt(String dbPW ) {
+		char xorPW[] = new char[4];
+		for (int i = 0; i < dbPW.length(); i++) {
+			int xorC = xor(dbPW.charAt(i));
+			xorPW[i] = (char) xorC;
+		}
+		return new String(xorPW);
+	}
+
+	private static int KEY = 0x98765432;
+	
+	public static int xor(int input) {
+		return input ^ KEY;
+	}	
+//	public void checkLOGGED_IN() {
+//		if( LOGGED_IN == null ) {
+//			btnLoginProc.setText("로그인");
+//			txtLogin.setEnabled(true);
+//			password.setEnabled(true);
+//			txtLogin.requestFocus();
+//		} else {
+//			btnLoginProc.setText("로그아웃");
+//			txtLogin.setText("");
+//			txtLogin.setEnabled(false);
+//			password.setText("");
+//			password.setEnabled(false);
+//		}
+//}
 }
