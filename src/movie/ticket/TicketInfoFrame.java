@@ -15,7 +15,7 @@ import javax.swing.border.EmptyBorder;
 import movie.db.dao.ReserveDBMgr;
 import movie.db.util.OracleDBUtil;
 import movie.mypage.MyPageFrame;
-import ui.movieMain.MainFrame2;
+import ui.movieMain.MovieMainFrame;
 
 import javax.swing.JTable;
 import java.awt.event.MouseAdapter;
@@ -101,7 +101,7 @@ public class TicketInfoFrame extends JFrame {
 		lblMVInfoP.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				MainFrame2 mf2 = new MainFrame2();
+				MovieMainFrame mf2 = new MovieMainFrame();
 				mf2.setSize(1000, 600);
 				mf2.setVisible(true);
 			}

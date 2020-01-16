@@ -44,6 +44,9 @@ import java.awt.event.FocusEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.Font;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 public class MoviePosterInfo extends JDialog implements ActionListener {
 	MoviePosterInfo dlg;
@@ -72,6 +75,7 @@ public class MoviePosterInfo extends JDialog implements ActionListener {
 	 * Create the frame.
 	 */
 	private JLabel movPoter;
+	private JTable table;
 
 //	public void showMovie(int sel) {
 //		cardMgr.show(movPoter, "mov" + sel);
@@ -221,11 +225,45 @@ public class MoviePosterInfo extends JDialog implements ActionListener {
 		JPanel panel_7 = new JPanel();
 		panel_3.add(panel_7, BorderLayout.SOUTH);
 		panel_7.setLayout(new BorderLayout(0, 0));
-
-		JPanel panel_8 = new JPanel();
-		FlowLayout flowLayout_1 = (FlowLayout) panel_8.getLayout();
-		flowLayout_1.setVgap(50);
-		panel_7.add(panel_8, BorderLayout.CENTER);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		panel_7.add(scrollPane_1, BorderLayout.NORTH);
+		
+		//TODO 영화정보 테이블\
+//		{"\uC81C\uBAA9", mv.getMovieTitle()}, // 제목
+//		{"\uC0C1\uC601\uB4F1\uAE09", mv.getMovieGrade()}, // 상영등급
+//		{"\uC7A5\uB974", mv.getMovieGenre()}, // 장르
+//		{"\uAC10\uB3C5", mv.getMovieDirector()}, // 감독
+//		{"\uC8FC\uC5F0/\uC870\uC5F0", mv.getMovieActors()}, // 주연/조연
+//		{"\uD3C9\uAC00\uC810\uC218", mv.getMovieRating()}, // 평가점수
+//		{"\uC0C1\uC601\uC2DC\uAC04", mv.getMovieTimes()}, // 상영시간
+//		{"\uC904\uAC70\uB9AC", mv.getMovieContent()}, // 줄거리
+		table = new JTable();
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+				{"\uC81C\uBAA9", mv.getMovieTitle()}, // 제목
+				{"\uC0C1\uC601\uB4F1\uAE09", mv.getMovieGrade()}, // 상영등급
+				{"\uC7A5\uB974", mv.getMovieGenre()}, // 장르
+				{"\uAC10\uB3C5", mv.getMovieDirector()}, // 감독
+				{"\uC8FC\uC5F0/\uC870\uC5F0", mv.getMovieActors()}, // 주연/조연
+				{"\uD3C9\uAC00\uC810\uC218", mv.getMovieRating()}, // 평가점수
+				{"\uC0C1\uC601\uC2DC\uAC04", mv.getMovieTimes()}, // 상영시간
+				{"\uC904\uAC70\uB9AC", mv.getMovieContent()}, // 줄거리
+			},
+			new String[] {
+				"영화", "정보"
+			}
+			
+		));
+//		table.setRowHeight(25); // 칼럼, 셀 , 행 높이 정하기
+//		table.getColumn().setPreferredWidth(30); // 칼럼 넓이 정하기
+//		table.getColumn("칼럼이름").setWidth(0); // 테이블 칼럽 숨기기, 안보이게 하기
+//		table.getColumn("칼럼이름").setMinWidth(0);
+//		table.getColumn("칼럼이름").setMaxWidth(0);
+//		table.setShowVerticalLines(false); // 테이블 선 안보이게 하기
+//		table.setShowHorizontalLines(false); // 테이블 선 안보이게 하기
+		//
+		panel_7.add(table, BorderLayout.SOUTH);
 
 		JPanel panel_9 = new JPanel();
 		panel_3.add(panel_9, BorderLayout.CENTER);
@@ -237,7 +275,7 @@ public class MoviePosterInfo extends JDialog implements ActionListener {
 		panel_10.setBackground(Color.BLACK);
 		panel_9.add(panel_10, BorderLayout.SOUTH);
 		// TODO 포스터 화면
-		ArrayList<MovieInfo> movlist = MainFrame2.mf;
+		ArrayList<MovieInfo> movlist = MovieMainFrame.mf;
 		for (int i = 0; i < movlist.size(); i++) {
 			MovieInfo mf = movlist.get(i);
 			if (mv.getMovieNo() == i + 1)

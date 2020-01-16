@@ -38,7 +38,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
-public class MainFrame2 extends JFrame {
+public class MovieMainFrame extends JFrame {
 
 	private JPanel contentPane;
 	private CardLayout cardMgr;
@@ -60,8 +60,7 @@ public class MainFrame2 extends JFrame {
 	JLabel movPoto3;
 	private String[] movieR;
 	MovieInfo mv;
-	private int random1, random2, random3;
-	private ArrayList<JLabel> movt;
+	private int random;
 
 	/**
 	 * Launch the application.
@@ -70,7 +69,7 @@ public class MainFrame2 extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MainFrame2 frame = new MainFrame2();
+					MovieMainFrame frame = new MovieMainFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -85,9 +84,8 @@ public class MainFrame2 extends JFrame {
 
 	// 트레일러
 	public JLabel MovieTrailer(JLabel jl, int random) {
-		random = (int) (Math.random() * 10);
-		for (int i = 0; i < mf.size(); i++) {
-			if (i == random) {
+		for (int i = random; i < mf.size(); i++) {
+			
 				String strURL = mf.get(random).getMoviePoster();
 				URL url;
 				try {
@@ -101,8 +99,6 @@ public class MainFrame2 extends JFrame {
 				}
 				jl = new JLabel(Icon);
 			}
-			
-		}
 		return jl;
 	}
 	// 동적으로 구현된 공통 핸들러
@@ -141,7 +137,7 @@ public class MainFrame2 extends JFrame {
 
 	//
 	//
-	public MainFrame2() {
+	public MovieMainFrame() {
 		OracleDBUtil.connectDB();
 		setResizable(false);
 		setTitle("\uB098\uBA3C\uC800\uC608\uB9E4");
@@ -169,7 +165,7 @@ public class MainFrame2 extends JFrame {
 		lblMovieTrailer.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-					mv = mf.get(random1);
+					mv = mf.get(random);
 				Runtime runtime = Runtime.getRuntime();
 				String URL = mv.getMovieTrailer();
 				try {
@@ -226,34 +222,28 @@ public class MainFrame2 extends JFrame {
 		// TODO 영화 카드레이아웃
 		mMgr = new MovieDBManager();
 		mf = mMgr.movieTitle_selectAll();
-		this.movieTOPList = new ArrayList<JLabel>();
+		movieTOPList = new ArrayList<JLabel>();
 
 		pnMovie = new JPanel();
 		paWest.add(pnMovie, BorderLayout.CENTER);
 		cardMgr = new CardLayout(0, 0);
 		pnMovie.setLayout(cardMgr);
-		
-		random1 = (int) (Math.random() * 10);
-		random2 = (int) (Math.random() * 10);
-		random3 = (int) (Math.random() * 10);
+		//TODO 랜덤으로 카드 뽑기
+		random = (int) (Math.random() * 10);
 
 		movPoto1 = new JLabel();
 		movPoto2 = new JLabel();
 		movPoto3 = new JLabel();
 		
 		//if(random1 != random2 && random1 != random3)	
-		pnMovie.add(MovieTrailer(movPoto1, random1), "1");
+		pnMovie.add(MovieTrailer(movPoto1, random), "1");
 		
 		//if(random2 != random1 && random2 != random3)
-		pnMovie.add(MovieTrailer(movPoto2, random1), "2");
+		pnMovie.add(MovieTrailer(movPoto2, random), "2");
 		
 		//if(random3 != random1 && random3 != random2)
-		pnMovie.add(MovieTrailer(movPoto3, random1), "3");
+		pnMovie.add(MovieTrailer(movPoto3, random), "3");
 		
-		movt = new ArrayList<JLabel>();
-		movt.add(movPoto1);
-		movt.add(movPoto2);
-		movt.add(movPoto3);
 		//
 		JPanel paEast = new JPanel();
 		contentPane.add(paEast, BorderLayout.CENTER);
@@ -436,7 +426,6 @@ public class MainFrame2 extends JFrame {
 			movieTOPList.add(lblTOPS[i]);
 			lblTOPS[i].addMouseListener(movSelectHandle);
 		}
-		OracleDBUtil.closeDB();
 	}
 
 }

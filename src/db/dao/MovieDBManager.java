@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 import data.MovieInfo;
 import db.util.OracleDBUtil;
-import ui.movieMain.MainFrame2;
+import ui.movieMain.MovieMainFrame;
 
 public class MovieDBManager {
 //	public static final String USER = "java";

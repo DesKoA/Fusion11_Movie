@@ -20,7 +20,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import data.MovieInfo;
-import ui.movieMain.MainFrame2;
+import ui.movieMain.MovieMainFrame;
 import ui.movieMain.MoviePosterInfo;
 
 import java.awt.Color;
@@ -54,7 +54,7 @@ public class Info extends JLabel {
 		lblPosterImage.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ArrayList<MovieInfo> mf = MainFrame2.mf;
+				ArrayList<MovieInfo> mf = MovieMainFrame.mf;
 				if(e.getSource() == lblPosterImage) {
 					for (int i = 0; i < mf.size(); i++) {
 						if(mo.getMovieNo() == i+1) {
