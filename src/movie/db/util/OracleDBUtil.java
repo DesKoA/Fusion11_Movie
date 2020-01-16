@@ -11,8 +11,8 @@ import java.util.Date;
 
 public class OracleDBUtil {
 	// util화 할때 properties 이용하여 설정할 예정
-			public static final String USER = "movie";
-			public static final String PW = "1230";
+			public static final String USER = "java";
+			public static final String PW = "1234";
 			public static final String URL
 				// 	= "jdbc:oracle:thin:@192.168.0.1:1521:xe"
 				//= "jdbc:oracle:thin:@127.0.0.1:1521:xe"
