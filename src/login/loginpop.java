@@ -33,7 +33,8 @@ public class loginpop extends JFrame {
 	private JTextField textField;
 	private JTextField textField_1;
 	protected JLabel txtWelcome;
-
+	public static String LOGGED_IN;
+	public static int LOGGED_IN_ID;
 	/**
 	 * Launch the application.
 	 */
@@ -180,8 +181,7 @@ public class loginpop extends JFrame {
 		panel.add(textField_1);
 		textField_1.setColumns(10);
 	}
-	public static String LOGGED_IN;
-	public static int LOGGED_IN_ID;
+
 	public static String encrypt(String inPW) {
 		char xorPW[] = new char[4];
 		for (int i = 0; i < inPW.length(); i++) {

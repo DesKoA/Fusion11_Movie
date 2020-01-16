@@ -96,7 +96,7 @@ public class MemberDBManager {
 		if( con != null ) // 접속 상태일때만... 
 		{
 			String sql = 
-				"select * from movie_members where login = ? and pw = ?";
+				"select * from movie_members where member_id = ? and member_pw = ?";
 			try {
 				PreparedStatement pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, login);
