@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ui.ticketing.test;
+package ui.admin;
 
 import javax.imageio.ImageIO;
 import javax.swing.AbstractListModel;
@@ -16,6 +16,7 @@ import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JToggleButton;
@@ -62,12 +63,16 @@ import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 
 /**
  *
  * @author alfo4-9
  */
-public class AdminTest extends JFrame {
+public class Admin extends JFrame {
 	public int adPersons;
 	public int stPersons;
 	public String movTitle;
@@ -91,8 +96,13 @@ public class AdminTest extends JFrame {
 	public Date movDate;
 	
 	public LinkedHashMap<String, ArrayList<String>> timeList;
+	public LinkedHashMap<String, String[]> timeHashList;
+	public ArrayList<String> timeArrayList;
+	public ArrayList<Integer> timeArrayWithOutList;
 	
-	public static AdminTest mov;
+	public ArrayList<String> hourList;
+	
+	public static Admin mov;
 	
 	public void setFrame() {
 		setBounds(0, 0, 500, 400);
@@ -123,7 +133,7 @@ public class AdminTest extends JFrame {
 	 * Creates new form MovieReservation
 	 */
 	
-	public AdminTest() {
+	public Admin() {
 		CalendarAdmin.mov = this;
 		initComponents();
 	}
@@ -133,6 +143,7 @@ public class AdminTest extends JFrame {
 		adPersons = 0;
 		stPersons = 0;
 		calFrame.showCal();
+		calFrame.cleanCal();
 		bg.clearSelection();
 		movieList.clearSelection();
 		bgAdult.clearSelection();
@@ -159,23 +170,46 @@ public class AdminTest extends JFrame {
 	}
 	
 	// DB¿¡¼­ ¹Þ¾Æ¿À±â
-	public void showTableDB() {
+	public void showTableDB(String scName) {
 		String[] header = { "Á¦¸ñ", "±ØÀå", "ÀÏÀÚ", "½ÃÀÛ", "Á¾·á"};
-		// select movie_title, screen_name, movie_date, movie_start, movie_end from movie_theaters where screen_name = '1°ü' and TO_CHAR(movie_date, 'YYYYMMDD')='20200124' order by screen_name, movie_start asc;
 		TheatersDBManager thMgr = new TheatersDBManager();
-		ArrayList<Theaters> thList = thMgr.selectOneMovie(movTitle);
+		movDate = new Date(calFrame.date.getTime());
+		ArrayList<Theaters> thList = thMgr.selectScNameInfo(scName, movDate);
 		Object[][] data = new Object[thList.size()][header.length];
-		for (int i = 0; i < thList.size(); i++) {
-			Theaters row = thList.get(i);
-			// data[i][0] 
+		if (thList.size() != 0) {
+			for (int i = 0; i < thList.size(); i++) {
+				Theaters row = thList.get(i);
+				data[i][0] = row.getMovieTitle();
+				data[i][1] = row.getScreenName();
+				data[i][2] = row.getMovieDate();
+				data[i][3] = row.getMovieStart();
+				data[i][4] = row.getMovieEnd();
+			}
+			DefaultTableModel dtm = new DefaultTableModel(data, header);
+			table.setModel(dtm);
+			table.getColumnModel().getColumn(0).setPreferredWidth(130);
+			table.getColumnModel().getColumn(1).setPreferredWidth(50);
+			table.getColumnModel().getColumn(2).setPreferredWidth(120);
+			table.getColumnModel().getColumn(3).setPreferredWidth(70);
+			table.getColumnModel().getColumn(4).setPreferredWidth(70);
+		} else if (thList.size() == 0) {
+			data = new Object[1][1];
+			data[0][0] = "¹èÁ¤ÁßÀÎ ¿µÈ­°¡ ¾øÀ½";
+			DefaultTableModel dtm = new DefaultTableModel(data, new String[] {"¹èÁ¤ÁßÀÎ ¿µÈ­°¡ ¾øÀ½"});
+			table.setModel(dtm);
 		}
-		DefaultTableModel dtm = new DefaultTableModel(data, header);
-		table.setModel(dtm);
-		table.getColumnModel().getColumn(0).setPreferredWidth(130);
-		table.getColumnModel().getColumn(1).setPreferredWidth(50);
-		table.getColumnModel().getColumn(2).setPreferredWidth(120);
-		table.getColumnModel().getColumn(3).setPreferredWidth(70);
-		table.getColumnModel().getColumn(4).setPreferredWidth(70);
+	}
+	
+	public ArrayList<String> createHourList() {
+		ArrayList<String> ret = new ArrayList<>();
+		hourList = new ArrayList<>();
+		for (int i = 0; i < 18; i++) {
+			int hour = 7;
+			String hourStr = String.format("%02d", hour + i);
+			hourList.add(hourStr);
+			ret.add(hourStr);
+		}
+		return ret;
 	}
 	
 	/**    
@@ -191,6 +225,7 @@ public class AdminTest extends JFrame {
 		Main = new JPanel();
 		allotMovie = new JPanel();
 		labelMovie = new JLabel();
+		timeMin = new JSpinner();
 		order = new JPanel();
 		ganadaB = new JToggleButton();
 		gradeB = new JToggleButton();
@@ -206,12 +241,14 @@ public class AdminTest extends JFrame {
 		movieInfoDay = new JLabel();
 		movieTimeLabel = new JLabel();
 		btnAllot = new JButton();
+		eastPanel = new JPanel();
 		movieInfoScreenName = new JLabel();
 		movieInfoDayName = new JLabel();
 		timePanel = new JPanel();
 		movieInfoStar = new JLabel();
 		selCal = new JPanel();
 		calSel = new JLabel();
+		timeCb = new JComboBox<>();
 		allotMovieTimeTheaters = new JPanel();
 		lblSelMovieTime = new JLabel();
 		movieTimeLabelName = new JLabel();
@@ -300,10 +337,11 @@ public class AdminTest extends JFrame {
 					String selection = movieList.getSelectedValue();
 					movTitle = selection;
 					movieInfoName.setFont(new Font("³ª´®½ºÄù¾î", 0, 18)); // NOI18N
-					movieInfoName.setText(selection);
 					if (selection != null) {
 						try {
+							calFrame.cleanCal();
 							MovieInfo movieInfo = movieMgr.movie_selectOneByTitle(selection);
+							movieInfoName.setText(selection + " (" + movieInfo.getMovieTimes() + "ºÐ)");
 							String strURL = movieInfo.getMoviePoster();
 							URL url = new URL(strURL);
 							Image image = ImageIO.read(url);
@@ -409,8 +447,16 @@ public class AdminTest extends JFrame {
 		btnAllot.setOpaque(false);
 		btnAllot.setEnabled(false);
 		btnAllot.addActionListener(new ActionListener() {
+			// ¹èÁ¤ÇÏ±â
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				MovieInfo movieInfo = movieMgr.movie_selectOneByTitle(movTitle);
+				Theaters th = new Theaters(0, movieInfoScreenName.getText(), movTitle, movieInfo.getMoviePoster(), movDate, 
+						movieTimeLabelName.getText().substring(0, 5), movieTimeLabelName.getText().substring(8, 13));
+				TheatersDBManager thMgr = new TheatersDBManager();
+				thMgr.insertNewScreen(th);
+				JOptionPane.showMessageDialog(null, "¹èÁ¤ÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.");
+				showTableDB(String.valueOf(cb1.getSelectedItem()));
 			}
 		});
 		movieInfo.add(btnAllot, new AbsoluteConstraints(50, 540, 190, -1));
@@ -476,35 +522,75 @@ public class AdminTest extends JFrame {
 		// timePanel.setLayout(new GridLayout(0, 1));
         Main.add(timePanel, new AbsoluteConstraints(1, 375, 728, 235));
         timePanel.setLayout(null);
+        timePanel.setVisible(false);
         
         JPanel tablePanel = new JPanel();
-        tablePanel.setBounds(2, 2, 332, 232);
+        tablePanel.setBounds(2, 2, 371, 232);
         timePanel.add(tablePanel);
         tablePanel.setLayout(new BorderLayout(0, 0));
         
-        JPanel inPanel = new JPanel();
-        tablePanel.add(inPanel, BorderLayout.NORTH);
-        inPanel.setLayout(new BorderLayout(0, 0));
+        JPanel westPanel = new JPanel();
+        tablePanel.add(westPanel, BorderLayout.NORTH);
+        westPanel.setLayout(new BorderLayout(0, 0));
         
         north = new JPanel();
-        inPanel.add(north);
+        westPanel.add(north);
         north.setLayout(new BorderLayout(0, 0));
         
-        in = new JPanel();
-        north.add(in, BorderLayout.EAST);
+        wnIn = new JPanel();
+        north.add(wnIn, BorderLayout.EAST);
         
-        lblNewLabel = new JLabel("\uADF9\uC7A5 \uC120\uD0DD");
-        lblNewLabel.setFont(new Font("³ª´®¹Ù¸¥°íµñ", Font.PLAIN, 13));
-        lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        in.add(lblNewLabel);
+        lb1 = new JLabel("\uADF9\uC7A5 \uC120\uD0DD");
+        lb1.setFont(new Font("³ª´®¹Ù¸¥°íµñ", Font.PLAIN, 16));
+        lb1.setHorizontalAlignment(SwingConstants.CENTER);
+        wnIn.add(lb1);
         
-        comboBox = new JComboBox();
-        comboBox.setFont(new Font("³ª´®¹Ù¸¥°íµñ", Font.PLAIN, 12));
-        comboBox.setModel(new DefaultComboBoxModel(new String[] {"1\uAD00", "2\uAD00", "3\uAD00", "4\uAD00", "5\uAD00"}));
-        in.add(comboBox);
+        cb1 = new JComboBox();
+        cb1.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		btnAllot.setEnabled(false);
+        		showTableDB(String.valueOf(cb1.getSelectedItem()));
+        		createHourList();
+        		ArrayList<String> movSHrList = thMgr.selectMovieStart((String)cb1.getSelectedItem(), movDate);
+        		ArrayList<String> movEHrList = thMgr.selectMovieEnd((String)cb1.getSelectedItem(), movDate);
+        		timeHashList = new LinkedHashMap<>();
+        		timeCb.removeAllItems();
+        		for (int i = 0; i < movSHrList.size(); i++) {
+        			for (int j = 0; j < hourList.size(); j++) {
+        				String temp = movSHrList.get(i).substring(0, 2);
+        				if (hourList.get(j).equals(temp)) {
+        					String[] tempList = new String[2];
+        					tempList[0] = movSHrList.get(i);
+        					tempList[1] = movEHrList.get(i);
+        					timeHashList.put(String.valueOf(j), tempList);
+        					break;
+        				}
+					}
+                }
+                for (int i = 0; i < hourList.size(); i++) {
+					timeCb.addItem(hourList.get(i));
+				}
+                
+        		eastPanel.setVisible(true);
+        		cb2.setSelectedItem(cb1.getSelectedItem());
+        	}
+        	
+        	public String getKeyFromValue(LinkedHashMap<String, String[]> map, String[] value) {
+				for (String key : map.keySet()) {
+					if (map.get(key).equals(value)) {
+						return key;
+					}
+				}
+				return "";
+			}
+        	
+        });
+        cb1.setFont(new Font("³ª´®¹Ù¸¥°íµñ", Font.PLAIN, 12));
+        cb1.setModel(new DefaultComboBoxModel(new String[] {"1\uAD00", "2\uAD00", "3\uAD00", "4\uAD00", "5\uAD00"}));
+        wnIn.add(cb1);
         
-        inTxtLb = new JLabel("\uADF9\uC7A5\uC5D0 \uBC30\uC815\uB41C \uC601\uD654 \uBAA9\uB85D \uD14C\uC774\uBE14");
-        inTxtLb.setFont(new Font("³ª´®¹Ù¸¥°íµñ", Font.PLAIN, 14));
+        inTxtLb = new JLabel("\uAC01 \uADF9\uC7A5\uC5D0 \uBC30\uC815\uC911\uC778 \uC601\uD654 \uB9AC\uC2A4\uD2B8");
+        inTxtLb.setFont(new Font("³ª´®¹Ù¸¥°íµñ", Font.PLAIN, 16));
         north.add(inTxtLb, BorderLayout.CENTER);
         
         JScrollPane scrollPane = new JScrollPane();
@@ -512,7 +598,134 @@ public class AdminTest extends JFrame {
         
         table = new JTable();
         scrollPane.setViewportView(table);
-        showTableDB();
+        
+        eastPanel.setBounds(374, 2, 354, 233);
+        timePanel.add(eastPanel);
+        eastPanel.setLayout(new BorderLayout(0, 0));
+        
+        eastNorth = new JPanel();
+        eastPanel.add(eastNorth, BorderLayout.NORTH);
+        eastNorth.setLayout(new BorderLayout(0, 0));
+        
+        enIn = new JPanel();
+        eastNorth.add(enIn, BorderLayout.EAST);
+        
+        lb2 = new JLabel("\uADF9\uC7A5 \uC120\uD0DD");
+        lb2.setHorizontalAlignment(SwingConstants.CENTER);
+        lb2.setFont(new Font("³ª´®¹Ù¸¥°íµñ", Font.PLAIN, 16));
+        enIn.add(lb2);
+        
+        cb2 = new JComboBox();
+        cb2.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		btnAllot.setEnabled(false);
+        		timeArrayList = createHourList();
+        		showTableDB(String.valueOf(cb2.getSelectedItem()));
+        		ArrayList<String> movSHrList = thMgr.selectMovieStart((String)cb2.getSelectedItem(), movDate);
+        		ArrayList<String> movEHrList = thMgr.selectMovieEnd((String)cb2.getSelectedItem(), movDate);
+        		timeHashList = new LinkedHashMap<>();
+        		timeArrayWithOutList = new ArrayList<>();
+        		timeCb.removeAllItems();
+        		for (int i = 0; i < movSHrList.size(); i++) {
+        			String[] tempList = new String[2];
+        			String temp = movSHrList.get(i).substring(0, 2);
+        			tempList[0] = movSHrList.get(i);
+        			tempList[1] = movEHrList.get(i);
+        			timeHashList.put(String.valueOf(i), tempList);
+        			for (int j = 0; j < hourList.size(); j++) {
+        				if (hourList.get(j).equals(temp)) {
+        					hourList.remove(j);
+                		}
+					}
+                }
+                for (int i = 0; i < hourList.size(); i++) {
+					timeCb.addItem(hourList.get(i));
+				}
+                
+                for (int i = 0; i < movSHrList.size(); i++) {
+        			for (int j = 0; j < timeArrayList.size(); j++) {
+        				String temp = movSHrList.get(i).substring(0, 2);
+        				if (timeArrayList.get(j).equals(temp)) {
+        					// timeArrayList.add(String.valueOf(j));
+        					timeArrayWithOutList.add(j);
+        					String[] tempList = new String[2];
+        					tempList[0] = movSHrList.get(i);
+        					tempList[1] = movEHrList.get(i);
+        					timeHashList.put(String.valueOf(j), tempList);
+        					break;
+        				}
+					}
+                }
+        	}
+        	public String getKeyFromValue(LinkedHashMap<String, String[]> map, String[] value) {
+				for (String key : map.keySet()) {
+					if (map.get(key).equals(value)) {
+						return key;
+					}
+				}
+				return "";
+			}
+        });
+        cb2.setModel(new DefaultComboBoxModel(new String[] {"1\uAD00", "2\uAD00", "3\uAD00", "4\uAD00", "5\uAD00"}));
+        cb2.setFont(new Font("³ª´®¹Ù¸¥°íµñ", Font.PLAIN, 12));
+        enIn.add(cb2);
+        
+        lb3 = new JLabel("\uBC30\uC815\uD560 \uADF9\uC7A5\uACFC \uC2DC\uAC04 \uC120\uD0DD");
+        lb3.setFont(new Font("³ª´®¹Ù¸¥°íµñ", Font.PLAIN, 16));
+        eastNorth.add(lb3, BorderLayout.WEST);
+        
+        eastCenter = new JPanel();
+        eastPanel.add(eastCenter, BorderLayout.CENTER);
+        eastCenter.setLayout(null);
+        
+        timeCb = new JComboBox();
+        timeCb.setFont(new Font("³ª´®¹Ù¸¥°íµñ", Font.PLAIN, 22));
+        timeCb.setBounds(22, 78, 55, 33);
+        eastCenter.add(timeCb);
+        
+        JLabel lblNewLabel = new JLabel("\uC601\uD654 \uC2DC\uC791 \uC2DC\uAC04 \uC785\uB825");
+        lblNewLabel.setFont(new Font("³ª´®¹Ù¸¥°íµñ", Font.PLAIN, 25));
+        lblNewLabel.setBounds(12, 33, 244, 35);
+        eastCenter.add(lblNewLabel);
+        
+        timeMin.setModel(new SpinnerNumberModel(0, 0, 59, 1));
+        timeMin.setFont(new Font("³ª´®¹Ù¸¥°íµñ", Font.PLAIN, 18));
+        timeMin.setBounds(103, 79, 55, 33);
+        eastCenter.add(timeMin);
+        
+        JButton btnNewButton = new JButton("\uC2DC\uAC04 \uC801\uC6A9");
+        btnNewButton.addActionListener(new ActionListener() {
+        	// ½Ã°£ Àû¿ë
+        	public void actionPerformed(ActionEvent e) {
+        		String timeHour = String.valueOf(timeCb.getSelectedItem());
+        		String temp = String.valueOf(timeMin.getValue());
+        		String timeMinStr = String.format("%02d", Integer.parseInt(temp));
+        		
+        		MovieInfo mov = movieMgr.movie_selectOneByTitle(movTitle);
+				int movHour = (mov.getMovieTimes() / 60);
+				int movMin = mov.getMovieTimes() - (movHour * 60);
+				
+				int sumHour = movHour + Integer.parseInt(timeHour);
+				int sumMin = movMin + Integer.parseInt(temp);
+				
+				if (sumMin >= 60) {
+					sumMin -= 60;
+					sumHour++;
+				}
+				if (sumHour >= 24) {
+					sumHour -= 24;
+				}
+				String movHourStr = String.format("%02d", sumHour);
+				String movMinStr = String.format("%02d", sumMin);
+				
+				movieInfoScreenName.setText(String.valueOf(cb2.getSelectedItem()));
+				movieTimeLabelName.setText(timeHour + ":" + timeMinStr + " ~ " + movHourStr + ":" + movMinStr);
+				btnAllot.setEnabled(true);
+			}
+        });
+        btnNewButton.setFont(new Font("³ª´®¹Ù¸¥°íµñ", Font.PLAIN, 14));
+        btnNewButton.setBounds(170, 78, 97, 33);
+        eastCenter.add(btnNewButton);
 		GroupLayout layout = new GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
 		layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(Main, GroupLayout.PREFERRED_SIZE,
@@ -522,6 +735,7 @@ public class AdminTest extends JFrame {
 		
 		pack();
 		mov = this;
+		
 	}// </editor-fold>
 	
 	private void ganadaBActionPerformed(ActionEvent evt) {
@@ -554,33 +768,6 @@ public class AdminTest extends JFrame {
 	 * @param args the command line arguments
 	 */
 	public static void main(String args[]) {
-		/* Set the Nimbus look and feel */
-		// <editor-fold defaultstate="collapsed" desc=" Look and feel setting code
-		// (optional) ">
-		/*
-		 * If Nimbus (introduced in Java SE 6) is not available, stay with the default
-		 * look and feel. For details see
-		 * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-		 */
-//		try {
-//			System.setProperty("awt.useSystemAAFontSettings", "on");
-//			System.setProperty("swing.aatext", "true");
-//			for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-//				if ("Nimbus".equals(info.getName())) {
-//					UIManager.setLookAndFeel(info.getClassName());
-//					break;
-//				}
-//			}
-//		} catch (ClassNotFoundException ex) {
-//			java.util.logging.Logger.getLogger(MovieTicketingTest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//		} catch (InstantiationException ex) {
-//			java.util.logging.Logger.getLogger(MovieTicketingTest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//		} catch (IllegalAccessException ex) {
-//			java.util.logging.Logger.getLogger(MovieTicketingTest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//		} catch (UnsupportedLookAndFeelException ex) {
-//			java.util.logging.Logger.getLogger(MovieTicketingTest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//		}
-
 		try {
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 			System.setProperty("awt.useSystemAAFontSettings", "on");
@@ -593,7 +780,7 @@ public class AdminTest extends JFrame {
 		/* Create and display the form */
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				new AdminTest().setVisible(true);
+				new Admin().setVisible(true);
 			}
 		});
 		OracleDBUtil.closeDB();
@@ -712,6 +899,7 @@ public class AdminTest extends JFrame {
 	public JLabel movieInfoDay;
 	public JLabel movieInfoPoster;
 	public JLabel movieInfoStar;
+	public JComboBox timeCb;
 	public JPanel order;
 	public JButton resetRe;
 	public JPanel selCal;
@@ -721,9 +909,17 @@ public class AdminTest extends JFrame {
 	private JPanel north;
 	public JLabel movieTimeLabel;
 	public JLabel movieTimeLabelName;
-	private JPanel in;
-	private JLabel lblNewLabel;
-	private JComboBox comboBox;
+	private JPanel wnIn;
+	private JLabel lb1;
+	private JComboBox cb1;
 	private JLabel inTxtLb;
 	private JTable table;
+	private JPanel eastNorth;
+	private JPanel enIn;
+	private JLabel lb2;
+	private JComboBox cb2;
+	public JSpinner timeMin;
+	private JLabel lb3;
+	private JPanel eastCenter;
+	public JPanel eastPanel;
 }

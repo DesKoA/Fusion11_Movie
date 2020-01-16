@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ui.ticketing.test;
+package ui.admin;
 
 import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;

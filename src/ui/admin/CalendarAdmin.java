@@ -1,4 +1,4 @@
-package ui.ticketing.test;
+package ui.admin;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -33,7 +33,7 @@ public class CalendarAdmin extends JInternalFrame { // CalendarDataManager의 GUI
 	int calDayOfMon;
 	public static int targetDay;
 	final int calLastDateOfMonth[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-	public static AdminTest mov;
+	public static Admin mov;
 	int calLastDate;
 	Calendar today = Calendar.getInstance();
 	Calendar cal;
@@ -133,6 +133,15 @@ public class CalendarAdmin extends JInternalFrame { // CalendarDataManager의 GUI
 //			}
 //		});
 //	}
+	
+	public void cleanCal() {
+		for (int i = 0; i < CAL_HEIGHT; i++) {
+			for (int j = 0; j < CAL_WIDTH; j++) {
+				dateButs[i][j].setBorder(null);
+			}
+		}
+		setToday();
+	}
 
 	public CalendarAdmin() { // 구성요소 순으로 정렬되어 있음. 각 판넬 사이에 빈줄로 구별
 		setToday();
@@ -374,6 +383,8 @@ public class CalendarAdmin extends JInternalFrame { // CalendarDataManager의 GUI
 						mov.movieInfoDayName.setText(calYear + "년 " + (calMonth + 1) + "월 " + calDates[i][j] + "일");
 						// !!! InternalFrameDemo.dayLb.setText(String.valueOf(calDates[i][j])); !!!
 						mov.timePanel.setVisible(true);
+						mov.eastPanel.setVisible(false);
+						mov.showTableDB("1관");
 					} else {
 						dateButs[i][j].setBorderPainted(false);
 						dateButs[i][j].setBorder(null);
