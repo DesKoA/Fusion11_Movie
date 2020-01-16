@@ -447,6 +447,7 @@ public class MovieMainFrame extends JFrame {
 			movieTOPList.add(lblTOPS[i]);
 			lblTOPS[i].addMouseListener(movSelectHandle);
 		}
+		OracleDBUtil.closeDB();
 	}
-
+	
 }

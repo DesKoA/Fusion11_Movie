@@ -229,23 +229,23 @@ public class MoviePosterInfo extends JDialog implements ActionListener {
 		panel_7.setLayout(new BorderLayout(0, 0));
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setPreferredSize(new Dimension(400, 145));
+		scrollPane_1.setPreferredSize(new Dimension(400, 135));
 		panel_7.add(scrollPane_1, BorderLayout.CENTER);
 		
 		table = new JTable();
 		scrollPane_1.setViewportView(table);
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
-				{"\uC81C\uBAA9", null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
+				{"제목 "+mv.getMovieTitle()},
+				{"장르 "+mv.getMovieGenre()},
+				{"감독 "+mv.getMovieDirector()},
+				{"주연/조연 "+mv.getMovieActors()},
+				{"등급 "+mv.getMovieGrade()},
+				{"상영시간 "+mv.getMovieTimes()},
+				{"줄거리 "+mv.getMovieContent()},
 			},
 			new String[] {
-				"영화", "정보"
+				""
 			}
 		));
 //		table.getColumn("New column").setWidth(0); // 테이블 칼럽 숨기기, 안보이게 하기
