@@ -240,16 +240,15 @@ public class MoviePosterInfo extends JDialog implements ActionListener {
 		scrollPane_1.setPreferredSize(new Dimension(400, 105));
 		
 		table = new JTable();
-		table.setFont(new Font("휴먼엑스포", Font.BOLD, 18));
 		scrollPane_1.setViewportView(table);
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
-				{"제목 "+mv.getMovieTitle()},
-				{"장르 "+mv.getMovieGenre()},
-				{"감독 "+mv.getMovieDirector()},
-				{"출현 "+mv.getMovieActors()},
-				{"등급 "+mv.getMovieGrade()},
-				{"시간 "+mv.getMovieTimes()},
+				{"제목 : "+mv.getMovieTitle()},
+				{"장르 : "+mv.getMovieGenre()},
+				{"감독 : "+mv.getMovieDirector()},
+				{"출현 : "+mv.getMovieActors()},
+				{"등급 : "+mv.getMovieGrade()},
+				{"시간 : "+mv.getMovieTimes()},
 			},
 			new String[] {
 				""

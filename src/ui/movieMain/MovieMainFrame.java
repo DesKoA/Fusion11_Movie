@@ -73,8 +73,10 @@ public class MovieMainFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					OracleDBUtil.connectDB();
 					MovieMainFrame frame = new MovieMainFrame();
 					frame.setVisible(true);
+//					OracleDBUtil.connectDB();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -143,7 +145,7 @@ public class MovieMainFrame extends JFrame {
 	//
 	//
 	public MovieMainFrame() {
-		OracleDBUtil.connectDB();
+//		OracleDBUtil.connectDB();
 		setResizable(false);
 		setTitle("\uB098\uBA3C\uC800\uC608\uB9E4");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -274,26 +276,26 @@ public class MovieMainFrame extends JFrame {
 		ArrayList<Member> mbA = mbMgr.selectAllMember();
 		Member mb = mbA.get(0);
 		
-		int dexNum;
-		if(mb.getMemberID() != "admin") {
+		//int dexNum;
+		//if(mb.getMemberID() != "admin") {
 		lblMyPage = new JLabel("MyPage");
-		dexNum = 0;
-		} else {
-		lblMyPage = new JLabel("admin");
-		dexNum = 1;
-		}
+		//dexNum = 0;
+		//} else {
+		//lblMyPage = new JLabel("admin");
+		//dexNum = 1;
+		//}
 		lblMyPage.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(dexNum == 0) {
+				//if(dexNum == 0) {
 				MyPageFrame mpf = new MyPageFrame();
 				mpf.setSize(1000, 600);
 				mpf.setVisible(true);
-				} else if(dexNum == 1) {
-					Admin ad = new Admin();
-					ad.setSize(500, 400);
-					ad.setVisible(true);
-				}
+				//} else if(dexNum == 1) {
+					//Admin ad = new Admin();
+					//ad.setSize(500, 400);
+					//ad.setVisible(true);
+				//}
 			}
 		});
 		lblMyPage.setForeground(Color.WHITE);
@@ -432,7 +434,7 @@ public class MovieMainFrame extends JFrame {
 			try {
 				url = new URL(strURL);
 				Image image = ImageIO.read(url);
-				Image changedImg = image.getScaledInstance(250, 230, Image.SCALE_SMOOTH);
+				Image changedImg = image.getScaledInstance(250, 230, Image.SCALE_FAST);
 				Icon = new ImageIcon(changedImg);
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
