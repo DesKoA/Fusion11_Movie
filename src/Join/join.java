@@ -8,6 +8,10 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 
+import data.Member;
+import db.dao.MemberDBManager;
+import db.util.OracleDBUtil;
+
 import javax.swing.JDesktopPane;
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -26,6 +30,7 @@ import java.awt.SystemColor;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.awt.Color;
 
 import javax.imageio.ImageIO;
@@ -49,13 +54,18 @@ public class join extends JFrame {
 	private JTextField idEnter;
 	private JPasswordField pwfirst;
 	private JPasswordField pwpwField;
-	private JTextField phoneMid;
 	private JTextField emailField;
-	private JTextField phoneEnd;
 	private BufferedImage background;
 	private JPanel panel_2;
 	private JLabel lblStatus;
 	private JTextField phone1st;
+	protected String memberID;
+	protected String memberPW;
+	protected String memberName;
+	protected String memberEmail;
+	protected java.sql.Date memberBirth;
+	protected String memberPhone;
+	public static OracleDBUtil db;
 	/**
 	 * Launch the application.
 	 */
@@ -70,6 +80,8 @@ public class join extends JFrame {
 				}
 			}
 		});
+		
+		OracleDBUtil.closeDB();
 	}
 
 	/**
@@ -77,7 +89,7 @@ public class join extends JFrame {
 	 */
 	
 	public join() {
-		
+		OracleDBUtil.connectDB();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1002, 537);
 		contentPane = new JPanel();
@@ -314,6 +326,10 @@ public class join extends JFrame {
 		centens.add(yymmdd);
 		yymmdd.setFont(new Font("한컴돋움", Font.PLAIN, 20));
 		
+		/*
+		 *  SimpleDateFormat sf = new SimpleDateFormat("YYYYMMDD");
+			String dateStr = sf.format(movDate);
+		 */
 		JSpinner yy = new JSpinner();
 		yy.setModel(new SpinnerListModel(new String[] {"1999", "1998", "1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990", "1989", "1988", "1987", "1986", "1985", "1984", "1983", "1982", "1981", "1980"}));
 		yy.setBounds(151, 299, 59, 22);
@@ -336,26 +352,8 @@ public class join extends JFrame {
 		
 		phone1st = new JTextField();
 		phone1st.setColumns(4);
-		phone1st.setBounds(402, 296, 54, 21);
+		phone1st.setBounds(402, 296, 140, 21);
 		centens.add(phone1st);
-		
-		JLabel _1 = new JLabel("   -");
-		_1.setBounds(453, 298, 18, 18);
-		centens.add(_1);
-		
-		phoneMid = new JTextField();
-		phoneMid.setBounds(477, 296, 54, 21);
-		centens.add(phoneMid);
-		phoneMid.setColumns(4);
-		
-		JLabel _2 = new JLabel("   -");
-		_2.setBounds(527, 300, 18, 15);
-		centens.add(_2);
-		
-		phoneEnd = new JTextField();
-		phoneEnd.setBounds(546, 296, 54, 21);
-		centens.add(phoneEnd);
-		phoneEnd.setColumns(4);
 		canel.setBackground(new Color(123, 104, 238));
 		
 		canel.setBounds(243, 331, 90, 23);
@@ -364,6 +362,14 @@ public class join extends JFrame {
 		JButton OKButton = new JButton("\uB4F1\uB85D\uD558\uAE30");
 		OKButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// String dateStr = sf.format(yy.getValue()+(String)mm.getValue()+dd.getValue());
+				Calendar cal = Calendar.getInstance();
+				cal.set(Integer.parseInt(String.valueOf(yy.getValue())), Integer.parseInt(String.valueOf(mm.getValue())), Integer.parseInt(String.valueOf(dd.getValue())));
+				Date date = cal.getTime();
+				// 이름 추가해주세요
+				Member mb = new Member(idEnter.getText(), pwfirst.getText(), "test", emailField.getText(), new java.sql.Date(date.getTime()), phone1st.getText(), null);
+				MemberDBManager mbMgr = new MemberDBManager();
+				mbMgr.insertNewMember(mb) ;
 			}
 		});
 		OKButton.setBounds(434, 331, 97, 23);

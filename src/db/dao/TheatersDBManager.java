@@ -1,7 +1,6 @@
 package db.dao;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -240,107 +239,6 @@ public class TheatersDBManager {
 		return 0;
 	}
 	
-	public ArrayList<Theaters> selectScNameInfo(String scName, Date movDate) {
-		if (con != null) {
-			String dateStr = new SimpleDateFormat("YYYYMMDD").format(movDate);
-			String sql = "select movie_title, screen_name, movie_date, movie_start, movie_end from movie_theaters "
-					+ "where screen_name = " + "'" + scName +"'" + " and TO_CHAR(movie_date, 'YYYYMMDD') = "
-							+ "'" + dateStr + "' order by screen_name, movie_start asc";
-			
-			try {
-				Statement stmt = con.createStatement();
-				ResultSet rs = stmt.executeQuery(sql);
-				
-				ArrayList<Theaters> thList = new ArrayList<>();
-				while (rs.next()) {
-					Theaters th = new Theaters(0, rs.getString(2), rs.getString(1), null, rs.getDate(3), rs.getString(4), rs.getString(5));
-					thList.add(th);
-				}
-				return thList;
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		else {
-			System.out.println("db에러");
-		}
-		return null;
-	}
-	
-	public ArrayList<String> selectMovieStart(String scName, Date movDate) {
-		if (con != null) {
-			String dateStr = new SimpleDateFormat("YYYYMMDD").format(movDate);
-			String sql = "select movie_start from movie_theaters "
-					+ "where screen_name = " + "'" + scName +"'" + " and TO_CHAR(movie_date, 'YYYYMMDD') = "
-							+ "'" + dateStr + "' order by movie_start asc";
-			
-			try {
-				Statement stmt = con.createStatement();
-				ResultSet rs = stmt.executeQuery(sql);
-				
-				ArrayList<String> thList = new ArrayList<>();
-				while (rs.next()) {
-					thList.add(rs.getString(1));
-				}
-				return thList;
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		else {
-			System.out.println("db에러");
-		}
-		return null;
-	}
-	
-	public ArrayList<String> selectMovieEnd(String scName, Date movDate) {
-		if (con != null) {
-			String dateStr = new SimpleDateFormat("YYYYMMDD").format(movDate);
-			String sql = "select movie_end from movie_theaters "
-					+ "where screen_name = " + "'" + scName +"'" + " and TO_CHAR(movie_date, 'YYYYMMDD') = "
-							+ "'" + dateStr + "' order by movie_start asc";
-			
-			try {
-				Statement stmt = con.createStatement();
-				ResultSet rs = stmt.executeQuery(sql);
-				
-				ArrayList<String> thList = new ArrayList<>();
-				while (rs.next()) {
-					thList.add(rs.getString(1));
-				}
-				return thList;
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		else {
-			System.out.println("db에러");
-		}
-		return null;
-	}
-	
-	public boolean insertNewScreen(Theaters th) {
-		if (con != null) {
-			String sql = "insert into movie_theaters values(sc_seq.nextval,?,?,?,?,?,?)";
-			try {
-				PreparedStatement pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, th.getScreenName());
-				pstmt.setString(2, th.getMovieTitle());
-				pstmt.setString(3, th.getMoviePoster());
-				pstmt.setDate(4, new java.sql.Date(th.getMovieDate().getTime()));
-				pstmt.setString(5, th.getMovieStart());
-				pstmt.setString(6, th.getMovieEnd());
-				int r = pstmt.executeUpdate();
-				if (r == 1) return true;
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		} else {
-			System.out.println("에러");
-		}
-		return false;
-	}
-	
 	public static void main(String[] args) {
 		OracleDBUtil.connectDB();
 		TheatersDBManager thMgr = new TheatersDBManager();
@@ -349,7 +247,7 @@ public class TheatersDBManager {
 		Date tDate = cal.getTime();
 		// LinkedHashMap<?, ?> hash = thMgr.selectOneMovieStartByName("백두산", tDate);
 		// LinkedHashMap<?, ?> hash = thMgr.selectOneMovieStartByName("백두산", tDate);
-		// System.out.println(thMgr.selectScNameInfo("1관", tDate));
+		System.out.println(thMgr.selectOneScreenNo("1관", "백두산", tDate, "12:00"));
 		OracleDBUtil.closeDB();
 	}
 	

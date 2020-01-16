@@ -113,7 +113,7 @@ public class MainPage extends JFrame {
 		loginBtn.setBounds(347, 36, 192, 175);
 		panel_1.add(loginBtn);
 		
-		JButton nojoinBtn = new JButton(new ImageIcon(".\\image\\blue.png"));
+		JButton nojoinBtn = new JButton(new ImageIcon("./image/blue.png"));
 		//nojoinBtn.setBorderPainted(false);//버튼 테두리 설정
 		nojoinBtn.setContentAreaFilled(false);//버튼 영역 배경 표시 설정
 		nojoinBtn.setFocusPainted(false);
