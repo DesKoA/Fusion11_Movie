@@ -69,7 +69,7 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
 /**
- *
+ * 123
  * @author alfo4-9
  */
 public class Admin extends JFrame {
