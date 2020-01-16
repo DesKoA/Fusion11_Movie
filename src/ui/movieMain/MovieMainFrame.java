@@ -80,6 +80,7 @@ public class MovieMainFrame extends JFrame {
 				}
 			}
 		});
+		OracleDBUtil.closeDB();
 	}
 //
 //	/**

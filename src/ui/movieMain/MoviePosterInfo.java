@@ -19,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Color;
+import java.awt.Dimension;
 
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
@@ -47,6 +48,7 @@ import java.awt.Font;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 public class MoviePosterInfo extends JDialog implements ActionListener {
 	MoviePosterInfo dlg;
@@ -227,43 +229,28 @@ public class MoviePosterInfo extends JDialog implements ActionListener {
 		panel_7.setLayout(new BorderLayout(0, 0));
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		panel_7.add(scrollPane_1, BorderLayout.NORTH);
+		scrollPane_1.setPreferredSize(new Dimension(400, 145));
+		panel_7.add(scrollPane_1, BorderLayout.CENTER);
 		
-		//TODO 영화정보 테이블\
-//		{"\uC81C\uBAA9", mv.getMovieTitle()}, // 제목
-//		{"\uC0C1\uC601\uB4F1\uAE09", mv.getMovieGrade()}, // 상영등급
-//		{"\uC7A5\uB974", mv.getMovieGenre()}, // 장르
-//		{"\uAC10\uB3C5", mv.getMovieDirector()}, // 감독
-//		{"\uC8FC\uC5F0/\uC870\uC5F0", mv.getMovieActors()}, // 주연/조연
-//		{"\uD3C9\uAC00\uC810\uC218", mv.getMovieRating()}, // 평가점수
-//		{"\uC0C1\uC601\uC2DC\uAC04", mv.getMovieTimes()}, // 상영시간
-//		{"\uC904\uAC70\uB9AC", mv.getMovieContent()}, // 줄거리
 		table = new JTable();
+		scrollPane_1.setViewportView(table);
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
-				{"\uC81C\uBAA9", mv.getMovieTitle()}, // 제목
-				{"\uC0C1\uC601\uB4F1\uAE09", mv.getMovieGrade()}, // 상영등급
-				{"\uC7A5\uB974", mv.getMovieGenre()}, // 장르
-				{"\uAC10\uB3C5", mv.getMovieDirector()}, // 감독
-				{"\uC8FC\uC5F0/\uC870\uC5F0", mv.getMovieActors()}, // 주연/조연
-				{"\uD3C9\uAC00\uC810\uC218", mv.getMovieRating()}, // 평가점수
-				{"\uC0C1\uC601\uC2DC\uAC04", mv.getMovieTimes()}, // 상영시간
-				{"\uC904\uAC70\uB9AC", mv.getMovieContent()}, // 줄거리
+				{"\uC81C\uBAA9", null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
 			},
 			new String[] {
 				"영화", "정보"
 			}
-			
 		));
-//		table.setRowHeight(25); // 칼럼, 셀 , 행 높이 정하기
-//		table.getColumn().setPreferredWidth(30); // 칼럼 넓이 정하기
-//		table.getColumn("칼럼이름").setWidth(0); // 테이블 칼럽 숨기기, 안보이게 하기
-//		table.getColumn("칼럼이름").setMinWidth(0);
-//		table.getColumn("칼럼이름").setMaxWidth(0);
-//		table.setShowVerticalLines(false); // 테이블 선 안보이게 하기
-//		table.setShowHorizontalLines(false); // 테이블 선 안보이게 하기
-		//
-		panel_7.add(table, BorderLayout.SOUTH);
+//		table.getColumn("New column").setWidth(0); // 테이블 칼럽 숨기기, 안보이게 하기
+//		table.getColumn("New column").setMinWidth(0);
+//		table.getColumn("New column").setMaxWidth(0);
 
 		JPanel panel_9 = new JPanel();
 		panel_3.add(panel_9, BorderLayout.CENTER);
