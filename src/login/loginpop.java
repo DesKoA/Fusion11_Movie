@@ -73,7 +73,7 @@ public class loginpop extends JFrame {
 		txtWelcome = new JLabel("\uB098 \uBA3C\uC800 \uC608\uBA54");
 		txtWelcome.setFont(new Font("HY견고딕", Font.PLAIN, 15));
 		txtWelcome.setForeground(Color.LIGHT_GRAY);
-		txtWelcome.setBounds(171, 50, 126, 31);
+		txtWelcome.setBounds(71, 90, 203, 23);
 		panel.add(txtWelcome);
 		
 		JLabel label = new JLabel("\uB098 \uBA3C\uC800 \uC608\uBA54");
@@ -96,8 +96,10 @@ public class loginpop extends JFrame {
 				
 				MemberDBManager mbMgr = new MemberDBManager();
 				Member foundMb = mbMgr.selectOneMember(login, strPW);
+				System.out.println(foundMb);
 				if( foundMb == null ) {
 					txtWelcome.setText(login+" 회원이 존재하지 않음!");
+					System.out.println("11");
 				} else {
 					// db에 회원이 존재하면..
 					String resPW = loginpop.decrypt(foundMb.getMemberPW());
@@ -106,9 +108,11 @@ public class loginpop extends JFrame {
 					//if(strPW.equals(foundMb.getPw())) {
 					if(strPW.equals(resPW)) {
 						txtWelcome.setText(login+" 회원 로그인 성공!!");
+						System.out.println("12");
 						LOGGED_IN = Member.getMemberID();
 					} else {
 						txtWelcome.setText(login+" 회원 암호 불일치!");
+						System.out.println("113");
 					}
 				}
 			}

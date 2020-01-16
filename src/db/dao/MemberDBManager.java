@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import data.Member;
 import data.MovieInfo;
 import db.util.OracleDBUtil;
+import login.loginpop;
 
 public class MemberDBManager {
 	Connection con;
@@ -97,31 +98,31 @@ public class MemberDBManager {
 		{
 			String sql = 
 				"select * from movie_members where member_id = ? and member_pw = ?";
+			System.out.println(login);
+			System.out.println(pw);
+			String pwpwpw = loginpop.encrypt(pw);
 			try {
 				PreparedStatement pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, login);
-				pstmt.setString(2, pw);
+				pstmt.setString(2, pwpwpw);
 				ResultSet rs = pstmt.executeQuery();
 				//while(rs.next()) { // 결과레코드가 있느냐?
 				if( rs.next() == true ) {
-					boolean mbGender	= rs.getInt("gender") == 0;
+		//			boolean mbGender	= rs.getInt("gender") == 0;
 //						= (rs.getInt("gender") 
 //						== 0) ? true: false;
 					Member mb = new Member(
-							rs.getString("memberID"), 
-							rs.getString("memberPW"), 
-							rs.getString("memberName"), 
-							rs.getString("memberEmail"), 
-							rs.getDate("memberBirth"), 
-							rs.getString("memberPhone"), 
-							rs.getString("memberFavor")
+							rs.getString("member_ID"), 
+							rs.getString("member_PW"), 
+							rs.getString("member_Name"), 
+							rs.getString("member_Email"), 
+							rs.getDate("member_Birth"), 
+							rs.getString("member_Phone"), 
+							rs.getString("member_Favor")
 );
 					System.out.println(mb);
 					return mb;
-				} else {					
-					System.out.println(login + " 사용가능한 login임!");
-					
-				}
+				} 
 			} catch (SQLException e) {				
 				e.printStackTrace();
 				
