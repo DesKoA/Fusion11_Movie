@@ -6,6 +6,7 @@ public class Seat {
 	private int screenNo; // 상영관 번호(상영관 클래스)
 	private char seatRow; // 좌석 행
 	private int seatCol; // 좌석 열
+	private String memberID; // 
 
 	private Theaters th = new Theaters();
 	
@@ -18,11 +19,12 @@ public class Seat {
 		this.seatCol = seatCol;
 	}
 
-	public Seat(int seatNo, int screenNo, char seatRow, int seatCol) {
+	public Seat(int seatNo, int screenNo, char seatRow, int seatCol, String memberID) {
 		this.seatNo = seatNo;
 		this.screenNo = screenNo;
 		this.seatRow = seatRow;
 		this.seatCol = seatCol;
+		this.memberID = memberID;
 	}
 
 	public int getSeatNo() {
@@ -55,6 +57,14 @@ public class Seat {
 
 	public void setSeatCol(int seatCol) {
 		this.seatCol = seatCol;
+	}
+	
+	public String getMemberID() {
+		return memberID;
+	}
+
+	public void setMemberID(String memberID) {
+		this.memberID = memberID;
 	}
 
 	@Override

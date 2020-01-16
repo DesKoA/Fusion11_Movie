@@ -80,6 +80,8 @@ public class MovieTicketing extends JFrame {
 	public ImageIcon Icon;
 	public ImageIcon Icon2; 
 	
+	public String[] dataList;
+	
 	public Date movDate;
 	
 	public LinkedHashMap<String, ArrayList<String>> timeList;
@@ -384,6 +386,16 @@ public class MovieTicketing extends JFrame {
 		});
 		movieInfo.add(resetRe, new AbsoluteConstraints(10, 10, 130, 30));
 		
+		JButton Mypage = new JButton();
+		Mypage.setFont(new Font("나눔스퀘어", 1, 15)); // NOI18N
+		Mypage.setText("마이 페이지");
+		Mypage.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		movieInfo.add(Mypage, new AbsoluteConstraints(150, 10, 120, 30));
+		
 		try {
 			Image image = ImageIO.read(new File(".\\files\\image\\no_poster.png"));
 			Image changedImg = image.getScaledInstance(200, 250, Image.SCALE_SMOOTH);
@@ -433,6 +445,7 @@ public class MovieTicketing extends JFrame {
 		btnReserve.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				String revNo = "";
 				// 제목, 상영일, 시작시간, 종료시간, 성인수, 학생수, 예약 금액
 				System.out.println("===============예매=================");
 				System.out.println("제목: " + movTitle);
@@ -916,6 +929,16 @@ public class MovieTicketing extends JFrame {
 			movieInfoPeopleName.setText(String.format("%d명 (성인:%d 학생:%d)", sumPersons, adult, student));
 			movieInfoMoneyName.setText(String.valueOf((adult * 10000) + (student * 8000)));
 		}
+	}
+	
+	public String[] getDataList() {
+		String revNo = "";
+		String memID = "test";
+		int scNum = thMgr.selectOneScreenNo(movieInfoScreenName.getText(), movieInfoName.getText(), movDate, movieInfoTimeName.getText().split("~")[0].replace(" ", ""));
+		dataList = new String[] {revNo, movTitle, memID, String.valueOf(scNum), String.valueOf(movDate), movieInfoTimeName.getText().split("~")[0].replace(" ", ""),
+				movieInfoTimeName.getText().split("~")[1].replace(" ", ""), "좌석번호", String.valueOf(adPersons), String.valueOf(stPersons),
+				String.valueOf(movieInfoMoneyName.getText()), String.valueOf(new Date())};
+		return dataList;
 	}
 	
 	public Object[] getObjects() {

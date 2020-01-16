@@ -23,12 +23,13 @@ public Connection con;
 	
 	public boolean insertSeat(Seat seat) {
 		if (con != null) {
-			String sql = "insert into movie_seats values(seat_seq.nextval, ?, ?, ?)";
+			String sql = "insert into movie_seats values(seat_seq.nextval, ?, ?, ?, ?)";
 			try {
 				PreparedStatement pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, seat.getScreenNo());
 				pstmt.setString(2, String.valueOf(seat.getSeatRow()));
 				pstmt.setInt(3, seat.getSeatCol());
+				pstmt.setString(4, seat.getMemberID());
 				
 				int r = pstmt.executeUpdate();
 				if (r == 1) return true;
@@ -55,6 +56,29 @@ public Connection con;
 					seatList.add(seat);
 				}
 				return seatList;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		} else {
+			
+		}
+		return null;
+	}
+	
+	public ArrayList<Integer> selectAllSeatNo(int scNo, String member) {
+		if (con != null) {
+			String sql = "select seat_no from movie_seats where screen_no = " + "'" + scNo + "'" + " and member_id = " + "'" + member + "'";
+			
+			try {
+				Statement stmt = con.createStatement();
+				ResultSet rs = stmt.executeQuery(sql);
+				ArrayList<Integer> stList = new ArrayList<>();
+				
+				while (rs.next()) {
+					stList.add(rs.getInt(1));
+				}
+				return stList;
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

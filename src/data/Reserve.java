@@ -6,14 +6,14 @@ import java.util.Date;
 
 public class Reserve {
 	private int reserveIndex; // 예약 인덱스 번호(자동증가)
-	private int reserveNo; // 예매번호 ex) 123-XA-WIN
+	private String reserveNo; // 예매번호 ex) 123-XA-WIN
 	private String movieTitle; // 영화 제목(영화 테이블)
 	private String memberID; // 회원 아이디(회원 테이블)
 	private int screenNo; // 상영관 번호(상영관 테이블)
 	private Date movieDate; // 상영일(상영관 테이블)
 	private String movieStart; // 상영시작시간(상영관 테이블)
 	private String movieEnd; // 상영종료시간(상영관 테이블)
-	private int seatNo; // 좌석번호(좌석 테이블)
+	private int[] seatNo; // 좌석번호(좌석 테이블)
 	private int reserveAdult; // 성인수
 	private int reserveStudent; // 학생수
 	private int reserveMoney; // 예약 금액
@@ -24,11 +24,31 @@ public class Reserve {
 	private MovieInfo mov = new MovieInfo();
 	private Member mb = new Member();
 	private Theaters th = new Theaters();
-	private Seat st = new Seat();
 
 	public Reserve() {}
+	
+	public Reserve(int reserveIndex, String reserveNo, String movieTitle, String memberID, int screenNo, Date movieDate,
+			String movieStart, String movieEnd, int[] seatNo, int reserveAdult, int reserveStudent, int reserveMoney,
+			Date reserveDay) {
+		super();
+		this.reserveIndex = reserveIndex;
+		this.reserveNo = reserveNo;
+		this.movieTitle = movieTitle;
+		this.memberID = memberID;
+		this.screenNo = screenNo;
+		this.movieDate = movieDate;
+		this.movieStart = movieStart;
+		this.movieEnd = movieEnd;
+		this.seatNo = seatNo;
+		this.reserveAdult = reserveAdult;
+		this.reserveStudent = reserveStudent;
+		this.reserveMoney = reserveMoney;
+		this.reserveDay = reserveDay;
+	}
 
-	public Reserve(int reserveIndex, int reserveNo, int reserveAdult, int reserveStudent, int reserveMoney, int reserveDis, Date disDay,
+
+
+	public Reserve(int reserveIndex, String reserveNo, int reserveAdult, int reserveStudent, int reserveMoney, int reserveDis, Date disDay,
 			Date reserveDay) {
 		this.reserveIndex = reserveIndex;
 		this.reserveNo = reserveNo;
@@ -38,7 +58,6 @@ public class Reserve {
 		this.movieDate = th.getMovieDate();
 		this.movieStart = th.getMovieStart();
 		this.movieEnd = th.getMovieEnd();
-		this.seatNo = st.getSeatNo();
 		this.reserveAdult = reserveAdult;
 		this.reserveStudent = reserveStudent;
 		this.reserveMoney = reserveMoney;
@@ -47,8 +66,8 @@ public class Reserve {
 		this.reserveDay = reserveDay;
 	}
 
-	public Reserve(int reserveIndex, int reserveNo, String movieTitle, String memberID, int screenNo, Date movieDate, String movieStart,
-			String movieEnd, int seatNo, int reserveAdult, int reserveStudent, int reserveMoney, int reserveDis,
+	public Reserve(int reserveIndex, String reserveNo, String movieTitle, String memberID, int screenNo, Date movieDate, String movieStart,
+			String movieEnd, int[] seatNo, int reserveAdult, int reserveStudent, int reserveMoney, int reserveDis,
 			Date disDay, Date reserveDay) {
 		this.reserveIndex = reserveIndex;
 		this.reserveNo = reserveNo;
@@ -76,11 +95,11 @@ public class Reserve {
 	}
 
 
-	public int getReserveNo() {
+	public String getReserveNo() {
 		return reserveNo;
 	}
 
-	public void setReserveNo(int reserveNo) {
+	public void setReserveNo(String reserveNo) {
 		this.reserveNo = reserveNo;
 	}
 
@@ -132,11 +151,11 @@ public class Reserve {
 		this.movieEnd = movieEnd;
 	}
 
-	public int getSeatNo() {
+	public int[] getSeatNo() {
 		return seatNo;
 	}
 
-	public void setSeatNo(int seatNo) {
+	public void setSeatNo(int[] seatNo) {
 		this.seatNo = seatNo;
 	}
 
@@ -195,7 +214,7 @@ public class Reserve {
 				+ movieStart + ", movieEnd=" + movieEnd + ", seatNo=" + seatNo + ", reserveAdult=" + reserveAdult
 				+ ", reserveStudent=" + reserveStudent + ", reserveMoney=" + reserveMoney + ", reserveDis=" + reserveDis
 				+ ", disDay=" + disDay + ", reserveDay=" + reserveDay + ", mov=" + mov + ", mb=" + mb + ", th=" + th
-				+ ", st=" + st + "]";
+				+ "]";
 	}
 	
 }
