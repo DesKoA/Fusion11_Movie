@@ -49,6 +49,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import javax.swing.JTabbedPane;
 
 public class MoviePosterInfo extends JDialog implements ActionListener {
 	MoviePosterInfo dlg;
@@ -225,33 +226,48 @@ public class MoviePosterInfo extends JDialog implements ActionListener {
 		panel_3.setLayout(new BorderLayout(0, 0));
 
 		JPanel panel_7 = new JPanel();
+		panel_7.setBackground(Color.WHITE);
 		panel_3.add(panel_7, BorderLayout.SOUTH);
 		panel_7.setLayout(new BorderLayout(0, 0));
 		
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		panel_7.add(tabbedPane, BorderLayout.NORTH);
+		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setPreferredSize(new Dimension(400, 135));
-		panel_7.add(scrollPane_1, BorderLayout.CENTER);
+		tabbedPane.addTab("\uC601\uD654 \uC815\uBCF4", null, scrollPane_1, null);
+		tabbedPane.setBackgroundAt(0, Color.BLACK);
+		tabbedPane.setForegroundAt(0, Color.WHITE);
+		scrollPane_1.setPreferredSize(new Dimension(400, 105));
 		
 		table = new JTable();
+		table.setFont(new Font("휴먼엑스포", Font.BOLD, 18));
 		scrollPane_1.setViewportView(table);
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 				{"제목 "+mv.getMovieTitle()},
 				{"장르 "+mv.getMovieGenre()},
 				{"감독 "+mv.getMovieDirector()},
-				{"주연/조연 "+mv.getMovieActors()},
+				{"출현 "+mv.getMovieActors()},
 				{"등급 "+mv.getMovieGrade()},
-				{"상영시간 "+mv.getMovieTimes()},
-				{"줄거리 "+mv.getMovieContent()},
+				{"시간 "+mv.getMovieTimes()},
 			},
 			new String[] {
 				""
 			}
 		));
-//		table.getColumn("New column").setWidth(0); // 테이블 칼럽 숨기기, 안보이게 하기
-//		table.getColumn("New column").setMinWidth(0);
-//		table.getColumn("New column").setMaxWidth(0);
-
+		table.setShowVerticalLines(false); // 테이블 선 안보이게 하기
+		table.setShowHorizontalLines(false); // 테이블 선 안보이게 하기
+		
+		JPanel panel = new JPanel();
+		tabbedPane.addTab("\uC904\uAC70\uB9AC", null, panel, null);
+		tabbedPane.setForegroundAt(1, Color.WHITE);
+		tabbedPane.setBackgroundAt(1, Color.BLACK);
+		panel.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		JTextArea txtrA = new JTextArea();
+		txtrA.setText(mv.getMovieContent());
+		panel.add(txtrA);
+		
 		JPanel panel_9 = new JPanel();
 		panel_3.add(panel_9, BorderLayout.CENTER);
 		panel_9.setLayout(new BorderLayout(0, 0));

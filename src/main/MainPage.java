@@ -9,6 +9,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import login.loginpop;
+
 import javax.swing.JButton;
 import javax.swing.JPopupMenu;
 import java.awt.Component;
@@ -100,7 +103,8 @@ public class MainPage extends JFrame {
 		joinBtn.setFocusPainted(false);
 		joinBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				loginpop login = new loginpop();
+				login.setVisible(true);
 			}
 		});
 		joinBtn.setBounds(120, 36, 192, 175);
