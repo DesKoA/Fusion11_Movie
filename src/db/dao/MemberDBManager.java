@@ -5,9 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 //import MovieProject.data.Member;
 import data.Member;
+import data.MovieInfo;
 import db.util.OracleDBUtil;
 
 public class MemberDBManager {
@@ -129,6 +131,26 @@ public class MemberDBManager {
 		}
 		return null;
 	}
-	
+	// 전체 회원 조회
+	public ArrayList<Member> selectAllMember() {
+		if (con != null) {
+			String sql = "select * from movie_members";
+			try {
+				Statement stmt = con.createStatement();
+				ResultSet rs = stmt.executeQuery(sql);
+				ArrayList<Member> mbList = new ArrayList<>();
+				while (rs.next()) {
+					Member mb = new Member(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5), rs.getString(6), rs.getString(7));
+					mbList.add(mb);
+				}
+				return mbList;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} else {
+			System.out.println("DB 통신 오류");
+		}
+		return null;
+	}
 }
 
